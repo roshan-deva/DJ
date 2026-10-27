@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PartyPulse AI YouTube DJ Booth</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Google Fonts: Orbitron (Digital Displays) & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            digital: ['"Orbitron"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              cyan: '#00f5ff',
+              magenta: '#ff007f',
+              lime: '#00ff66',
+              amber: '#ffd000',
+              violet: '#7928ca',
+              dark: '#08090d',
+              card: '#11131b',
+              border: '#1f2436'
+            }
+          },
+          keyframes: {
+            'spin-vinyl': {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' }
+            },
+            'pulse-neon': {
+              '0%, 100%': { opacity: '1', filter: 'drop-shadow(0 0 12px rgba(0, 245, 255, 0.8))' },
+              '50%': { opacity: '0.6', filter: 'drop-shadow(0 0 3px rgba(0, 245, 255, 0.3))' }
+            },
+            'glow-pink': {
+              '0%, 100%': { filter: 'drop-shadow(0 0 12px rgba(255, 0, 127, 0.8))' },
+              '50%': { filter: 'drop-shadow(0 0 4px rgba(255, 0, 127, 0.3))' }
+            }
+          },
+          animation: {
+            'spin-vinyl': 'spin-vinyl 2.2s linear infinite',
+            'pulse-neon': 'pulse-neon 1.6s ease-in-out infinite',
+            'glow-pink': 'glow-pink 1.6s ease-in-out infinite',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Realistic Vinyl Grooves */
+    .vinyl-grooves {
+      background: radial-gradient(circle, 
+        #111116 0%, #111116 26%, 
+        #1a1a22 26.5%, #101015 27%,
+        #22222a 38%, #0f0f14 39%,
+        #282834 52%, #0d0d12 53%,
+        #2d2d3a 70%, #0b0b0f 71%,
+        #21212a 86%, #07070a 88%,
+        #17171e 98%, #050507 100%
+      );
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.95), 0 12px 30px rgba(0,0,0,0.85);
+    }
+
+    /* Turntable Tonearm */
+    .tonearm {
+      transform-origin: 22px 22px;
+      transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .tonearm.engaged {
+      transform: rotate(26deg);
+    }
+
+    /* Custom Input Sliders */
+    input[type=range] {
+      -webkit-appearance: none;
+      background: #181d2a;
+      border-radius: 9999px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 20px;
+      width: 14px;
+      border-radius: 3px;
+      background: #00f5ff;
+      box-shadow: 0 0 10px #00f5ff;
+      cursor: pointer;
+      border: 1px solid #ffffff;
+    }
+    .crossfader::-webkit-slider-thumb {
+      height: 38px;
+      width: 22px;
+      background: linear-gradient(180deg, #ff007f 0%, #00f5ff 100%);
+      box-shadow: 0 0 16px rgba(255, 0, 127, 0.85);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #08090d;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e2436;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00f5ff;
+    }
+  </style>
+</head>
+<body class="bg-[#07080c] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-brand-magenta selection:text-white pb-12">
+
+  <!-- ================= TOP DJ BOOTH HEADER ================= -->
+  <header class="border-b border-brand-border bg-[#0d0f17]/95 backdrop-blur-md sticky top-0 z-50 px-4 lg:px-8 py-3">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-cyan via-brand-violet to-brand-magenta p-0.5 shadow-lg shadow-brand-cyan/20 flex items-center justify-center">
+          <div class="w-full h-full bg-[#0d0f17] rounded-[10px] flex items-center justify-center">
+            <i class="fa-solid fa-compact-disc text-brand-cyan text-lg animate-spin-vinyl"></i>
+          </div>
+        </div>
+        <div>
+          <h1 class="font-extrabold text-lg lg:text-xl tracking-tight bg-gradient-to-r from-white via-slate-200 to-brand-cyan bg-clip-text text-transparent flex items-center gap-2">
+            PartyPulse <span class="text-xs uppercase px-2 py-0.5 rounded bg-brand-cyan/10 border border-brand-cyan/30 text-brand-cyan font-digital">AI DJ Booth</span>
+          </h1>
+          <p class="text-[11px] text-slate-400 font-medium">Harmonic Dual-Deck YouTube Engine</p>
+        </div>
+      </div>
+
+      <!-- Live Party Energy & Master Pulse Monitor -->
+      <div class="flex items-center gap-4 bg-[#121520] px-4 py-2 rounded-xl border border-brand-border shadow-inner">
+        <div class="flex flex-col items-end">
+          <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Crowd Energy</span>
+          <div class="flex items-center gap-1.5">
+            <span id="party-energy-text" class="text-xs font-digital font-bold text-brand-lime">PEAK HYPER (96%)</span>
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-lime opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-lime"></span>
+            </span>
+          </div>
+        </div>
+        
+        <!-- Live Animated VU Bars -->
+        <div class="flex items-end gap-1 h-6 w-16 px-1 bg-black/50 rounded border border-white/5" id="master-visualizer">
+          <div class="w-1 bg-brand-lime h-3/6 rounded-t transition-all duration-75"></div>
+          <div class="w-1 bg-brand-lime h-5/6 rounded-t transition-all duration-75"></div>
+          <div class="w-1 bg-brand-cyan h-4/6 rounded-t transition-all duration-75"></div>
+          <div class="w-1 bg-brand-cyan h-6/6 rounded-t transition-all duration-75"></div>
+          <div class="w-1 bg-brand-magenta h-5/6 rounded-t transition-all duration-75"></div>
+          <div class="w-1 bg-brand-magenta h-2/6 rounded-t transition-all duration-75"></div>
+        </div>
+      </div>
+
+      <!-- System Status Indicators & Audio Engine Mode -->
+      <div class="flex items-center gap-2.5 text-[11px] font-digital">
+        <div id="audio-engine-badge" class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-950/40 border border-emerald-500/30 text-emerald-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          YT ENGINE READY
+        </div>
+        <button onclick="openCustomUrlModal()" class="flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-800 hover:bg-zinc-700 text-cyan-300 border border-cyan-500/30 transition-all">
+          <i class="fa-brands fa-youtube text-red-500"></i> + Add URL
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= MAIN DJ BOOTH CONSOLE ================= -->
+  <main class="max-w-7xl mx-auto w-full px-3 lg:px-6 py-6 flex-1 flex flex-col gap-6">
+
+    <!-- DUAL DECK STAGE -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+      
+      <!-- ==================== DECK A (LEFT) ==================== -->
+      <section id="deck-container-a" class="lg:col-span-5 bg-brand-card rounded-2xl border-2 border-brand-cyan/40 p-5 pt-6 flex flex-col justify-between shadow-xl shadow-cyan-950/15 relative transition-all duration-500">
+        
+        <div>
+          <!-- Deck Top Bar (Fixed Padding & Badges) -->
+          <div class="flex items-center justify-between pb-3.5 border-b border-brand-border">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-1 rounded-md bg-brand-cyan text-black font-extrabold text-xs font-digital tracking-wide shadow-md shadow-brand-cyan/30">DECK A</span>
+              <span id="deck-a-active-tag" class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">MASTER ON-AIR</span>
+            </div>
+            <!-- Harmonic & BPM Badges -->
+            <div class="flex items-center gap-1.5">
+              <span id="deck-a-camelot" class="px-2.5 py-1 rounded-lg text-xs font-bold font-digital bg-indigo-950/80 text-cyan-300 border border-cyan-500/40">4A</span>
+              <span id="deck-a-bpm" class="px-2.5 py-1 rounded-lg text-xs font-bold font-digital bg-zinc-900 text-amber-400 border border-amber-500/30">126 BPM</span>
+            </div>
+          </div>
+
+          <!-- Track Metadata Info -->
+          <div class="mt-4 flex items-center justify-between">
+            <div class="truncate pr-3">
+              <h2 id="deck-a-title" class="text-base font-bold text-white truncate hover:text-brand-cyan transition-colors">Nevada (Club Mix)</h2>
+              <p id="deck-a-artist" class="text-xs text-slate-400 font-medium truncate">Vicetone</p>
+            </div>
+            <div class="text-right flex-shrink-0">
+              <span id="deck-a-time" class="font-digital text-sm font-bold text-slate-300">00:00</span>
+              <span id="deck-a-duration" class="font-digital text-xs text-slate-500"> / 03:28</span>
+            </div>
+          </div>
+
+          <!-- Turntable Platter Visual & ToneArm Graphic -->
+          <div class="relative my-6 flex items-center justify-center">
+            <div class="w-60 h-60 sm:w-64 sm:h-64 rounded-full p-2.5 bg-[#0a0c12] border-4 border-[#1c2132] shadow-2xl flex items-center justify-center relative">
+              
+              <!-- Neon Perimeter Ring -->
+              <div id="deck-a-rim" class="absolute inset-1 rounded-full border border-brand-cyan/30 transition-all"></div>
+              
+              <!-- Vinyl Record -->
+              <div id="vinyl-a" class="w-full h-full rounded-full vinyl-grooves relative flex items-center justify-center cursor-pointer transition-transform ease-linear">
+                <!-- Center Label Art -->
+                <div class="w-20 h-20 rounded-full border-2 border-white/20 bg-cover bg-center overflow-hidden flex items-center justify-center shadow-inner relative" id="deck-a-artwork" style="background-image: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&q=80')">
+                  <div class="absolute inset-0 bg-black/35"></div>
+                  <div class="w-5 h-5 rounded-full bg-[#0a0c12] border border-white/40 z-10"></div>
+                </div>
+              </div>
+
+              <!-- Tonearm Visual -->
+              <div id="tonearm-a" class="tonearm absolute top-1 right-3 w-16 h-28 pointer-events-none z-20">
+                <svg width="60" height="110" viewBox="0 0 60 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="45" cy="15" r="10" fill="#2d3748" stroke="#718096" stroke-width="2"/>
+                  <circle cx="45" cy="15" r="4" fill="#00f5ff" />
+                  <path d="M45 15 L22 75 L15 95" stroke="#cbd5e0" stroke-width="3" stroke-linecap="round"/>
+                  <rect x="8" y="93" width="12" height="16" rx="2" fill="#e53e3e" stroke="#fff" stroke-width="1" transform="rotate(-15 8 93)"/>
+                </svg>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Visual Cue Timeline Progress Bar -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-[10px] text-slate-400 font-digital">
+              <span id="deck-a-cue-in">IN 00:15</span>
+              <span id="deck-a-cue-drop" class="text-brand-magenta font-bold">DROP @ 00:45</span>
+              <span id="deck-a-cue-out">OUT 03:00</span>
+            </div>
+            <!-- Progress Bar Container -->
+            <div class="relative w-full h-3 bg-zinc-900 rounded-full overflow-hidden cursor-pointer border border-white/10" id="deck-a-timeline-wrap">
+              <div id="deck-a-progress" class="h-full bg-gradient-to-r from-cyan-600 to-brand-cyan w-0% transition-all duration-100"></div>
+              <div id="deck-a-drop-pin" class="absolute top-0 bottom-0 w-1 bg-brand-magenta" style="left: 22%;" title="Drop Timestamp"></div>
+              <div id="deck-a-out-pin" class="absolute top-0 bottom-0 w-1 bg-yellow-400" style="left: 88%;" title="Mix Out Point"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deck A Transport & Pitch Controls -->
+        <div class="mt-6 pt-4 border-t border-brand-border space-y-4">
+          <div class="flex items-center justify-between gap-3">
+            <button id="btn-cue-a" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5 transition-all">
+              <i class="fa-solid fa-backward-step mr-1.5"></i> CUE
+            </button>
+            <button id="btn-play-a" class="flex-[2] py-3 rounded-xl bg-gradient-to-r from-brand-cyan to-blue-500 hover:from-cyan-400 hover:to-blue-400 active:scale-95 text-black font-extrabold text-sm uppercase font-digital shadow-lg shadow-brand-cyan/25 flex items-center justify-center gap-2 transition-all">
+              <i class="fa-solid fa-play text-base" id="icon-play-a"></i> PLAY
+            </button>
+            <button id="btn-sync-a" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5 transition-all">
+              <i class="fa-solid fa-bolt mr-1"></i> SYNC
+            </button>
+          </div>
+
+          <!-- Pitch / Tempo Slider -->
+          <div class="flex items-center gap-3 bg-black/40 px-3 py-2 rounded-xl border border-white/5">
+            <span class="text-[10px] font-digital text-slate-400">PITCH</span>
+            <input type="range" id="deck-a-tempo" min="0.90" max="1.10" step="0.01" value="1.00" class="w-full h-1.5">
+            <span id="deck-a-tempo-val" class="font-digital text-xs text-brand-cyan w-10 text-right">0.0%</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==================== CENTRAL MIXER CONSOLE ==================== -->
+      <section class="lg:col-span-2 bg-[#0c0e17] rounded-2xl border border-brand-border p-4 flex flex-col justify-between items-center shadow-2xl relative">
+        
+        <div class="w-full flex items-center justify-between border-b border-brand-border/60 pb-2">
+          <span class="text-[10px] font-digital tracking-widest text-slate-400 uppercase">DJM-AI CORE</span>
+          <div class="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></div>
+        </div>
+
+        <!-- 3-Band EQ Simulation -->
+        <div class="w-full grid grid-cols-2 gap-4 my-2">
+          <div class="flex flex-col items-center gap-2">
+            <span class="text-[9px] font-digital font-bold text-brand-cyan">EQ A</span>
+            <div class="flex flex-col items-center gap-1.5 text-[9px] font-digital text-slate-400">
+              <span>HI</span>
+              <input type="range" class="w-12 h-1 accent-cyan-400" min="0" max="100" value="80">
+              <span>MID</span>
+              <input type="range" class="w-12 h-1 accent-cyan-400" min="0" max="100" value="80">
+              <span>LOW</span>
+              <input type="range" class="w-12 h-1 accent-cyan-400" min="0" max="100" value="85">
+            </div>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <span class="text-[9px] font-digital font-bold text-brand-magenta">EQ B</span>
+            <div class="flex flex-col items-center gap-1.5 text-[9px] font-digital text-slate-400">
+              <span>HI</span>
+              <input type="range" class="w-12 h-1 accent-pink-500" min="0" max="100" value="80">
+              <span>MID</span>
+              <input type="range" class="w-12 h-1 accent-pink-500" min="0" max="100" value="80">
+              <span>LOW</span>
+              <input type="range" class="w-12 h-1 accent-pink-500" min="0" max="100" value="85">
+            </div>
+          </div>
+        </div>
+
+        <!-- Dual Level VU Meters -->
+        <div class="w-full my-2 bg-black/60 p-2 rounded-xl border border-white/5 flex justify-center gap-4">
+          <div class="flex gap-1 h-20 items-end">
+            <div class="w-1.5 bg-zinc-800 rounded-sm h-full relative overflow-hidden">
+              <div id="meter-l" class="absolute bottom-0 w-full bg-gradient-to-t from-emerald-500 via-amber-400 to-rose-500 h-[60%] transition-all duration-75"></div>
+            </div>
+            <div class="w-1.5 bg-zinc-800 rounded-sm h-full relative overflow-hidden">
+              <div id="meter-r" class="absolute bottom-0 w-full bg-gradient-to-t from-emerald-500 via-amber-400 to-rose-500 h-[50%] transition-all duration-75"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Crossfade Controls -->
+        <div class="w-full space-y-3 pt-2">
+          
+          <!-- Smart Quick Crossfade Action Button -->
+          <button id="btn-quick-crossfade" class="w-full py-2.5 px-2 rounded-xl bg-gradient-to-r from-brand-cyan/20 via-brand-magenta/30 to-brand-cyan/20 border border-brand-magenta/40 hover:border-brand-magenta text-slate-100 font-digital font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-lg shadow-brand-magenta/15 hover:shadow-brand-magenta/30 active:scale-95 transition-all" title="Swaps Deck B into Deck A with smooth scale transition and updates live metadata">
+            <i class="fa-solid fa-shuffle text-brand-magenta"></i>
+            Quick Crossfade
+          </button>
+
+          <!-- Crossfader Slider -->
+          <div class="space-y-1">
+            <div class="flex justify-between text-[10px] font-digital font-bold px-1">
+              <span class="text-brand-cyan">DECK A</span>
+              <span class="text-slate-400">CENTER</span>
+              <span class="text-brand-magenta">DECK B</span>
+            </div>
+            <input type="range" id="crossfader" min="0" max="100" value="0" class="crossfader w-full h-2 rounded-lg cursor-pointer">
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==================== DECK B (RIGHT) ==================== -->
+      <section id="deck-container-b" class="lg:col-span-5 bg-brand-card rounded-2xl border-2 border-brand-magenta/30 p-5 pt-6 flex flex-col justify-between shadow-xl shadow-pink-950/15 relative transition-all duration-500">
+
+        <div>
+          <!-- Deck Top Bar (Fixed Padding & Badges) -->
+          <div class="flex items-center justify-between pb-3.5 border-b border-brand-border">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-1 rounded-md bg-brand-magenta text-white font-extrabold text-xs font-digital tracking-wide shadow-md shadow-brand-magenta/30">DECK B</span>
+              <span id="deck-b-active-tag" class="px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30">QUEUED / STANDBY</span>
+            </div>
+            <!-- Harmonic & BPM Badges -->
+            <div class="flex items-center gap-1.5">
+              <span id="deck-b-camelot" class="px-2.5 py-1 rounded-lg text-xs font-bold font-digital bg-fuchsia-950/80 text-fuchsia-300 border border-fuchsia-500/40">4A</span>
+              <span id="deck-b-bpm" class="px-2.5 py-1 rounded-lg text-xs font-bold font-digital bg-zinc-900 text-amber-400 border border-amber-500/30">126 BPM</span>
+            </div>
+          </div>
+
+          <!-- Track Metadata Info -->
+          <div class="mt-4 flex items-center justify-between">
+            <div class="truncate pr-3">
+              <h2 id="deck-b-title" class="text-base font-bold text-white truncate hover:text-brand-magenta transition-colors">Puzzle (Club Mix)</h2>
+              <p id="deck-b-artist" class="text-xs text-slate-400 font-medium truncate">RetroVision</p>
+            </div>
+            <div class="text-right flex-shrink-0">
+              <span id="deck-b-time" class="font-digital text-sm font-bold text-slate-300">00:00</span>
+              <span id="deck-b-duration" class="font-digital text-xs text-slate-500"> / 02:48</span>
+            </div>
+          </div>
+
+          <!-- Turntable Platter Visual & ToneArm Graphic -->
+          <div class="relative my-6 flex items-center justify-center">
+            <div class="w-60 h-60 sm:w-64 sm:h-64 rounded-full p-2.5 bg-[#0a0c12] border-4 border-[#1c2132] shadow-2xl flex items-center justify-center relative">
+              
+              <!-- Neon Perimeter Ring -->
+              <div id="deck-b-rim" class="absolute inset-1 rounded-full border border-brand-magenta/30 transition-all"></div>
+              
+              <!-- Vinyl Record -->
+              <div id="vinyl-b" class="w-full h-full rounded-full vinyl-grooves relative flex items-center justify-center cursor-pointer transition-transform ease-linear">
+                <!-- Center Label Art -->
+                <div class="w-20 h-20 rounded-full border-2 border-white/20 bg-cover bg-center overflow-hidden flex items-center justify-center shadow-inner relative" id="deck-b-artwork" style="background-image: url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=300&q=80')">
+                  <div class="absolute inset-0 bg-black/35"></div>
+                  <div class="w-5 h-5 rounded-full bg-[#0a0c12] border border-white/40 z-10"></div>
+                </div>
+              </div>
+
+              <!-- Tonearm Visual -->
+              <div id="tonearm-b" class="tonearm absolute top-1 right-3 w-16 h-28 pointer-events-none z-20">
+                <svg width="60" height="110" viewBox="0 0 60 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="45" cy="15" r="10" fill="#2d3748" stroke="#718096" stroke-width="2"/>
+                  <circle cx="45" cy="15" r="4" fill="#ff007f" />
+                  <path d="M45 15 L22 75 L15 95" stroke="#cbd5e0" stroke-width="3" stroke-linecap="round"/>
+                  <rect x="8" y="93" width="12" height="16" rx="2" fill="#00f5ff" stroke="#fff" stroke-width="1" transform="rotate(-15 8 93)"/>
+                </svg>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Visual Cue Timeline Progress Bar -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-[10px] text-slate-400 font-digital">
+              <span id="deck-b-cue-in">IN 00:15</span>
+              <span id="deck-b-cue-drop" class="text-brand-magenta font-bold">DROP @ 00:46</span>
+              <span id="deck-b-cue-out">OUT 02:30</span>
+            </div>
+            <!-- Progress Bar Container -->
+            <div class="relative w-full h-3 bg-zinc-900 rounded-full overflow-hidden cursor-pointer border border-white/10" id="deck-b-timeline-wrap">
+              <div id="deck-b-progress" class="h-full bg-gradient-to-r from-pink-600 to-brand-magenta w-0% transition-all duration-100"></div>
+              <div id="deck-b-drop-pin" class="absolute top-0 bottom-0 w-1 bg-brand-cyan" style="left: 27%;" title="Drop Timestamp"></div>
+              <div id="deck-b-out-pin" class="absolute top-0 bottom-0 w-1 bg-yellow-400" style="left: 88%;" title="Mix Out Point"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deck B Transport & Pitch Controls -->
+        <div class="mt-6 pt-4 border-t border-brand-border space-y-4">
+          <div class="flex items-center justify-between gap-3">
+            <button id="btn-cue-b" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5 transition-all">
+              <i class="fa-solid fa-backward-step mr-1.5"></i> CUE
+            </button>
+            <button id="btn-play-b" class="flex-[2] py-3 rounded-xl bg-gradient-to-r from-brand-magenta to-rose-600 hover:from-pink-500 hover:to-rose-500 active:scale-95 text-white font-extrabold text-sm uppercase font-digital shadow-lg shadow-brand-magenta/25 flex items-center justify-center gap-2 transition-all">
+              <i class="fa-solid fa-play text-base" id="icon-play-b"></i> PLAY
+            </button>
+            <button id="btn-sync-b" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5 transition-all">
+              <i class="fa-solid fa-bolt mr-1"></i> SYNC
+            </button>
+          </div>
+
+          <!-- Pitch / Tempo Slider -->
+          <div class="flex items-center gap-3 bg-black/40 px-3 py-2 rounded-xl border border-white/5">
+            <span class="text-[10px] font-digital text-slate-400">PITCH</span>
+            <input type="range" id="deck-b-tempo" min="0.90" max="1.10" step="0.01" value="1.00" class="w-full h-1.5">
+            <span id="deck-b-tempo-val" class="font-digital text-xs text-brand-magenta w-10 text-right">0.0%</span>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+    <!-- ================= AI DROP ASSISTANT & RHYTHM MATCHER ================= -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      
+      <!-- AI Cue & Drop Assistant Panel (Left 5 Cols) -->
+      <section class="lg:col-span-5 bg-brand-card rounded-2xl border border-brand-border p-5 flex flex-col justify-between shadow-lg">
+        <div>
+          <div class="flex items-center justify-between pb-3 border-b border-brand-border">
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-lg bg-brand-magenta/20 text-brand-magenta flex items-center justify-center">
+                <i class="fa-solid fa-brain text-xs"></i>
+              </div>
+              <h3 class="font-bold text-sm tracking-wide text-white">AI Cue & Drop Assistant</h3>
+            </div>
+            <span id="ai-active-deck-label" class="text-[10px] font-digital px-2 py-0.5 rounded bg-zinc-800 text-slate-300">MONITORING DECK A</span>
+          </div>
+
+          <!-- Real-Time Drop Countdown Display -->
+          <div class="my-4 p-4 rounded-xl bg-gradient-to-br from-black/80 to-[#121422] border border-white/10 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] uppercase font-digital text-slate-400 block tracking-wider">Next Structural Drop</span>
+              <div id="ai-drop-countdown" class="text-2xl sm:text-3xl font-digital font-black text-brand-magenta tracking-wider">
+                00:45.0
+              </div>
+              <span id="ai-bar-count" class="text-[11px] text-slate-400 font-digital">BAR 32 // CHORUS IMPACT</span>
+            </div>
+            <div class="text-right">
+              <span class="text-[10px] uppercase font-digital text-slate-400 block tracking-wider">Current Phase</span>
+              <span id="ai-track-phase" class="inline-block mt-1 px-3 py-1 rounded-full text-xs font-bold font-digital bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/40 animate-pulse">
+                INTRO GROOVE
+              </span>
+            </div>
+          </div>
+
+          <!-- Dynamic Transition Prompts -->
+          <div class="space-y-2">
+            <span class="text-[10px] uppercase font-bold text-slate-400 font-digital tracking-wider">Live Transition Guidance</span>
+            <div id="ai-prompt-box" class="p-3.5 rounded-xl bg-cyan-950/20 border border-brand-cyan/30 text-xs text-slate-200 flex items-start gap-3">
+              <i class="fa-solid fa-wand-magic-sparkles text-brand-cyan text-sm mt-0.5"></i>
+              <div>
+                <p id="ai-prompt-headline" class="font-bold text-brand-cyan mb-0.5">Mix incoming bassline ready</p>
+                <p id="ai-prompt-detail" class="text-[11px] text-slate-400 leading-relaxed">Deck B matches harmonic Camelot 4A. Begin gradual 16-bar low-EQ filter sweep now.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cue Jump Buttons -->
+        <div class="mt-4 pt-3 border-t border-brand-border/60 flex items-center gap-2">
+          <button id="jump-intro" class="flex-1 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-[10px] font-digital text-slate-300 border border-white/5 active:scale-95 transition-all">
+            Intro (00:00)
+          </button>
+          <button id="jump-drop" class="flex-1 py-1.5 rounded-lg bg-brand-magenta/20 hover:bg-brand-magenta/30 text-[10px] font-digital text-pink-300 border border-brand-magenta/40 active:scale-95 transition-all">
+            Drop Fire!
+          </button>
+          <button id="jump-outro" class="flex-1 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-[10px] font-digital text-slate-300 border border-white/5 active:scale-95 transition-all">
+            Mix-Out
+          </button>
+        </div>
+      </section>
+
+      <!-- Smart Rhythm Matching & Suggestions Panel (Right 7 Cols) -->
+      <section class="lg:col-span-7 bg-brand-card rounded-2xl border border-brand-border p-5 flex flex-col justify-between shadow-lg">
+        <div>
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-brand-border">
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-lg bg-brand-cyan/20 text-brand-cyan flex items-center justify-center">
+                <i class="fa-solid fa-wave-square text-xs"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-sm tracking-wide text-white">Smart Rhythm & Camelot Harmonic Matches</h3>
+              </div>
+            </div>
+            <span class="text-[11px] font-digital text-slate-400">Filtering: <span class="text-brand-cyan font-bold">±4 BPM & Compatible Wheels</span></span>
+          </div>
+
+          <!-- Dynamic Suggestions Grid -->
+          <div id="smart-suggestions-list" class="mt-3.5 space-y-2.5 max-h-[220px] overflow-y-auto pr-1">
+            <!-- Dynamically populated via updateSuggestions() -->
+          </div>
+        </div>
+
+        <div class="mt-3 pt-3 border-t border-brand-border/60 flex items-center justify-between text-[11px] text-slate-400">
+          <div class="flex items-center gap-3">
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Exact Key</span>
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-brand-cyan"></span> Energy Boost (+1)</span>
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-400"></span> Relative Maj/Min</span>
+          </div>
+          <span class="font-digital text-xs text-brand-cyan">Auto-Match Active</span>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ================= PRE-SELECTED PARTY CRATE (PLAYLIST) ================= -->
+    <section class="bg-brand-card rounded-2xl border border-brand-border p-5 shadow-lg">
+      <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-brand-border">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
+            <i class="fa-solid fa-record-vinyl text-sm"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-base text-white">Curated Peak-Time Party Crate</h3>
+            <p class="text-xs text-slate-400">Pre-analyzed BPMs, Camelot Keys, and Structural Mix Windows</p>
+          </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="relative w-full sm:w-64">
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-500"></i>
+          <input type="text" id="crate-search-input" placeholder="Search track, artist, key..." class="w-full bg-black/50 border border-brand-border rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-cyan transition-colors">
+        </div>
+      </div>
+
+      <!-- Crate Table -->
+      <div class="mt-4 overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead>
+            <tr class="text-slate-500 font-digital uppercase text-[10px] border-b border-brand-border/60">
+              <th class="pb-3 font-semibold">Track & Artist</th>
+              <th class="pb-3 font-semibold text-center">BPM</th>
+              <th class="pb-3 font-semibold text-center">Camelot</th>
+              <th class="pb-3 font-semibold text-center">Energy</th>
+              <th class="pb-3 font-semibold text-center">Drop Point</th>
+              <th class="pb-3 font-semibold text-center">Duration</th>
+              <th class="pb-3 font-semibold text-right">Load Actions</th>
+            </tr>
+          </thead>
+          <tbody id="crate-table-body" class="divide-y divide-brand-border/30">
+            <!-- Dynamically populated via renderPartyCrate() -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= OFF-SCREEN COMPLIANT YOUTUBE PLAYERS ================= -->
+  <!-- Fully dimensioned (320x180) to satisfy YouTube IFrame API requirements without visual errors -->
+  <div class="fixed -bottom-[300px] left-0 opacity-0 pointer-events-none z-[-10]">
+    <div id="yt-player-a" style="width: 320px; height: 180px;"></div>
+    <div id="yt-player-b" style="width: 320px; height: 180px;"></div>
+  </div>
+
+  <!-- Custom YouTube URL Modal -->
+  <div id="custom-url-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-[#12141f] border border-brand-border rounded-2xl max-w-md w-full p-6 shadow-2xl">
+      <div class="flex items-center justify-between pb-3 border-b border-brand-border">
+        <h3 class="font-bold text-white text-sm flex items-center gap-2">
+          <i class="fa-brands fa-youtube text-red-500"></i> Load Custom YouTube Track
+        </h3>
+        <button onclick="closeCustomUrlModal()" class="text-slate-400 hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="mt-4 space-y-3">
+        <div>
+          <label class="block text-xs font-digital text-slate-400 mb-1">YouTube URL or Video ID</label>
+          <input type="text" id="custom-yt-input" placeholder="e.g., https://youtu.be/... or video ID" class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-cyan">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-digital text-slate-400 mb-1">BPM (Default 126)</label>
+            <input type="number" id="custom-bpm-input" value="126" class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-cyan">
+          </div>
+          <div>
+            <label class="block text-xs font-digital text-slate-400 mb-1">Camelot Key</label>
+            <input type="text" id="custom-key-input" value="4A" class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-cyan">
+          </div>
+        </div>
+        <div class="pt-3 flex gap-2">
+          <button onclick="submitCustomTrack('A')" class="flex-1 py-2 rounded-xl bg-brand-cyan text-black font-digital font-bold text-xs hover:bg-cyan-400 active:scale-95 transition-all">Load to Deck A</button>
+          <button onclick="submitCustomTrack('B')" class="flex-1 py-2 rounded-xl bg-brand-magenta text-white font-digital font-bold text-xs hover:bg-pink-600 active:scale-95 transition-all">Load to Deck B</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT DJ ENGINE ================= -->
+  <script>
+    /* =====================================================================
+       1. TRACK DATABASE (Universal Embed-Safe Tracks)
+       ===================================================================== */
+    const PARTY_TRACKS = [
+      {
+        id: "trk_001",
+        title: "Nevada (Club Mix)",
+        artist: "Vicetone",
+        ytId: "fq3EbRgtRxM",
+        duration: 208,
+        artwork: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&q=80",
+        audioProfile: {
+          bpm: 126,
+          camelotKey: "4A",
+          rootKey: "C# Minor",
+          energyLevel: "Peak",
+          energyScore: 9.6
+        },
+        cuePoints: {
+          introStart: 0.0,
+          mixInPoint: 15.0,
+          dropTimestamp: 45.0,
+          mixOutPoint: 180.0
+        }
+      },
+      {
+        id: "trk_002",
+        title: "Puzzle (Club Mix)",
+        artist: "RetroVision",
+        ytId: "TN_8L-x6C4E",
+        duration: 168,
+        artwork: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=300&q=80",
+        audioProfile: {
+          bpm: 126,
+          camelotKey: "4A",
+          rootKey: "C# Minor",
+          energyLevel: "Peak Rave",
+          energyScore: 9.8
+        },
+        cuePoints: {
+          introStart: 0.0,
+          mixInPoint: 15.0,
+          dropTimestamp: 46.0,
+          mixOutPoint: 150.0
+        }
+      },
+      {
+        id: "trk_003",
+        title: "On & On (Extended)",
+        artist: "Cartoon ft. Daniel Levi",
+        ytId: "K4DyBUG242c",
+        duration: 208,
+        artwork: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&q=80",
+        audioProfile: {
+          bpm: 128,
+          camelotKey: "4B",
+          rootKey: "E Major",
+          energyLevel: "Festival Anthem",
+          energyScore: 9.4
+        },
+        cuePoints: {
+          introStart: 0.0,
+          mixInPoint: 15.0,
+          dropTimestamp: 45.0,
+          mixOutPoint: 185.0
+        }
+      },
+      {
+        id: "trk_004",
+        title: "Sky High (Festival Mix)",
+        artist: "Elektronomia",
+        ytId: "p7ZsBPK656g",
+        duration: 237,
+        artwork: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=300&q=80",
+        audioProfile: {
+          bpm: 128,
+          camelotKey: "5B",
+          rootKey: "D Major",
+          energyLevel: "Hyper Peak",
+          energyScore: 9.9
+        },
+        cuePoints: {
+          introStart: 0.0,
+          mixInPoint: 15.0,
+          dropTimestamp: 48.0,
+          mixOutPoint: 205.0
+        }
+      },
+      {
+        id: "trk_005",
+        title: "Heroes Tonight",
+        artist: "Janji ft. Johnning",
+        ytId: "__CRWE-L45k",
+        duration: 208,
+        artwork: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&q=80",
+        audioProfile: {
+          bpm: 126,
+          camelotKey: "4A",
+          rootKey: "C# Minor",
+          energyLevel: "Anthem",
+          energyScore: 9.5
+        },
+        cuePoints: {
+          introStart: 0.0,
+          mixInPoint: 16.0,
+          dropTimestamp: 47.0,
+          mixOutPoint: 180.0
+        }
+      },
+      {
+        id: "trk_006",
+        title: "Candyland",
+        artist: "Tobu",
+        ytId: "n8X9_FX26mQ",
+        duration: 198,
+        artwork: "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=300&q=80",
+        audioProfile: {
+          bpm: 128,
+          camelotKey: "4B",
+          rootKey: "E Major",
+          energyLevel: "Uplifting",
+          energyScore: 9.2
+        },
+        cuePoints: {
+          introStart: 0.0,
+          mixInPoint: 15.0,
+          dropTimestamp: 50.0,
+          mixOutPoint: 175.0
+        }
+      }
+    ];
+
+    /* =====================================================================
+       2. DJ STATE & WEB AUDIO SYNTHESIZER FALLBACK
+       ===================================================================== */
+    const djState = {
+      activeMaster: 'A',
+      crossfader: 0,
+      audioCtx: null,
+      synthActive: false,
+      deckA: {
+        track: PARTY_TRACKS[0],
+        player: null,
+        isPlaying: false,
+        currentTime: 0,
+        duration: PARTY_TRACKS[0].duration,
+        pitch: 1.0,
+        volume: 100
+      },
+      deckB: {
+        track: PARTY_TRACKS[1],
+        player: null,
+        isPlaying: false,
+        currentTime: 0,
+        duration: PARTY_TRACKS[1].duration,
+        pitch: 1.0,
+        volume: 0
+      }
+    };
+
+    // Web Audio Synthesizer (Zero-latency fallback if YouTube is blocked by file:// or network)
+    function initWebAudio() {
+      if (!djState.audioCtx) {
+        djState.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (djState.audioCtx.state === 'suspended') {
+        djState.audioCtx.resume();
+      }
+    }
+
+    function playSynthBeat(deckLetter) {
+      if (!djState.audioCtx) return;
+      const deck = (deckLetter === 'A') ? djState.deckA : djState.deckB;
+      const vol = deck.volume / 100;
+      if (vol <= 0.01) return;
+
+      const now = djState.audioCtx.currentTime;
+
+      // Punchy Club Kick
+      const osc = djState.audioCtx.createOscillator();
+      const gain = djState.audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(140, now);
+      osc.frequency.exponentialRampToValueAtTime(36, now + 0.12);
+      gain.gain.setValueAtTime(0.5 * vol, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+      osc.connect(gain);
+      gain.connect(djState.audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.18);
+
+      // Off-beat Hi-Hat
+      setTimeout(() => {
+        if (!deck.isPlaying || !djState.audioCtx) return;
+        const hatNow = djState.audioCtx.currentTime;
+        const bufferSize = djState.audioCtx.sampleRate * 0.04;
+        const buffer = djState.audioCtx.createBuffer(1, bufferSize, djState.audioCtx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+
+        const noise = djState.audioCtx.createBufferSource();
+        noise.buffer = buffer;
+        const filter = djState.audioCtx.createBiquadFilter();
+        filter.type = 'highpass';
+        filter.frequency.value = 7500;
+
+        const hatGain = djState.audioCtx.createGain();
+        hatGain.gain.setValueAtTime(0.18 * vol, hatNow);
+        hatGain.gain.exponentialRampToValueAtTime(0.001, hatNow + 0.04);
+
+        noise.connect(filter);
+        filter.connect(hatGain);
+        hatGain.connect(djState.audioCtx.destination);
+        noise.start(hatNow);
+      }, (60 / (deck.track.audioProfile.bpm * deck.pitch) * 500));
+    }
+
+    // Regular beat pulses for synth fallback
+    setInterval(() => {
+      if (djState.deckA.isPlaying && djState.synthActive) playSynthBeat('A');
+      if (djState.deckB.isPlaying && djState.synthActive) playSynthBeat('B');
+    }, 470);
+
+    /* =====================================================================
+       3. YOUTUBE IFRAME PLAYER API INITIALIZATION
+       ===================================================================== */
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScript = document.getElementsByTagName('script')[0];
+    firstScript.parentNode.insertBefore(tag, firstScript);
+
+    window.onYouTubeIframeAPIReady = function() {
+      // Deck A Player
+      djState.deckA.player = new YT.Player('yt-player-a', {
+        height: '180',
+        width: '320',
+        videoId: djState.deckA.track.ytId,
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          modestbranding: 1,
+          rel: 0,
+          playsinline: 1
+        },
+        events: {
+          'onReady': () => {
+            if (djState.deckA.player.setVolume) djState.deckA.player.setVolume(100);
+          },
+          'onStateChange': (e) => onPlayerStateChange('A', e),
+          'onError': () => activateSynthFallback('Deck A')
+        }
+      });
+
+      // Deck B Player
+      djState.deckB.player = new YT.Player('yt-player-b', {
+        height: '180',
+        width: '320',
+        videoId: djState.deckB.track.ytId,
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          modestbranding: 1,
+          rel: 0,
+          playsinline: 1
+        },
+        events: {
+          'onReady': () => {
+            if (djState.deckB.player.setVolume) djState.deckB.player.setVolume(0);
+          },
+          'onStateChange': (e) => onPlayerStateChange('B', e),
+          'onError': () => activateSynthFallback('Deck B')
+        }
+      });
+    };
+
+    function activateSynthFallback(deckName) {
+      djState.synthActive = true;
+      const badge = document.getElementById('audio-engine-badge');
+      badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse"></span> SYNTH AUDIO ACTIVE`;
+      badge.className = "flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-cyan-950/60 border border-brand-cyan/40 text-cyan-300";
+    }
+
+    function onPlayerStateChange(deckLetter, event) {
+      const isPlay = (event.data === YT.PlayerState.PLAYING);
+      const deck = (deckLetter === 'A') ? djState.deckA : djState.deckB;
+      deck.isPlaying = isPlay;
+      updateDeckPlayingVisuals(deckLetter, isPlay);
+    }
+
+    /* =====================================================================
+       4. CAMELOT HARMONIC ENGINE
+       ===================================================================== */
+    function parseCamelot(keyStr) {
+      const match = keyStr.match(/^(\d+)([AB])$/i);
+      if (!match) return { num: 1, letter: 'A' };
+      return { num: parseInt(match[1]), letter: match[2].toUpperCase() };
+    }
+
+    function getHarmonicMatch(sourceKeyStr, targetKeyStr) {
+      const src = parseCamelot(sourceKeyStr);
+      const tgt = parseCamelot(targetKeyStr);
+
+      if (src.num === tgt.num && src.letter === tgt.letter) {
+        return { match: true, score: 100, label: "Exact Key", color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30" };
+      }
+      if (src.num === tgt.num && src.letter !== tgt.letter) {
+        return { match: true, score: 95, label: "Relative Key", color: "text-purple-400 bg-purple-500/10 border-purple-500/30" };
+      }
+      const plusOne = (src.num % 12) + 1;
+      const minusOne = (src.num === 1) ? 12 : src.num - 1;
+
+      if (tgt.letter === src.letter && tgt.num === plusOne) {
+        return { match: true, score: 90, label: "Energy Boost (+1)", color: "text-brand-cyan bg-cyan-500/10 border-cyan-500/30" };
+      }
+      if (tgt.letter === src.letter && tgt.num === minusOne) {
+        return { match: true, score: 85, label: "Energy Step (-1)", color: "text-blue-400 bg-blue-500/10 border-blue-500/30" };
+      }
+      return { match: false, score: 35, label: "Non-Harmonic", color: "text-slate-400 bg-zinc-800 border-white/5" };
+    }
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+
+    /* =====================================================================
+       5. UI RENDERERS
+       ===================================================================== */
+    function updateDeckUI(deckLetter) {
+      const isA = (deckLetter === 'A');
+      const deck = isA ? djState.deckA : djState.deckB;
+      const t = deck.track;
+      const prefix = `deck-${deckLetter.toLowerCase()}`;
+
+      document.getElementById(`${prefix}-title`).textContent = t.title;
+      document.getElementById(`${prefix}-artist`).textContent = t.artist;
+      document.getElementById(`${prefix}-bpm`).textContent = `${t.audioProfile.bpm} BPM`;
+      document.getElementById(`${prefix}-camelot`).textContent = `${t.audioProfile.camelotKey} - ${t.audioProfile.rootKey}`;
+      document.getElementById(`${prefix}-artwork`).style.backgroundImage = `url('${t.artwork}')`;
+      document.getElementById(`${prefix}-duration`).textContent = ` / ${formatTime(t.duration)}`;
+
+      document.getElementById(`${prefix}-cue-in`).textContent = `IN ${formatTime(t.cuePoints.mixInPoint)}`;
+      document.getElementById(`${prefix}-cue-drop`).textContent = `DROP @ ${formatTime(t.cuePoints.dropTimestamp)}`;
+      document.getElementById(`${prefix}-cue-out`).textContent = `OUT ${formatTime(t.cuePoints.mixOutPoint)}`;
+
+      const dropPct = (t.cuePoints.dropTimestamp / t.duration) * 100;
+      const outPct = (t.cuePoints.mixOutPoint / t.duration) * 100;
+      document.getElementById(`${prefix}-drop-pin`).style.left = `${dropPct}%`;
+      document.getElementById(`${prefix}-out-pin`).style.left = `${outPct}%`;
+    }
+
+    function updateDeckPlayingVisuals(deckLetter, isPlaying) {
+      const vinyl = document.getElementById(`vinyl-${deckLetter.toLowerCase()}`);
+      const tonearm = document.getElementById(`tonearm-${deckLetter.toLowerCase()}`);
+      const playIcon = document.getElementById(`icon-play-${deckLetter.toLowerCase()}`);
+      const rim = document.getElementById(`deck-${deckLetter.toLowerCase()}-rim`);
+
+      if (isPlaying) {
+        vinyl.classList.add('animate-spin-vinyl');
+        tonearm.classList.add('engaged');
+        playIcon.className = "fa-solid fa-pause text-base";
+        rim.classList.add(deckLetter === 'A' ? 'animate-pulse-neon' : 'animate-glow-pink');
+      } else {
+        vinyl.classList.remove('animate-spin-vinyl');
+        tonearm.classList.remove('engaged');
+        playIcon.className = "fa-solid fa-play text-base";
+        rim.classList.remove('animate-pulse-neon', 'animate-glow-pink');
+      }
+    }
+
+    function renderPartyCrate() {
+      const tbody = document.getElementById('crate-table-body');
+      const searchTerm = document.getElementById('crate-search-input').value.toLowerCase();
+      tbody.innerHTML = '';
+
+      PARTY_TRACKS.filter(t => {
+        return t.title.toLowerCase().includes(searchTerm) ||
+               t.artist.toLowerCase().includes(searchTerm) ||
+               t.audioProfile.camelotKey.toLowerCase().includes(searchTerm);
+      }).forEach(track => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-white/[0.04] transition-colors group";
+        tr.innerHTML = `
+          <td class="py-3 flex items-center gap-3">
+            <img src="${track.artwork}" alt="Cover" class="w-9 h-9 rounded-lg object-cover border border-white/10 flex-shrink-0">
+            <div class="truncate">
+              <span class="font-bold text-slate-100 block group-hover:text-brand-cyan transition-colors truncate">${track.title}</span>
+              <span class="text-[11px] text-slate-400 font-medium truncate">${track.artist}</span>
+            </div>
+          </td>
+          <td class="py-3 text-center font-digital font-bold text-amber-400">${track.audioProfile.bpm}</td>
+          <td class="py-3 text-center">
+            <span class="px-2 py-0.5 rounded text-[10px] font-digital font-bold bg-indigo-950/70 text-cyan-300 border border-cyan-500/30">
+              ${track.audioProfile.camelotKey}
+            </span>
+          </td>
+          <td class="py-3 text-center">
+            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-rose-500/10 text-rose-300 border border-rose-500/20">
+              ${track.audioProfile.energyLevel}
+            </span>
+          </td>
+          <td class="py-3 text-center font-digital text-brand-magenta font-semibold">${formatTime(track.cuePoints.dropTimestamp)}</td>
+          <td class="py-3 text-center font-digital text-slate-400">${formatTime(track.duration)}</td>
+          <td class="py-3 text-right">
+            <div class="flex items-center justify-end gap-1.5">
+              <button onclick="loadTrackToDeck('A', '${track.id}')" class="px-2 py-1 rounded bg-zinc-800 hover:bg-brand-cyan hover:text-black font-digital text-[10px] font-bold text-cyan-300 transition-all border border-cyan-500/20 active:scale-95">LOAD A</button>
+              <button onclick="loadTrackToDeck('B', '${track.id}')" class="px-2 py-1 rounded bg-zinc-800 hover:bg-brand-magenta hover:text-white font-digital text-[10px] font-bold text-pink-300 transition-all border border-pink-500/20 active:scale-95">LOAD B</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateSuggestions() {
+      const container = document.getElementById('smart-suggestions-list');
+      const activeDeckObj = (djState.activeMaster === 'A') ? djState.deckA : djState.deckB;
+      const activeBPM = activeDeckObj.track.audioProfile.bpm;
+      const activeKey = activeDeckObj.track.audioProfile.camelotKey;
+
+      const suggestions = PARTY_TRACKS.filter(t => t.id !== activeDeckObj.track.id).map(track => {
+        const bpmDiff = Math.abs(track.audioProfile.bpm - activeBPM);
+        const harmonic = getHarmonicMatch(activeKey, track.audioProfile.camelotKey);
+        let priority = 0;
+        if (bpmDiff <= 4) priority += 60;
+        if (harmonic.match) priority += harmonic.score;
+        return { track, bpmDiff, harmonic, priority };
+      }).sort((a, b) => b.priority - a.priority);
+
+      container.innerHTML = '';
+      suggestions.slice(0, 4).forEach(({ track, bpmDiff, harmonic }) => {
+        const diffText = (bpmDiff === 0) ? "Exact BPM" : `${track.audioProfile.bpm > activeBPM ? '+' : '-'}${bpmDiff} BPM`;
+        const card = document.createElement('div');
+        card.className = "p-2.5 rounded-xl bg-black/45 border border-white/5 hover:border-brand-cyan/40 transition-all flex items-center justify-between gap-3";
+        card.innerHTML = `
+          <div class="flex items-center gap-3 truncate">
+            <img src="${track.artwork}" alt="Cover" class="w-10 h-10 rounded-lg object-cover flex-shrink-0 border border-white/10">
+            <div class="truncate">
+              <div class="flex items-center gap-2 truncate">
+                <span class="font-bold text-xs text-white truncate">${track.title}</span>
+                <span class="px-1.5 py-0.2 rounded text-[9px] font-digital font-bold ${harmonic.color}">${harmonic.label}</span>
+              </div>
+              <div class="flex items-center gap-2 mt-0.5 text-[10px] text-slate-400">
+                <span>${track.artist}</span>
+                <span>•</span>
+                <span class="font-digital text-amber-400 font-bold">${track.audioProfile.bpm} BPM (${diffText})</span>
+              </div>
+            </div>
+          </div>
+          <button onclick="loadTrackToDeck('B', '${track.id}')" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-brand-magenta/30 to-rose-600/30 hover:from-brand-magenta hover:to-rose-600 border border-brand-magenta/50 text-white font-digital text-[10px] font-bold flex-shrink-0 active:scale-95 transition-all">Load to B</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    /* =====================================================================
+       6. DJ ACTIONS & INTERACTIVITY
+       ===================================================================== */
+    window.loadTrackToDeck = function(deckLetter, trackId) {
+      const track = PARTY_TRACKS.find(t => t.id === trackId);
+      if (!track) return;
+
+      const deck = (deckLetter === 'A') ? djState.deckA : djState.deckB;
+      deck.track = track;
+      deck.currentTime = 0;
+      deck.duration = track.duration;
+
+      updateDeckUI(deckLetter);
+
+      if (deck.player && deck.player.cueVideoById) {
+        deck.player.cueVideoById({ videoId: track.ytId, startSeconds: 0 });
+      }
+
+      updateSuggestions();
+      updateAIAdvice();
+    };
+
+    function togglePlay(deckLetter) {
+      initWebAudio();
+      const deck = (deckLetter === 'A') ? djState.deckA : djState.deckB;
+
+      if (!deck.player || !deck.player.playVideo) {
+        deck.isPlaying = !deck.isPlaying;
+        updateDeckPlayingVisuals(deckLetter, deck.isPlaying);
+        return;
+      }
+
+      if (deck.isPlaying) {
+        deck.player.pauseVideo();
+        deck.isPlaying = false;
+        updateDeckPlayingVisuals(deckLetter, false);
+      } else {
+        deck.player.playVideo();
+        deck.isPlaying = true;
+        updateDeckPlayingVisuals(deckLetter, true);
+
+        if (deckLetter === 'A' && djState.crossfader === 0) setActiveMaster('A');
+        else if (deckLetter === 'B' && djState.crossfader === 100) setActiveMaster('B');
+      }
+    }
+
+    function setActiveMaster(targetDeck) {
+      djState.activeMaster = targetDeck;
+      const isA = (targetDeck === 'A');
+
+      const tagA = document.getElementById('deck-a-active-tag');
+      const tagB = document.getElementById('deck-b-active-tag');
+      const contA = document.getElementById('deck-container-a');
+      const contB = document.getElementById('deck-container-b');
+      const aiDeckLabel = document.getElementById('ai-active-deck-label');
+
+      if (isA) {
+        tagA.textContent = "MASTER ON-AIR";
+        tagA.className = "px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+        tagB.textContent = "QUEUED / STANDBY";
+        tagB.className = "px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30";
+        contA.classList.add('border-brand-cyan/60');
+        contB.classList.remove('border-brand-magenta/60');
+        aiDeckLabel.textContent = "MONITORING DECK A";
+      } else {
+        tagB.textContent = "MASTER ON-AIR";
+        tagB.className = "px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+        tagA.textContent = "QUEUED / STANDBY";
+        tagA.className = "px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30";
+        contB.classList.add('border-brand-magenta/60');
+        contA.classList.remove('border-brand-cyan/60');
+        aiDeckLabel.textContent = "MONITORING DECK B";
+      }
+
+      updateSuggestions();
+    }
+
+    function applyCrossfade(value) {
+      djState.crossfader = value;
+      const volA = Math.cos((value / 100) * 0.5 * Math.PI);
+      const volB = Math.sin((value / 100) * 0.5 * Math.PI);
+
+      djState.deckA.volume = Math.round(volA * 100);
+      djState.deckB.volume = Math.round(volB * 100);
+
+      if (djState.deckA.player && djState.deckA.player.setVolume) {
+        djState.deckA.player.setVolume(djState.deckA.volume);
+      }
+      if (djState.deckB.player && djState.deckB.player.setVolume) {
+        djState.deckB.player.setVolume(djState.deckB.volume);
+      }
+
+      if (value < 35 && djState.activeMaster !== 'A') setActiveMaster('A');
+      else if (value > 65 && djState.activeMaster !== 'B') setActiveMaster('B');
+    }
+
+    // Quick Crossfade Transition
+    function executeQuickCrossfade() {
+      const containerA = document.getElementById('deck-container-a');
+      const containerB = document.getElementById('deck-container-b');
+
+      containerA.classList.add('scale-95', 'opacity-60', 'blur-[1px]');
+      containerB.classList.add('scale-105', 'border-brand-cyan', 'shadow-brand-cyan/30');
+
+      setTimeout(() => {
+        const incomingTrack = djState.deckB.track;
+        djState.deckA.track = incomingTrack;
+        djState.deckA.currentTime = djState.deckB.currentTime;
+        djState.deckA.duration = incomingTrack.duration;
+
+        const nextTrack = PARTY_TRACKS.find(t => 
+          t.id !== incomingTrack.id && 
+          Math.abs(t.audioProfile.bpm - incomingTrack.audioProfile.bpm) <= 3
+        ) || PARTY_TRACKS[(PARTY_TRACKS.indexOf(incomingTrack) + 1) % PARTY_TRACKS.length];
+        
+        djState.deckB.track = nextTrack;
+        djState.deckB.currentTime = 0;
+        djState.deckB.duration = nextTrack.duration;
+
+        updateDeckUI('A');
+        updateDeckUI('B');
+
+        const faderInput = document.getElementById('crossfader');
+        faderInput.value = 0;
+        applyCrossfade(0);
+        setActiveMaster('A');
+
+        if (djState.deckA.player && djState.deckA.player.loadVideoById) {
+          djState.deckA.player.loadVideoById({ videoId: djState.deckA.track.ytId, startSeconds: djState.deckA.currentTime });
+          djState.deckA.isPlaying = true;
+          updateDeckPlayingVisuals('A', true);
+        }
+
+        if (djState.deckB.player && djState.deckB.player.cueVideoById) {
+          djState.deckB.player.cueVideoById(djState.deckB.track.ytId);
+          djState.deckB.isPlaying = false;
+          updateDeckPlayingVisuals('B', false);
+        }
+
+        containerA.classList.remove('scale-95', 'opacity-60', 'blur-[1px]');
+        containerB.classList.remove('scale-105', 'border-brand-cyan', 'shadow-brand-cyan/30');
+
+        updateSuggestions();
+        updateAIAdvice();
+      }, 400);
+    }
+
+    /* =====================================================================
+       7. AI CUE & DROP ASSISTANT REAL-TIME EVALUATOR
+       ===================================================================== */
+    function updateAIAdvice() {
+      const activeDeckObj = (djState.activeMaster === 'A') ? djState.deckA : djState.deckB;
+      const otherDeckObj = (djState.activeMaster === 'A') ? djState.deckB : djState.deckA;
+      const track = activeDeckObj.track;
+      const currentTime = activeDeckObj.currentTime;
+      const cue = track.cuePoints;
+
+      const countdownEl = document.getElementById('ai-drop-countdown');
+      const barCountEl = document.getElementById('ai-bar-count');
+      const phaseEl = document.getElementById('ai-track-phase');
+      const headlineEl = document.getElementById('ai-prompt-headline');
+      const detailEl = document.getElementById('ai-prompt-detail');
+
+      const timeToDrop = cue.dropTimestamp - currentTime;
+      if (timeToDrop > 0) {
+        countdownEl.textContent = `00:${Math.ceil(timeToDrop).toString().padStart(2, '0')}.${Math.floor((timeToDrop % 1) * 10)}`;
+        countdownEl.className = "text-2xl sm:text-3xl font-digital font-black text-brand-magenta tracking-wider";
+        const barsRemaining = Math.max(1, Math.round(timeToDrop / (60 / track.audioProfile.bpm * 4)));
+        barCountEl.textContent = `BAR ${barsRemaining * 4} // CHORUS BUILD IMPACT`;
+      } else if (currentTime < cue.mixOutPoint) {
+        countdownEl.textContent = "🔥 DROP ACTIVE";
+        countdownEl.className = "text-2xl sm:text-3xl font-digital font-black text-brand-lime tracking-wider animate-pulse";
+        barCountEl.textContent = "PEAK ENERGY DANCEFLOOR";
+      } else {
+        countdownEl.textContent = "MIX-OUT OPEN";
+        countdownEl.className = "text-2xl sm:text-3xl font-digital font-black text-amber-400 tracking-wider";
+        barCountEl.textContent = "CROSSFADE TO QUEUED DECK";
+      }
+
+      if (currentTime < cue.mixInPoint) {
+        phaseEl.textContent = "INTRO GROOVE";
+        phaseEl.className = "inline-block mt-1 px-3 py-1 rounded-full text-xs font-bold font-digital bg-cyan-500/20 text-cyan-300 border border-cyan-500/30";
+        headlineEl.textContent = "Intro Beatmatch Locked";
+        detailEl.textContent = `Active tempo ${track.audioProfile.bpm} BPM. Camelot key is ${track.audioProfile.camelotKey}. Aligning next incoming bassline.`;
+      } else if (currentTime < cue.dropTimestamp - 10) {
+        phaseEl.textContent = "BUILD-UP TENSION";
+        phaseEl.className = "inline-block mt-1 px-3 py-1 rounded-full text-xs font-bold font-digital bg-yellow-500/20 text-amber-300 border border-amber-500/30";
+        headlineEl.textContent = "Mix incoming bassline here";
+        detailEl.textContent = `Prep filter sweep. Deck B Camelot ${otherDeckObj.track.audioProfile.camelotKey} is primed. Cut low EQ on incoming deck.`;
+      } else if (currentTime < cue.dropTimestamp) {
+        phaseEl.textContent = "⚠️ IMPACT INCOMING";
+        phaseEl.className = "inline-block mt-1 px-3 py-1 rounded-full text-xs font-bold font-digital bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-bounce";
+        headlineEl.textContent = "8 beats to Drop! Engage crowd!";
+        detailEl.textContent = "Standby on master bass volume. Prepare dancefloor for maximum impact.";
+      } else if (currentTime < cue.mixOutPoint) {
+        phaseEl.textContent = "MAIN CHORUS DROP";
+        phaseEl.className = "inline-block mt-1 px-3 py-1 rounded-full text-xs font-bold font-digital bg-brand-lime/20 text-brand-lime border border-brand-lime/30";
+        headlineEl.textContent = "Drop Hot: Full Power";
+        detailEl.textContent = `Harmonic compatibility confirmed with queue. Ready Deck ${djState.activeMaster === 'A' ? 'B' : 'A'} at Mix-In marker.`;
+      } else {
+        phaseEl.textContent = "OUTRO MIX WINDOW";
+        phaseEl.className = "inline-block mt-1 px-3 py-1 rounded-full text-xs font-bold font-digital bg-purple-500/20 text-purple-300 border border-purple-500/30";
+        headlineEl.textContent = "Mix-Out Window Open: Sweep crossfader";
+        detailEl.textContent = `Smoothly sweep crossfader to Deck ${djState.activeMaster === 'A' ? 'B' : 'A'} for continuous high-energy party pulse.`;
+      }
+    }
+
+    /* =====================================================================
+       8. MAIN TICK LOOP
+       ===================================================================== */
+    setInterval(() => {
+      // Sync Deck A Playhead
+      if (djState.deckA.player && djState.deckA.player.getCurrentTime) {
+        const timeA = djState.deckA.player.getCurrentTime();
+        if (timeA && !isNaN(timeA)) {
+          djState.deckA.currentTime = timeA;
+          document.getElementById('deck-a-time').textContent = formatTime(timeA);
+          document.getElementById('deck-a-progress').style.width = `${Math.min((timeA / djState.deckA.duration) * 100, 100)}%`;
+        }
+      } else if (djState.deckA.isPlaying) {
+        djState.deckA.currentTime = (djState.deckA.currentTime + 0.15 * djState.deckA.pitch) % djState.deckA.duration;
+        document.getElementById('deck-a-time').textContent = formatTime(djState.deckA.currentTime);
+        document.getElementById('deck-a-progress').style.width = `${(djState.deckA.currentTime / djState.deckA.duration) * 100}%`;
+      }
+
+      // Sync Deck B Playhead
+      if (djState.deckB.player && djState.deckB.player.getCurrentTime) {
+        const timeB = djState.deckB.player.getCurrentTime();
+        if (timeB && !isNaN(timeB)) {
+          djState.deckB.currentTime = timeB;
+          document.getElementById('deck-b-time').textContent = formatTime(timeB);
+          document.getElementById('deck-b-progress').style.width = `${Math.min((timeB / djState.deckB.duration) * 100, 100)}%`;
+        }
+      } else if (djState.deckB.isPlaying) {
+        djState.deckB.currentTime = (djState.deckB.currentTime + 0.15 * djState.deckB.pitch) % djState.deckB.duration;
+        document.getElementById('deck-b-time').textContent = formatTime(djState.deckB.currentTime);
+        document.getElementById('deck-b-progress').style.width = `${(djState.deckB.currentTime / djState.deckB.duration) * 100}%`;
+      }
+
+      updateAIAdvice();
+
+      // Master VU Meters
+      const activeObj = (djState.activeMaster === 'A') ? djState.deckA : djState.deckB;
+      const isLive = activeObj.isPlaying;
+      const meterL = document.getElementById('meter-l');
+      const meterR = document.getElementById('meter-r');
+      if (isLive) {
+        meterL.style.height = `${45 + Math.random() * 50}%`;
+        meterR.style.height = `${40 + Math.random() * 55}%`;
+      } else {
+        meterL.style.height = '12%';
+        meterR.style.height = '12%';
+      }
+    }, 150);
+
+    /* =====================================================================
+       9. CUSTOM MODAL AND EVENT LISTENERS
+       ===================================================================== */
+    function openCustomUrlModal() {
+      document.getElementById('custom-url-modal').classList.remove('hidden');
+    }
+    function closeCustomUrlModal() {
+      document.getElementById('custom-url-modal').classList.add('hidden');
+    }
+    function submitCustomTrack(deckLetter) {
+      const urlInput = document.getElementById('custom-yt-input').value.trim();
+      const bpm = parseInt(document.getElementById('custom-bpm-input').value) || 126;
+      const key = document.getElementById('custom-key-input').value.trim() || '4A';
+
+      if (!urlInput) return;
+      let vid = urlInput;
+      const match = urlInput.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+      if (match) vid = match[1];
+
+      const customTrack = {
+        id: "custom_" + Date.now(),
+        title: "Custom YouTube Audio",
+        artist: "User Load",
+        ytId: vid,
+        duration: 210,
+        artwork: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&q=80",
+        audioProfile: { bpm, camelotKey: key, rootKey: "Custom", energyLevel: "Custom", energyScore: 9.0 },
+        cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 45, mixOutPoint: 180 }
+      };
+
+      PARTY_TRACKS.unshift(customTrack);
+      loadTrackToDeck(deckLetter, customTrack.id);
+      renderPartyCrate();
+      closeCustomUrlModal();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateDeckUI('A');
+      updateDeckUI('B');
+      renderPartyCrate();
+      updateSuggestions();
+
+      document.getElementById('btn-play-a').addEventListener('click', () => togglePlay('A'));
+      document.getElementById('btn-play-b').addEventListener('click', () => togglePlay('B'));
+      document.getElementById('vinyl-a').addEventListener('click', () => togglePlay('A'));
+      document.getElementById('vinyl-b').addEventListener('click', () => togglePlay('B'));
+
+      document.getElementById('btn-cue-a').addEventListener('click', () => {
+        const mixIn = djState.deckA.track.cuePoints.mixInPoint;
+        djState.deckA.currentTime = mixIn;
+        if (djState.deckA.player && djState.deckA.player.seekTo) djState.deckA.player.seekTo(mixIn, true);
+      });
+      document.getElementById('btn-cue-b').addEventListener('click', () => {
+        const mixIn = djState.deckB.track.cuePoints.mixInPoint;
+        djState.deckB.currentTime = mixIn;
+        if (djState.deckB.player && djState.deckB.player.seekTo) djState.deckB.player.seekTo(mixIn, true);
+      });
+
+      document.getElementById('btn-sync-a').addEventListener('click', () => {
+        const ratio = parseFloat((djState.deckB.track.audioProfile.bpm / djState.deckA.track.audioProfile.bpm).toFixed(2));
+        djState.deckA.pitch = ratio;
+        document.getElementById('deck-a-tempo').value = ratio;
+        document.getElementById('deck-a-tempo-val').textContent = `${((ratio - 1) * 100).toFixed(1)}%`;
+        if (djState.deckA.player && djState.deckA.player.setPlaybackRate) djState.deckA.player.setPlaybackRate(ratio);
+      });
+      document.getElementById('btn-sync-b').addEventListener('click', () => {
+        const ratio = parseFloat((djState.deckA.track.audioProfile.bpm / djState.deckB.track.audioProfile.bpm).toFixed(2));
+        djState.deckB.pitch = ratio;
+        document.getElementById('deck-b-tempo').value = ratio;
+        document.getElementById('deck-b-tempo-val').textContent = `${((ratio - 1) * 100).toFixed(1)}%`;
+        if (djState.deckB.player && djState.deckB.player.setPlaybackRate) djState.deckB.player.setPlaybackRate(ratio);
+      });
+
+      document.getElementById('deck-a-tempo').addEventListener('input', (e) => {
+        const val = parseFloat(e.target.value);
+        djState.deckA.pitch = val;
+        document.getElementById('deck-a-tempo-val').textContent = `${((val - 1) * 100).toFixed(1)}%`;
+        if (djState.deckA.player && djState.deckA.player.setPlaybackRate) djState.deckA.player.setPlaybackRate(val);
+      });
+      document.getElementById('deck-b-tempo').addEventListener('input', (e) => {
+        const val = parseFloat(e.target.value);
+        djState.deckB.pitch = val;
+        document.getElementById('deck-b-tempo-val').textContent = `${((val - 1) * 100).toFixed(1)}%`;
+        if (djState.deckB.player && djState.deckB.player.setPlaybackRate) djState.deckB.player.setPlaybackRate(val);
+      });
+
+      document.getElementById('deck-a-timeline-wrap').addEventListener('click', (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const seekTime = ((e.clientX - rect.left) / rect.width) * djState.deckA.duration;
+        djState.deckA.currentTime = seekTime;
+        if (djState.deckA.player && djState.deckA.player.seekTo) djState.deckA.player.seekTo(seekTime, true);
+      });
+      document.getElementById('deck-b-timeline-wrap').addEventListener('click', (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const seekTime = ((e.clientX - rect.left) / rect.width) * djState.deckB.duration;
+        djState.deckB.currentTime = seekTime;
+        if (djState.deckB.player && djState.deckB.player.seekTo) djState.deckB.player.seekTo(seekTime, true);
+      });
+
+      document.getElementById('jump-intro').addEventListener('click', () => {
+        const deck = (djState.activeMaster === 'A') ? djState.deckA : djState.deckB;
+        deck.currentTime = deck.track.cuePoints.introStart;
+        if (deck.player && deck.player.seekTo) deck.player.seekTo(deck.track.cuePoints.introStart, true);
+      });
+      document.getElementById('jump-drop').addEventListener('click', () => {
+        const deck = (djState.activeMaster === 'A') ? djState.deckA : djState.deckB;
+        deck.currentTime = Math.max(0, deck.track.cuePoints.dropTimestamp - 2);
+        if (deck.player && deck.player.seekTo) deck.player.seekTo(deck.currentTime, true);
+      });
+      document.getElementById('jump-outro').addEventListener('click', () => {
+        const deck = (djState.activeMaster === 'A') ? djState.deckA : djState.deckB;
+        deck.currentTime = deck.track.cuePoints.mixOutPoint;
+        if (deck.player && deck.player.seekTo) deck.player.seekTo(deck.track.cuePoints.mixOutPoint, true);
+      });
+
+      document.getElementById('crossfader').addEventListener('input', (e) => {
+        applyCrossfade(parseInt(e.target.value));
+      });
+      document.getElementById('btn-quick-crossfade').addEventListener('click', executeQuickCrossfade);
+      document.getElementById('crate-search-input').addEventListener('input', renderPartyCrate);
+    });
+  </script>
+</body>
+</html>
