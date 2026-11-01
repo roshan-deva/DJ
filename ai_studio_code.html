@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PartyPulse AI YouTube DJ Booth</title>
+  <title>PartyPulse AI YouTube DJ Booth — Diwali Edition</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -11,7 +11,7 @@
   <!-- FontAwesome Icons CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Google Fonts: Orbitron (Digital Displays) & Plus Jakarta Sans -->
+  <!-- Google Fonts: Orbitron & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -62,7 +62,6 @@
   </script>
 
   <style>
-    /* Realistic Vinyl Grooves */
     .vinyl-grooves {
       background: radial-gradient(circle, 
         #111116 0%, #111116 26%, 
@@ -75,8 +74,6 @@
       );
       box-shadow: inset 0 0 25px rgba(0,0,0,0.95), 0 12px 30px rgba(0,0,0,0.85);
     }
-
-    /* Turntable Tonearm */
     .tonearm {
       transform-origin: 22px 22px;
       transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -84,8 +81,6 @@
     .tonearm.engaged {
       transform: rotate(26deg);
     }
-
-    /* Custom Input Sliders */
     input[type=range] {
       -webkit-appearance: none;
       background: #181d2a;
@@ -108,21 +103,10 @@
       box-shadow: 0 0 16px rgba(255, 0, 127, 0.85);
       border-radius: 4px;
     }
-
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #08090d;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #1e2436;
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #00f5ff;
-    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #08090d; }
+    ::-webkit-scrollbar-thumb { background: #1e2436; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00f5ff; }
   </style>
 </head>
 <body class="bg-[#07080c] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-brand-magenta selection:text-white pb-12">
@@ -131,38 +115,37 @@
   <header class="border-b border-brand-border bg-[#0d0f17]/95 backdrop-blur-md sticky top-0 z-50 px-4 lg:px-8 py-3">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
       
-      <!-- Brand Logo -->
+      <!-- Logo -->
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-cyan via-brand-violet to-brand-magenta p-0.5 shadow-lg shadow-brand-cyan/20 flex items-center justify-center">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-amber via-brand-magenta to-brand-cyan p-0.5 shadow-lg shadow-brand-amber/20 flex items-center justify-center">
           <div class="w-full h-full bg-[#0d0f17] rounded-[10px] flex items-center justify-center">
-            <i class="fa-solid fa-compact-disc text-brand-cyan text-lg animate-spin-vinyl"></i>
+            <i class="fa-solid fa-fire text-amber-400 text-lg"></i>
           </div>
         </div>
         <div>
-          <h1 class="font-extrabold text-lg lg:text-xl tracking-tight bg-gradient-to-r from-white via-slate-200 to-brand-cyan bg-clip-text text-transparent flex items-center gap-2">
-            PartyPulse <span class="text-xs uppercase px-2 py-0.5 rounded bg-brand-cyan/10 border border-brand-cyan/30 text-brand-cyan font-digital">AI DJ Booth</span>
+          <h1 class="font-extrabold text-lg lg:text-xl tracking-tight bg-gradient-to-r from-amber-300 via-pink-400 to-brand-cyan bg-clip-text text-transparent flex items-center gap-2">
+            Diwali Dance Party <span class="text-xs uppercase px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-digital">80 Tracks</span>
           </h1>
-          <p class="text-[11px] text-slate-400 font-medium">Harmonic Dual-Deck YouTube Engine</p>
+          <p class="text-[11px] text-slate-400 font-medium">Auto-Cue • Peak Arc • Non-Stop Harmonic Mix</p>
         </div>
       </div>
 
       <!-- Live Party Energy & Master Pulse Monitor -->
       <div class="flex items-center gap-4 bg-[#121520] px-4 py-2 rounded-xl border border-brand-border shadow-inner">
         <div class="flex flex-col items-end">
-          <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Crowd Energy</span>
+          <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Diwali Energy</span>
           <div class="flex items-center gap-1.5">
-            <span id="party-energy-text" class="text-xs font-digital font-bold text-brand-lime">PEAK HYPER (96%)</span>
+            <span id="party-energy-text" class="text-xs font-digital font-bold text-amber-400">WARM-UP GROOVE</span>
             <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-lime opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-lime"></span>
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
             </span>
           </div>
         </div>
         
-        <!-- Live Animated VU Bars -->
         <div class="flex items-end gap-1 h-6 w-16 px-1 bg-black/50 rounded border border-white/5" id="master-visualizer">
-          <div class="w-1 bg-brand-lime h-3/6 rounded-t transition-all duration-75"></div>
-          <div class="w-1 bg-brand-lime h-5/6 rounded-t transition-all duration-75"></div>
+          <div class="w-1 bg-amber-400 h-3/6 rounded-t transition-all duration-75"></div>
+          <div class="w-1 bg-amber-400 h-5/6 rounded-t transition-all duration-75"></div>
           <div class="w-1 bg-brand-cyan h-4/6 rounded-t transition-all duration-75"></div>
           <div class="w-1 bg-brand-cyan h-6/6 rounded-t transition-all duration-75"></div>
           <div class="w-1 bg-brand-magenta h-5/6 rounded-t transition-all duration-75"></div>
@@ -170,13 +153,14 @@
         </div>
       </div>
 
-      <!-- System Status Indicators & Audio Engine Mode -->
-      <div class="flex items-center gap-2.5 text-[11px] font-digital">
-        <div id="audio-engine-badge" class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-950/40 border border-emerald-500/30 text-emerald-400">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          YT ENGINE READY
-        </div>
-        <button onclick="openCustomUrlModal()" class="flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-800 hover:bg-zinc-700 text-cyan-300 border border-cyan-500/30 transition-all">
+      <!-- Auto-DJ Toggle & Custom Load -->
+      <div class="flex items-center gap-2 text-[11px] font-digital">
+        <!-- Auto-DJ Mode Button -->
+        <button id="btn-auto-dj" onclick="toggleAutoDJ()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 border border-brand-border text-slate-400 hover:text-white transition-all">
+          <i class="fa-solid fa-robot"></i>
+          <span>Auto-DJ: <strong id="auto-dj-status" class="text-rose-400">OFF</strong></span>
+        </button>
+        <button onclick="openCustomUrlModal()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-cyan-300 border border-cyan-500/30 transition-all">
           <i class="fa-brands fa-youtube text-red-500"></i> + Add URL
         </button>
       </div>
@@ -192,50 +176,43 @@
       
       <!-- ==================== DECK A (LEFT) ==================== -->
       <section id="deck-container-a" class="lg:col-span-5 bg-brand-card rounded-2xl border-2 border-brand-cyan/40 p-5 pt-6 flex flex-col justify-between shadow-xl shadow-cyan-950/15 relative transition-all duration-500">
-        
         <div>
-          <!-- Deck Top Bar (Fixed Padding & Badges) -->
+          <!-- Top Bar -->
           <div class="flex items-center justify-between pb-3.5 border-b border-brand-border">
             <div class="flex items-center gap-2">
               <span class="px-2.5 py-1 rounded-md bg-brand-cyan text-black font-extrabold text-xs font-digital tracking-wide shadow-md shadow-brand-cyan/30">DECK A</span>
               <span id="deck-a-active-tag" class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">MASTER ON-AIR</span>
             </div>
-            <!-- Harmonic & BPM Badges -->
             <div class="flex items-center gap-1.5">
               <span id="deck-a-camelot" class="px-2.5 py-1 rounded-lg text-xs font-bold font-digital bg-indigo-950/80 text-cyan-300 border border-cyan-500/40">4A</span>
               <span id="deck-a-bpm" class="px-2.5 py-1 rounded-lg text-xs font-bold font-digital bg-zinc-900 text-amber-400 border border-amber-500/30">126 BPM</span>
             </div>
           </div>
 
-          <!-- Track Metadata Info -->
+          <!-- Track Metadata -->
           <div class="mt-4 flex items-center justify-between">
             <div class="truncate pr-3">
-              <h2 id="deck-a-title" class="text-base font-bold text-white truncate hover:text-brand-cyan transition-colors">Nevada (Club Mix)</h2>
-              <p id="deck-a-artist" class="text-xs text-slate-400 font-medium truncate">Vicetone</p>
+              <h2 id="deck-a-title" class="text-base font-bold text-white truncate hover:text-brand-cyan transition-colors">Gallan Goodiyaan</h2>
+              <p id="deck-a-artist" class="text-xs text-slate-400 font-medium truncate">Dil Dhadakne Do</p>
             </div>
             <div class="text-right flex-shrink-0">
               <span id="deck-a-time" class="font-digital text-sm font-bold text-slate-300">00:00</span>
-              <span id="deck-a-duration" class="font-digital text-xs text-slate-500"> / 03:28</span>
+              <span id="deck-a-duration" class="font-digital text-xs text-slate-500"> / 02:30</span>
             </div>
           </div>
 
-          <!-- Turntable Platter Visual & ToneArm Graphic -->
+          <!-- Turntable Platter -->
           <div class="relative my-6 flex items-center justify-center">
             <div class="w-60 h-60 sm:w-64 sm:h-64 rounded-full p-2.5 bg-[#0a0c12] border-4 border-[#1c2132] shadow-2xl flex items-center justify-center relative">
-              
-              <!-- Neon Perimeter Ring -->
               <div id="deck-a-rim" class="absolute inset-1 rounded-full border border-brand-cyan/30 transition-all"></div>
-              
-              <!-- Vinyl Record -->
               <div id="vinyl-a" class="w-full h-full rounded-full vinyl-grooves relative flex items-center justify-center cursor-pointer transition-transform ease-linear">
-                <!-- Center Label Art -->
                 <div class="w-20 h-20 rounded-full border-2 border-white/20 bg-cover bg-center overflow-hidden flex items-center justify-center shadow-inner relative" id="deck-a-artwork" style="background-image: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&q=80')">
                   <div class="absolute inset-0 bg-black/35"></div>
                   <div class="w-5 h-5 rounded-full bg-[#0a0c12] border border-white/40 z-10"></div>
                 </div>
               </div>
 
-              <!-- Tonearm Visual -->
+              <!-- Tonearm -->
               <div id="tonearm-a" class="tonearm absolute top-1 right-3 w-16 h-28 pointer-events-none z-20">
                 <svg width="60" height="110" viewBox="0 0 60 110" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="45" cy="15" r="10" fill="#2d3748" stroke="#718096" stroke-width="2"/>
@@ -244,27 +221,25 @@
                   <rect x="8" y="93" width="12" height="16" rx="2" fill="#e53e3e" stroke="#fff" stroke-width="1" transform="rotate(-15 8 93)"/>
                 </svg>
               </div>
-
             </div>
           </div>
 
-          <!-- Visual Cue Timeline Progress Bar -->
+          <!-- Timeline -->
           <div class="space-y-1.5">
             <div class="flex justify-between text-[10px] text-slate-400 font-digital">
-              <span id="deck-a-cue-in">IN 00:15</span>
-              <span id="deck-a-cue-drop" class="text-brand-magenta font-bold">DROP @ 00:45</span>
-              <span id="deck-a-cue-out">OUT 03:00</span>
+              <span id="deck-a-cue-in">IN 00:10</span>
+              <span id="deck-a-cue-drop" class="text-amber-400 font-bold">CUE HOOK</span>
+              <span id="deck-a-cue-out">OUT 02:40</span>
             </div>
-            <!-- Progress Bar Container -->
             <div class="relative w-full h-3 bg-zinc-900 rounded-full overflow-hidden cursor-pointer border border-white/10" id="deck-a-timeline-wrap">
               <div id="deck-a-progress" class="h-full bg-gradient-to-r from-cyan-600 to-brand-cyan w-0% transition-all duration-100"></div>
-              <div id="deck-a-drop-pin" class="absolute top-0 bottom-0 w-1 bg-brand-magenta" style="left: 22%;" title="Drop Timestamp"></div>
-              <div id="deck-a-out-pin" class="absolute top-0 bottom-0 w-1 bg-yellow-400" style="left: 88%;" title="Mix Out Point"></div>
+              <div id="deck-a-drop-pin" class="absolute top-0 bottom-0 w-1 bg-amber-400" style="left: 30%;" title="Hook Point"></div>
+              <div id="deck-a-out-pin" class="absolute top-0 bottom-0 w-1 bg-rose-500" style="left: 95%;" title="Fade Point"></div>
             </div>
           </div>
         </div>
 
-        <!-- Deck A Transport & Pitch Controls -->
+        <!-- Controls -->
         <div class="mt-6 pt-4 border-t border-brand-border space-y-4">
           <div class="flex items-center justify-between gap-3">
             <button id="btn-cue-a" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5 transition-all">
@@ -278,21 +253,18 @@
             </button>
           </div>
 
-          <!-- Pitch / Tempo Slider -->
           <div class="flex items-center gap-3 bg-black/40 px-3 py-2 rounded-xl border border-white/5">
             <span class="text-[10px] font-digital text-slate-400">PITCH</span>
             <input type="range" id="deck-a-tempo" min="0.90" max="1.10" step="0.01" value="1.00" class="w-full h-1.5">
             <span id="deck-a-tempo-val" class="font-digital text-xs text-brand-cyan w-10 text-right">0.0%</span>
           </div>
         </div>
-
       </section>
 
       <!-- ==================== CENTRAL MIXER CONSOLE ==================== -->
       <section class="lg:col-span-2 bg-[#0c0e17] rounded-2xl border border-brand-border p-4 flex flex-col justify-between items-center shadow-2xl relative">
-        
         <div class="w-full flex items-center justify-between border-b border-brand-border/60 pb-2">
-          <span class="text-[10px] font-digital tracking-widest text-slate-400 uppercase">DJM-AI CORE</span>
+          <span class="text-[10px] font-digital tracking-widest text-slate-400 uppercase">DIWALI-CORE</span>
           <div class="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></div>
         </div>
 
@@ -336,14 +308,11 @@
 
         <!-- Crossfade Controls -->
         <div class="w-full space-y-3 pt-2">
-          
-          <!-- Smart Quick Crossfade Action Button -->
-          <button id="btn-quick-crossfade" class="w-full py-2.5 px-2 rounded-xl bg-gradient-to-r from-brand-cyan/20 via-brand-magenta/30 to-brand-cyan/20 border border-brand-magenta/40 hover:border-brand-magenta text-slate-100 font-digital font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-lg shadow-brand-magenta/15 hover:shadow-brand-magenta/30 active:scale-95 transition-all" title="Swaps Deck B into Deck A with smooth scale transition and updates live metadata">
+          <button id="btn-quick-crossfade" class="w-full py-2.5 px-2 rounded-xl bg-gradient-to-r from-brand-cyan/20 via-brand-magenta/30 to-brand-cyan/20 border border-brand-magenta/40 hover:border-brand-magenta text-slate-100 font-digital font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-lg shadow-brand-magenta/15 hover:shadow-brand-magenta/30 active:scale-95 transition-all">
             <i class="fa-solid fa-shuffle text-brand-magenta"></i>
             Quick Crossfade
           </button>
 
-          <!-- Crossfader Slider -->
           <div class="space-y-1">
             <div class="flex justify-between text-[10px] font-digital font-bold px-1">
               <span class="text-brand-cyan">DECK A</span>
@@ -353,55 +322,47 @@
             <input type="range" id="crossfader" min="0" max="100" value="0" class="crossfader w-full h-2 rounded-lg cursor-pointer">
           </div>
         </div>
-
       </section>
 
       <!-- ==================== DECK B (RIGHT) ==================== -->
       <section id="deck-container-b" class="lg:col-span-5 bg-brand-card rounded-2xl border-2 border-brand-magenta/30 p-5 pt-6 flex flex-col justify-between shadow-xl shadow-pink-950/15 relative transition-all duration-500">
-
         <div>
-          <!-- Deck Top Bar (Fixed Padding & Badges) -->
+          <!-- Top Bar -->
           <div class="flex items-center justify-between pb-3.5 border-b border-brand-border">
             <div class="flex items-center gap-2">
               <span class="px-2.5 py-1 rounded-md bg-brand-magenta text-white font-extrabold text-xs font-digital tracking-wide shadow-md shadow-brand-magenta/30">DECK B</span>
               <span id="deck-b-active-tag" class="px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30">QUEUED / STANDBY</span>
             </div>
-            <!-- Harmonic & BPM Badges -->
             <div class="flex items-center gap-1.5">
               <span id="deck-b-camelot" class="px-2.5 py-1 rounded-lg text-xs font-bold font-digital bg-fuchsia-950/80 text-fuchsia-300 border border-fuchsia-500/40">4A</span>
               <span id="deck-b-bpm" class="px-2.5 py-1 rounded-lg text-xs font-bold font-digital bg-zinc-900 text-amber-400 border border-amber-500/30">126 BPM</span>
             </div>
           </div>
 
-          <!-- Track Metadata Info -->
+          <!-- Track Metadata -->
           <div class="mt-4 flex items-center justify-between">
             <div class="truncate pr-3">
-              <h2 id="deck-b-title" class="text-base font-bold text-white truncate hover:text-brand-magenta transition-colors">Puzzle (Club Mix)</h2>
-              <p id="deck-b-artist" class="text-xs text-slate-400 font-medium truncate">RetroVision</p>
+              <h2 id="deck-b-title" class="text-base font-bold text-white truncate hover:text-brand-magenta transition-colors">London Thumakda</h2>
+              <p id="deck-b-artist" class="text-xs text-slate-400 font-medium truncate">Queen</p>
             </div>
             <div class="text-right flex-shrink-0">
               <span id="deck-b-time" class="font-digital text-sm font-bold text-slate-300">00:00</span>
-              <span id="deck-b-duration" class="font-digital text-xs text-slate-500"> / 02:48</span>
+              <span id="deck-b-duration" class="font-digital text-xs text-slate-500"> / 02:25</span>
             </div>
           </div>
 
-          <!-- Turntable Platter Visual & ToneArm Graphic -->
+          <!-- Turntable Platter -->
           <div class="relative my-6 flex items-center justify-center">
             <div class="w-60 h-60 sm:w-64 sm:h-64 rounded-full p-2.5 bg-[#0a0c12] border-4 border-[#1c2132] shadow-2xl flex items-center justify-center relative">
-              
-              <!-- Neon Perimeter Ring -->
               <div id="deck-b-rim" class="absolute inset-1 rounded-full border border-brand-magenta/30 transition-all"></div>
-              
-              <!-- Vinyl Record -->
               <div id="vinyl-b" class="w-full h-full rounded-full vinyl-grooves relative flex items-center justify-center cursor-pointer transition-transform ease-linear">
-                <!-- Center Label Art -->
                 <div class="w-20 h-20 rounded-full border-2 border-white/20 bg-cover bg-center overflow-hidden flex items-center justify-center shadow-inner relative" id="deck-b-artwork" style="background-image: url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=300&q=80')">
                   <div class="absolute inset-0 bg-black/35"></div>
                   <div class="w-5 h-5 rounded-full bg-[#0a0c12] border border-white/40 z-10"></div>
                 </div>
               </div>
 
-              <!-- Tonearm Visual -->
+              <!-- Tonearm -->
               <div id="tonearm-b" class="tonearm absolute top-1 right-3 w-16 h-28 pointer-events-none z-20">
                 <svg width="60" height="110" viewBox="0 0 60 110" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="45" cy="15" r="10" fill="#2d3748" stroke="#718096" stroke-width="2"/>
@@ -410,27 +371,25 @@
                   <rect x="8" y="93" width="12" height="16" rx="2" fill="#00f5ff" stroke="#fff" stroke-width="1" transform="rotate(-15 8 93)"/>
                 </svg>
               </div>
-
             </div>
           </div>
 
-          <!-- Visual Cue Timeline Progress Bar -->
+          <!-- Timeline -->
           <div class="space-y-1.5">
             <div class="flex justify-between text-[10px] text-slate-400 font-digital">
-              <span id="deck-b-cue-in">IN 00:15</span>
-              <span id="deck-b-cue-drop" class="text-brand-magenta font-bold">DROP @ 00:46</span>
-              <span id="deck-b-cue-out">OUT 02:30</span>
+              <span id="deck-b-cue-in">IN 00:08</span>
+              <span id="deck-b-cue-drop" class="text-amber-400 font-bold">CLAP BEAT</span>
+              <span id="deck-b-cue-out">OUT 02:33</span>
             </div>
-            <!-- Progress Bar Container -->
             <div class="relative w-full h-3 bg-zinc-900 rounded-full overflow-hidden cursor-pointer border border-white/10" id="deck-b-timeline-wrap">
               <div id="deck-b-progress" class="h-full bg-gradient-to-r from-pink-600 to-brand-magenta w-0% transition-all duration-100"></div>
-              <div id="deck-b-drop-pin" class="absolute top-0 bottom-0 w-1 bg-brand-cyan" style="left: 27%;" title="Drop Timestamp"></div>
-              <div id="deck-b-out-pin" class="absolute top-0 bottom-0 w-1 bg-yellow-400" style="left: 88%;" title="Mix Out Point"></div>
+              <div id="deck-b-drop-pin" class="absolute top-0 bottom-0 w-1 bg-amber-400" style="left: 30%;" title="Hook Point"></div>
+              <div id="deck-b-out-pin" class="absolute top-0 bottom-0 w-1 bg-rose-500" style="left: 95%;" title="Fade Point"></div>
             </div>
           </div>
         </div>
 
-        <!-- Deck B Transport & Pitch Controls -->
+        <!-- Controls -->
         <div class="mt-6 pt-4 border-t border-brand-border space-y-4">
           <div class="flex items-center justify-between gap-3">
             <button id="btn-cue-b" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5 transition-all">
@@ -444,142 +403,159 @@
             </button>
           </div>
 
-          <!-- Pitch / Tempo Slider -->
           <div class="flex items-center gap-3 bg-black/40 px-3 py-2 rounded-xl border border-white/5">
             <span class="text-[10px] font-digital text-slate-400">PITCH</span>
             <input type="range" id="deck-b-tempo" min="0.90" max="1.10" step="0.01" value="1.00" class="w-full h-1.5">
             <span id="deck-b-tempo-val" class="font-digital text-xs text-brand-magenta w-10 text-right">0.0%</span>
           </div>
         </div>
-
       </section>
 
     </div>
 
-    <!-- ================= AI DROP ASSISTANT & RHYTHM MATCHER ================= -->
+    <!-- ================= AI DROP ASSISTANT & LIVE CUE NOTE ================= -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
       
-      <!-- AI Cue & Drop Assistant Panel (Left 5 Cols) -->
-      <section class="lg:col-span-5 bg-brand-card rounded-2xl border border-brand-border p-5 flex flex-col justify-between shadow-lg">
+      <!-- AI Cue & Drop Assistant Panel -->
+      <section class="lg:col-span-6 bg-brand-card rounded-2xl border border-brand-border p-5 flex flex-col justify-between shadow-lg">
         <div>
           <div class="flex items-center justify-between pb-3 border-b border-brand-border">
             <div class="flex items-center gap-2">
               <div class="w-7 h-7 rounded-lg bg-brand-magenta/20 text-brand-magenta flex items-center justify-center">
                 <i class="fa-solid fa-brain text-xs"></i>
               </div>
-              <h3 class="font-bold text-sm tracking-wide text-white">AI Cue & Drop Assistant</h3>
+              <h3 class="font-bold text-sm tracking-wide text-white">AI Cue & Transition Coach</h3>
             </div>
             <span id="ai-active-deck-label" class="text-[10px] font-digital px-2 py-0.5 rounded bg-zinc-800 text-slate-300">MONITORING DECK A</span>
           </div>
 
-          <!-- Real-Time Drop Countdown Display -->
+          <!-- Countdown -->
           <div class="my-4 p-4 rounded-xl bg-gradient-to-br from-black/80 to-[#121422] border border-white/10 flex items-center justify-between">
             <div>
-              <span class="text-[10px] uppercase font-digital text-slate-400 block tracking-wider">Next Structural Drop</span>
-              <div id="ai-drop-countdown" class="text-2xl sm:text-3xl font-digital font-black text-brand-magenta tracking-wider">
-                00:45.0
+              <span class="text-[10px] uppercase font-digital text-slate-400 block tracking-wider">Next Auto-Crossfade</span>
+              <div id="ai-drop-countdown" class="text-2xl sm:text-3xl font-digital font-black text-amber-400 tracking-wider">
+                02:30.0
               </div>
-              <span id="ai-bar-count" class="text-[11px] text-slate-400 font-digital">BAR 32 // CHORUS IMPACT</span>
+              <span id="ai-bar-count" class="text-[11px] text-slate-400 font-digital">FADE WINDOW 6-8s BEFORE OUT</span>
             </div>
             <div class="text-right">
-              <span class="text-[10px] uppercase font-digital text-slate-400 block tracking-wider">Current Phase</span>
-              <span id="ai-track-phase" class="inline-block mt-1 px-3 py-1 rounded-full text-xs font-bold font-digital bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/40 animate-pulse">
-                INTRO GROOVE
+              <span class="text-[10px] uppercase font-digital text-slate-400 block tracking-wider">Playlist Phase</span>
+              <span id="ai-track-phase" class="inline-block mt-1 px-3 py-1 rounded-full text-xs font-bold font-digital bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                PHASE 1: WARM-UP
               </span>
             </div>
           </div>
 
-          <!-- Dynamic Transition Prompts -->
-          <div class="space-y-2">
-            <span class="text-[10px] uppercase font-bold text-slate-400 font-digital tracking-wider">Live Transition Guidance</span>
-            <div id="ai-prompt-box" class="p-3.5 rounded-xl bg-cyan-950/20 border border-brand-cyan/30 text-xs text-slate-200 flex items-start gap-3">
-              <i class="fa-solid fa-wand-magic-sparkles text-brand-cyan text-sm mt-0.5"></i>
-              <div>
-                <p id="ai-prompt-headline" class="font-bold text-brand-cyan mb-0.5">Mix incoming bassline ready</p>
-                <p id="ai-prompt-detail" class="text-[11px] text-slate-400 leading-relaxed">Deck B matches harmonic Camelot 4A. Begin gradual 16-bar low-EQ filter sweep now.</p>
-              </div>
+          <!-- Cue Note from Markdown -->
+          <div class="p-3.5 rounded-xl bg-cyan-950/20 border border-brand-cyan/30 text-xs text-slate-200 flex items-start gap-3">
+            <i class="fa-solid fa-lightbulb text-amber-400 text-sm mt-0.5"></i>
+            <div>
+              <p id="ai-prompt-headline" class="font-bold text-brand-cyan mb-0.5">Current Cue Guideline</p>
+              <p id="ai-prompt-detail" class="text-[11px] text-slate-300 leading-relaxed">
+                Skip the soft intro, enter on the first dhol groove. Fade out before the slow tail.
+              </p>
             </div>
           </div>
         </div>
 
-        <!-- Cue Jump Buttons -->
         <div class="mt-4 pt-3 border-t border-brand-border/60 flex items-center gap-2">
-          <button id="jump-intro" class="flex-1 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-[10px] font-digital text-slate-300 border border-white/5 active:scale-95 transition-all">
-            Intro (00:00)
-          </button>
-          <button id="jump-drop" class="flex-1 py-1.5 rounded-lg bg-brand-magenta/20 hover:bg-brand-magenta/30 text-[10px] font-digital text-pink-300 border border-brand-magenta/40 active:scale-95 transition-all">
-            Drop Fire!
-          </button>
-          <button id="jump-outro" class="flex-1 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-[10px] font-digital text-slate-300 border border-white/5 active:scale-95 transition-all">
-            Mix-Out
-          </button>
+          <button id="jump-intro" class="flex-1 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-[10px] font-digital text-slate-300 border border-white/5 active:scale-95 transition-all">Jump Cue-In</button>
+          <button id="jump-drop" class="flex-1 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-[10px] font-digital text-amber-300 border border-amber-500/40 active:scale-95 transition-all">Play Hook</button>
+          <button id="jump-outro" class="flex-1 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-[10px] font-digital text-slate-300 border border-white/5 active:scale-95 transition-all">Cue-Out (Fade)</button>
         </div>
       </section>
 
-      <!-- Smart Rhythm Matching & Suggestions Panel (Right 7 Cols) -->
-      <section class="lg:col-span-7 bg-brand-card rounded-2xl border border-brand-border p-5 flex flex-col justify-between shadow-lg">
+      <!-- Rescue Tracks & Quick Jumps -->
+      <section class="lg:col-span-6 bg-brand-card rounded-2xl border border-brand-border p-5 flex flex-col justify-between shadow-lg">
         <div>
-          <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-brand-border">
+          <div class="flex items-center justify-between pb-3 border-b border-brand-border">
             <div class="flex items-center gap-2">
-              <div class="w-7 h-7 rounded-lg bg-brand-cyan/20 text-brand-cyan flex items-center justify-center">
-                <i class="fa-solid fa-wave-square text-xs"></i>
+              <div class="w-7 h-7 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center">
+                <i class="fa-solid fa-life-ring text-xs"></i>
               </div>
-              <div>
-                <h3 class="font-bold text-sm tracking-wide text-white">Smart Rhythm & Camelot Harmonic Matches</h3>
-              </div>
+              <h3 class="font-bold text-sm tracking-wide text-white">Emergency Dancefloor Rescues</h3>
             </div>
-            <span class="text-[11px] font-digital text-slate-400">Filtering: <span class="text-brand-cyan font-bold">±4 BPM & Compatible Wheels</span></span>
+            <span class="text-[10px] font-digital text-rose-400">INSTANT FLOOR FILLERS</span>
           </div>
 
-          <!-- Dynamic Suggestions Grid -->
-          <div id="smart-suggestions-list" class="mt-3.5 space-y-2.5 max-h-[220px] overflow-y-auto pr-1">
-            <!-- Dynamically populated via updateSuggestions() -->
+          <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+            If the dancefloor thins at any point during your party, immediately tap one of these two verified rescue tracks:
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+            <div class="p-3 bg-black/40 border border-rose-500/30 rounded-xl flex flex-col justify-between">
+              <div>
+                <span class="text-[10px] font-digital text-brand-cyan uppercase font-bold">#36 Phase 3 Peak</span>
+                <h4 class="font-bold text-sm text-white">Kala Chashma</h4>
+                <p class="text-[11px] text-slate-400">Baar Baar Dekho</p>
+              </div>
+              <button onclick="loadTrackToDeck('B', 'trk_036'); executeQuickCrossfade();" class="mt-3 w-full py-1.5 rounded-lg bg-rose-600/30 hover:bg-rose-600 text-rose-300 hover:text-white border border-rose-500/50 font-digital text-xs font-bold transition-all">
+                🚨 Fire Kala Chashma
+              </button>
+            </div>
+
+            <div class="p-3 bg-black/40 border border-brand-amber/30 rounded-xl flex flex-col justify-between">
+              <div>
+                <span class="text-[10px] font-digital text-brand-amber uppercase font-bold">#56 Phase 4 Peak</span>
+                <h4 class="font-bold text-sm text-white">Naatu Naatu</h4>
+                <p class="text-[11px] text-slate-400">RRR (Telugu Explosion)</p>
+              </div>
+              <button onclick="loadTrackToDeck('B', 'trk_056'); executeQuickCrossfade();" class="mt-3 w-full py-1.5 rounded-lg bg-amber-600/30 hover:bg-amber-600 text-amber-300 hover:text-white border border-amber-500/50 font-digital text-xs font-bold transition-all">
+                🚨 Fire Naatu Naatu
+              </button>
+            </div>
           </div>
         </div>
 
-        <div class="mt-3 pt-3 border-t border-brand-border/60 flex items-center justify-between text-[11px] text-slate-400">
-          <div class="flex items-center gap-3">
-            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Exact Key</span>
-            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-brand-cyan"></span> Energy Boost (+1)</span>
-            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-400"></span> Relative Maj/Min</span>
-          </div>
-          <span class="font-digital text-xs text-brand-cyan">Auto-Match Active</span>
+        <div class="mt-4 pt-3 border-t border-brand-border/60 flex items-center justify-between text-[11px] text-slate-400 font-digital">
+          <span>Continuous Arc: 80 Tracks (~3h 20m)</span>
+          <span class="text-emerald-400">Zero Silence Mode</span>
         </div>
       </section>
 
     </div>
 
-    <!-- ================= PRE-SELECTED PARTY CRATE (PLAYLIST) ================= -->
+    <!-- ================= 80-TRACK DIWALI CRATE ================= -->
     <section class="bg-brand-card rounded-2xl border border-brand-border p-5 shadow-lg">
       <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-brand-border">
         <div class="flex items-center gap-3">
           <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
-            <i class="fa-solid fa-record-vinyl text-sm"></i>
+            <i class="fa-solid fa-list-ol text-sm"></i>
           </div>
           <div>
-            <h3 class="font-bold text-base text-white">Curated Peak-Time Party Crate</h3>
-            <p class="text-xs text-slate-400">Pre-analyzed BPMs, Camelot Keys, and Structural Mix Windows</p>
+            <h3 class="font-bold text-base text-white">Full Diwali Party Playlist (80 Songs)</h3>
+            <p class="text-xs text-slate-400">Play in sequence for the proven Warm-Up $\to$ Peak $\to$ Finale energy progression</p>
           </div>
         </div>
 
         <!-- Search Bar -->
         <div class="relative w-full sm:w-64">
           <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-500"></i>
-          <input type="text" id="crate-search-input" placeholder="Search track, artist, key..." class="w-full bg-black/50 border border-brand-border rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-cyan transition-colors">
+          <input type="text" id="crate-search-input" placeholder="Search track, artist, film..." class="w-full bg-black/50 border border-brand-border rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-cyan transition-colors">
         </div>
       </div>
 
+      <!-- Phase Filter Tabs -->
+      <div class="flex flex-wrap items-center gap-2 mt-4 pb-2 border-b border-brand-border/50 text-xs font-digital">
+        <button onclick="filterPhase('all')" class="phase-btn px-3 py-1 rounded-lg bg-brand-cyan text-black font-bold" data-phase="all">All (80)</button>
+        <button onclick="filterPhase(1)" class="phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white" data-phase="1">Phase 1: Warm-Up (1-14)</button>
+        <button onclick="filterPhase(2)" class="phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white" data-phase="2">Phase 2: Build (15-31)</button>
+        <button onclick="filterPhase(3)" class="phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white" data-phase="3">Phase 3: Peak Bollywood (32-51)</button>
+        <button onclick="filterPhase(4)" class="phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white" data-phase="4">Phase 4: Crossover (52-69)</button>
+        <button onclick="filterPhase(5)" class="phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white" data-phase="5">Phase 5: Finale (70-80)</button>
+      </div>
+
       <!-- Crate Table -->
-      <div class="mt-4 overflow-x-auto">
+      <div class="mt-4 overflow-x-auto max-h-[500px] overflow-y-auto pr-1">
         <table class="w-full text-left text-xs">
-          <thead>
+          <thead class="sticky top-0 bg-brand-card z-10">
             <tr class="text-slate-500 font-digital uppercase text-[10px] border-b border-brand-border/60">
-              <th class="pb-3 font-semibold">Track & Artist</th>
-              <th class="pb-3 font-semibold text-center">BPM</th>
-              <th class="pb-3 font-semibold text-center">Camelot</th>
-              <th class="pb-3 font-semibold text-center">Energy</th>
-              <th class="pb-3 font-semibold text-center">Drop Point</th>
+              <th class="pb-3 w-8">#</th>
+              <th class="pb-3 font-semibold">Track & Film</th>
+              <th class="pb-3 font-semibold">Type</th>
+              <th class="pb-3 font-semibold text-center">Play Window</th>
               <th class="pb-3 font-semibold text-center">Duration</th>
+              <th class="pb-3 font-semibold">Cue Note</th>
               <th class="pb-3 font-semibold text-right">Load Actions</th>
             </tr>
           </thead>
@@ -592,14 +568,13 @@
 
   </main>
 
-  <!-- ================= OFF-SCREEN COMPLIANT YOUTUBE PLAYERS ================= -->
-  <!-- Fully dimensioned (320x180) to satisfy YouTube IFrame API requirements without visual errors -->
+  <!-- Off-Screen YouTube Containers -->
   <div class="fixed -bottom-[300px] left-0 opacity-0 pointer-events-none z-[-10]">
     <div id="yt-player-a" style="width: 320px; height: 180px;"></div>
     <div id="yt-player-b" style="width: 320px; height: 180px;"></div>
   </div>
 
-  <!-- Custom YouTube URL Modal -->
+  <!-- Modal for Custom URL -->
   <div id="custom-url-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-[#12141f] border border-brand-border rounded-2xl max-w-md w-full p-6 shadow-2xl">
       <div class="flex items-center justify-between pb-3 border-b border-brand-border">
@@ -634,145 +609,122 @@
   <!-- ================= JAVASCRIPT DJ ENGINE ================= -->
   <script>
     /* =====================================================================
-       1. TRACK DATABASE (Universal Embed-Safe Tracks)
+       COMPLETE 80-TRACK DIWALI DANCE PARTY DATABASE
        ===================================================================== */
     const PARTY_TRACKS = [
-      {
-        id: "trk_001",
-        title: "Nevada (Club Mix)",
-        artist: "Vicetone",
-        ytId: "fq3EbRgtRxM",
-        duration: 208,
-        artwork: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&q=80",
-        audioProfile: {
-          bpm: 126,
-          camelotKey: "4A",
-          rootKey: "C# Minor",
-          energyLevel: "Peak",
-          energyScore: 9.6
-        },
-        cuePoints: {
-          introStart: 0.0,
-          mixInPoint: 15.0,
-          dropTimestamp: 45.0,
-          mixOutPoint: 180.0
-        }
-      },
-      {
-        id: "trk_002",
-        title: "Puzzle (Club Mix)",
-        artist: "RetroVision",
-        ytId: "TN_8L-x6C4E",
-        duration: 168,
-        artwork: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=300&q=80",
-        audioProfile: {
-          bpm: 126,
-          camelotKey: "4A",
-          rootKey: "C# Minor",
-          energyLevel: "Peak Rave",
-          energyScore: 9.8
-        },
-        cuePoints: {
-          introStart: 0.0,
-          mixInPoint: 15.0,
-          dropTimestamp: 46.0,
-          mixOutPoint: 150.0
-        }
-      },
-      {
-        id: "trk_003",
-        title: "On & On (Extended)",
-        artist: "Cartoon ft. Daniel Levi",
-        ytId: "K4DyBUG242c",
-        duration: 208,
-        artwork: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&q=80",
-        audioProfile: {
-          bpm: 128,
-          camelotKey: "4B",
-          rootKey: "E Major",
-          energyLevel: "Festival Anthem",
-          energyScore: 9.4
-        },
-        cuePoints: {
-          introStart: 0.0,
-          mixInPoint: 15.0,
-          dropTimestamp: 45.0,
-          mixOutPoint: 185.0
-        }
-      },
-      {
-        id: "trk_004",
-        title: "Sky High (Festival Mix)",
-        artist: "Elektronomia",
-        ytId: "p7ZsBPK656g",
-        duration: 237,
-        artwork: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=300&q=80",
-        audioProfile: {
-          bpm: 128,
-          camelotKey: "5B",
-          rootKey: "D Major",
-          energyLevel: "Hyper Peak",
-          energyScore: 9.9
-        },
-        cuePoints: {
-          introStart: 0.0,
-          mixInPoint: 15.0,
-          dropTimestamp: 48.0,
-          mixOutPoint: 205.0
-        }
-      },
-      {
-        id: "trk_005",
-        title: "Heroes Tonight",
-        artist: "Janji ft. Johnning",
-        ytId: "__CRWE-L45k",
-        duration: 208,
-        artwork: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&q=80",
-        audioProfile: {
-          bpm: 126,
-          camelotKey: "4A",
-          rootKey: "C# Minor",
-          energyLevel: "Anthem",
-          energyScore: 9.5
-        },
-        cuePoints: {
-          introStart: 0.0,
-          mixInPoint: 16.0,
-          dropTimestamp: 47.0,
-          mixOutPoint: 180.0
-        }
-      },
-      {
-        id: "trk_006",
-        title: "Candyland",
-        artist: "Tobu",
-        ytId: "n8X9_FX26mQ",
-        duration: 198,
-        artwork: "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=300&q=80",
-        audioProfile: {
-          bpm: 128,
-          camelotKey: "4B",
-          rootKey: "E Major",
-          energyLevel: "Uplifting",
-          energyScore: 9.2
-        },
-        cuePoints: {
-          introStart: 0.0,
-          mixInPoint: 15.0,
-          dropTimestamp: 50.0,
-          mixOutPoint: 175.0
-        }
-      }
+      // PHASE 1: WARM-UP & WELCOME (1–14)
+      { num: 1, id: "trk_001", phase: 1, title: "Gallan Goodiyaan", artist: "Dil Dhadakne Do", type: "Bollywood", ytId: "jCEdTq3j-0U", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 45, mixOutPoint: 160 }, cueNote: "Skip the soft intro, enter on the first dhol groove. Fade out before the slow tail." },
+      { num: 2, id: "trk_002", phase: 1, title: "London Thumakda", artist: "Queen", type: "Bollywood", ytId: "YekLo4zAhXQ", inTime: "0:08", outTime: "2:33", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 40, mixOutPoint: 153 }, cueNote: "Start on the clap beat. Singalong warm-up, keep volume a touch lower." },
+      { num: 3, id: "trk_003", phase: 1, title: "Abhi Toh Party Shuru Hui Hai", artist: "Khoobsurat", type: "Bollywood", ytId: "89LW7O_F2Ew", inTime: "0:12", outTime: "2:47", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 42, mixOutPoint: 167 }, cueNote: "Cut the spoken intro. The hook is the cue to get people up." },
+      { num: 4, id: "trk_004", phase: 1, title: "Nachde Ne Saare", artist: "Baar Baar Dekho", type: "Bollywood", ytId: "HgIW7P4dsXU", inTime: "0:10", outTime: "2:30", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 150 }, cueNote: "Start at the first beat drop, not the piano intro." },
+      { num: 5, id: "trk_005", phase: 1, title: "Shape of You", artist: "Ed Sheeran", type: "English", ytId: "JGwWNGJdvx8", inTime: "0:05", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 5, dropTimestamp: 35, mixOutPoint: 155 }, cueNote: "Familiar crossover bridge. Fade during the last chorus repeat." },
+      { num: 6, id: "trk_006", phase: 1, title: "Kar Gayi Chull", artist: "Kapoor & Sons", type: "Bollywood", ytId: "NTHz9ephYTw", inTime: "0:15", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 45, mixOutPoint: 165 }, cueNote: "Start just before the chorus drop. Pairs well after Shape of You." },
+      { num: 7, id: "trk_007", phase: 1, title: "The Breakup Song", artist: "Ae Dil Hai Mushkil", type: "Bollywood", ytId: "kd5KLEKC814", inTime: "0:12", outTime: "2:37", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 42, mixOutPoint: 157 }, cueNote: "Skip dialogue intro. Keep chorus loop energy up." },
+      { num: 8, id: "trk_008", phase: 1, title: "Bole Chudiyan", artist: "Kabhi Khushi Kabhie Gham...", type: "Bollywood", ytId: "IBvg3WeqP1U", inTime: "0:20", outTime: "2:55", cuePoints: { introStart: 0, mixInPoint: 20, dropTimestamp: 60, mixOutPoint: 175 }, cueNote: "Diwali family singalong moment. Start on the main dholak beat." },
+      { num: 9, id: "trk_009", phase: 1, title: "Senorita", artist: "Shawn Mendes & Camila Cabello", type: "English", ytId: "Pkh8UtuejGw", inTime: "0:10", outTime: "2:30", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 40, mixOutPoint: 150 }, cueNote: "Slower, romantic groove. Good breather before tempo rises." },
+      { num: 10, id: "trk_010", phase: 1, title: "Happy", artist: "Pharrell Williams", type: "English", ytId: "ZbZSe6N_BXs", inTime: "0:08", outTime: "2:38", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 42, mixOutPoint: 158 }, cueNote: "Feel-good warm-up. Start on the clap beat, fade before final chorus repeat." },
+      { num: 11, id: "trk_011", phase: 1, title: "Nashe Si Chadh Gayi", artist: "Befikre", type: "Bollywood", ytId: "Wd2B8OAotU8", inTime: "0:18", outTime: "2:48", cuePoints: { introStart: 0, mixInPoint: 18, dropTimestamp: 50, mixOutPoint: 168 }, cueNote: "Start on the beat, skip long vocal intro." },
+      { num: 12, id: "trk_012", phase: 1, title: "Ainvayi Ainvayi", artist: "Band Baaja Baaraat", type: "Bollywood", ytId: "pElk1ShPrcE", inTime: "0:15", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 48, mixOutPoint: 160 }, cueNote: "End of warm-up. Let the dhol build, then lift into Phase 2." },
+      { num: 13, id: "trk_013", phase: 1, title: "Sadi Gali", artist: "Tanu Weds Manu", type: "Bollywood", ytId: "w_HaezV0abk", inTime: "0:12", outTime: "2:47", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 44, mixOutPoint: 167 }, cueNote: "Groovy singalong warm-up. Start on main beat." },
+      { num: 14, id: "trk_014", phase: 1, title: "Second Hand Jawaani", artist: "Cocktail", type: "Bollywood", ytId: "bO1fD_Jj3aQ", inTime: "0:10", outTime: "2:30", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 40, mixOutPoint: 150 }, cueNote: "Light, cheeky groove to close warm-up." },
+
+      // PHASE 2: BUILD (15–31)
+      { num: 15, id: "trk_015", phase: 2, title: "Chaiyya Chaiyya", artist: "Dil Se..", type: "Bollywood", ytId: "PQmrmVs10X8", inTime: "0:12", outTime: "2:42", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 48, mixOutPoint: 162 }, cueNote: "Iconic train rhythm. Start on percussion, not flute intro." },
+      { num: 16, id: "trk_016", phase: 2, title: "Desi Girl", artist: "Dostana", type: "Bollywood", ytId: "N1oA_5B3y4g", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 45, mixOutPoint: 160 }, cueNote: "Start at the first chorus. Crowd knows every word." },
+      { num: 17, id: "trk_017", phase: 2, title: "Dhoom Machale", artist: "Dhoom", type: "Bollywood", ytId: "Wf1Xp0y6n_g", inTime: "0:15", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 45, mixOutPoint: 160 }, cueNote: "Skip the slow build. Enter on the main guitar riff." },
+      { num: 18, id: "trk_018", phase: 2, title: "Kajra Re", artist: "Bunty Aur Babli", type: "Bollywood", ytId: "4b97_38Gj1c", inTime: "0:18", outTime: "2:53", cuePoints: { introStart: 0, mixInPoint: 18, dropTimestamp: 50, mixOutPoint: 173 }, cueNote: "Start just before the Kajra Re hook. Nostalgia peak for late-30s/40s crowd." },
+      { num: 19, id: "trk_019", phase: 2, title: "Ek Do Teen", artist: "Tezaab", type: "Bollywood", ytId: "pW_r0V8hV_M", inTime: "0:15", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 45, mixOutPoint: 155 }, cueNote: "90s nostalgia. Start on the Ek Do Teen hook." },
+      { num: 20, id: "trk_020", phase: 2, title: "Cheap Thrills", artist: "Sia ft. Sean Paul", type: "English", ytId: "nYh-n75tAP8", inTime: "0:08", outTime: "2:38", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 42, mixOutPoint: 158 }, cueNote: "Use the radio/clean version. Straight into chorus groove." },
+      { num: 21, id: "trk_021", phase: 2, title: "Radha", artist: "Student of the Year", type: "Bollywood", ytId: "514W_2_eM7g", inTime: "0:12", outTime: "2:42", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 162 }, cueNote: "Bright, bouncy. Fade before rap outro drags." },
+      { num: 22, id: "trk_022", phase: 2, title: "Badtameez Dil", artist: "Yeh Jawaani Hai Deewani", type: "Bollywood", ytId: "II2EO3Nw4m0", inTime: "0:10", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 40, mixOutPoint: 155 }, cueNote: "Start on drum intro, cut before slow bridge." },
+      { num: 23, id: "trk_023", phase: 2, title: "Balam Pichkari", artist: "Yeh Jawaani Hai Deewani", type: "Bollywood", ytId: "0WtRNGubWmM", inTime: "0:15", outTime: "2:50", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 50, mixOutPoint: 170 }, cueNote: "Festival anthem. Let chorus run, fade on second chorus repeat." },
+      { num: 24, id: "trk_024", phase: 2, title: "Dilliwaali Girlfriend", artist: "Yeh Jawaani Hai Deewani", type: "Bollywood", ytId: "1cDoRqPn9mM", inTime: "0:12", outTime: "2:32", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 42, mixOutPoint: 152 }, cueNote: "Keep tempo high after Balam Pichkari, no gap." },
+      { num: 25, id: "trk_025", phase: 2, title: "Don't Start Now", artist: "Dua Lipa", type: "English", ytId: "oygrmJFKYZY", inTime: "0:08", outTime: "2:38", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 38, mixOutPoint: 158 }, cueNote: "Modern disco groove. Start on the bassline." },
+      { num: 26, id: "trk_026", phase: 2, title: "Can't Stop The Feeling", artist: "Justin Timberlake", type: "English", ytId: "ru0K8uYEZWw", inTime: "0:05", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 5, dropTimestamp: 38, mixOutPoint: 155 }, cueNote: "Bright pop lift. Start right on the beat." },
+      { num: 27, id: "trk_027", phase: 2, title: "Dus Bahane", artist: "Dus", type: "Bollywood", ytId: "j6c_wP3fG6E", inTime: "0:10", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 40, mixOutPoint: 155 }, cueNote: "2000s throwback. Start on the beat drop." },
+      { num: 28, id: "trk_028", phase: 2, title: "Ghagra", artist: "Yeh Jawaani Hai Deewani", type: "Bollywood", ytId: "caoGNx1LF24", inTime: "0:15", outTime: "2:50", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 50, mixOutPoint: 170 }, cueNote: "End of build. Fade on the dhol beat into the peak set." },
+      { num: 29, id: "trk_029", phase: 2, title: "Swag Se Swagat", artist: "Tiger Zinda Hai", type: "Bollywood", ytId: "xmU0s2QtaEY", inTime: "0:10", outTime: "2:30", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 40, mixOutPoint: 150 }, cueNote: "Big chorus, start directly on it." },
+      { num: 30, id: "trk_030", phase: 2, title: "Afghan Jalebi", artist: "Phantom", type: "Bollywood", ytId: "1T2j6DqK_0o", inTime: "0:12", outTime: "2:42", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 162 }, cueNote: "High-energy, start on the hook." },
+      { num: 31, id: "trk_031", phase: 2, title: "Lat Lag Gayee", artist: "Race 2", type: "Bollywood", ytId: "w_n4F_E8-zU", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 160 }, cueNote: "Punchy club beat, keep the window tight." },
+
+      // PHASE 3: PEAK: BOLLYWOOD GOLD (32–51)
+      { num: 32, id: "trk_032", phase: 3, title: "Sheila Ki Jawani", artist: "Tees Maar Khan", type: "Bollywood", ytId: "ZTmF2v5gpVc", inTime: "0:10", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 40, mixOutPoint: 155 }, cueNote: "Peak set opener. Start directly on the hook." },
+      { num: 33, id: "trk_033", phase: 3, title: "Munni Badnaam Hui", artist: "Dabangg", type: "Bollywood", ytId: "Jn5hsfbhWx4", inTime: "0:12", outTime: "2:47", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 167 }, cueNote: "Back-to-back item energy. No pause between Sheila and Munni." },
+      { num: 34, id: "trk_034", phase: 3, title: "Chikni Chameli", artist: "Agneepath", type: "Bollywood", ytId: "MQM7CNoAsBI", inTime: "0:15", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 45, mixOutPoint: 155 }, cueNote: "Start on dhol beat. Cut before slow outro." },
+      { num: 35, id: "trk_035", phase: 3, title: "Fevicol Se", artist: "Dabangg 2", type: "Bollywood", ytId: "zE7PwGl6WYk", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 160 }, cueNote: "Keep it punchy. Fade on chorus repeat." },
+      { num: 36, id: "trk_036", phase: 3, title: "Kala Chashma", artist: "Baar Baar Dekho", type: "Bollywood", ytId: "k4yXQkG2s1E", inTime: "0:12", outTime: "2:42", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 162 }, cueNote: "Crowd favourite. Start on first Kala Chashma line. #1 Rescue Track!" },
+      { num: 37, id: "trk_037", phase: 3, title: "Aankh Marey", artist: "Simmba", type: "Bollywood", ytId: "_KhQT-LGb-4", inTime: "0:10", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 42, mixOutPoint: 155 }, cueNote: "90s revival energy. Start on the beat, skip intro dialogue." },
+      { num: 38, id: "trk_038", phase: 3, title: "Garmi", artist: "Street Dancer 3D", type: "Bollywood", ytId: "q_0uF80g-ao", inTime: "0:08", outTime: "2:43", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 40, mixOutPoint: 163 }, cueNote: "High BPM. Short, sharp play window." },
+      { num: 39, id: "trk_039", phase: 3, title: "Muqabla", artist: "Street Dancer 3D", type: "Bollywood", ytId: "skZxF_u9dAI", inTime: "0:12", outTime: "2:32", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 42, mixOutPoint: 152 }, cueNote: "A.R. Rahman throwback remake. Start on Muqabla hook." },
+      { num: 40, id: "trk_040", phase: 3, title: "Illegal Weapon 2.0", artist: "Street Dancer 3D", type: "Bollywood", ytId: "1x_AbtptDgg", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 160 }, cueNote: "Keep the run tight. Fade before final slowdown." },
+      { num: 41, id: "trk_041", phase: 3, title: "Baby Doll", artist: "Ragini MMS 2", type: "Bollywood", ytId: "kHue-G4WoA4", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 42, mixOutPoint: 160 }, cueNote: "Peak item-number energy, start on the hook." },
+      { num: 42, id: "trk_042", phase: 3, title: "Sunny Sunny", artist: "Yaariyan", type: "Bollywood", ytId: "7KPy_O-h0fI", inTime: "0:12", outTime: "2:37", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 42, mixOutPoint: 157 }, cueNote: "Sunny, bouncy peak track." },
+      { num: 43, id: "trk_043", phase: 3, title: "Levitating", artist: "Dua Lipa", type: "English", ytId: "TUVcZfQe-Kw", inTime: "0:05", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 5, dropTimestamp: 40, mixOutPoint: 160 }, cueNote: "English breather in the peak. Disco-pop keeps feet moving." },
+      { num: 44, id: "trk_044", phase: 3, title: "Jhoome Jo Pathaan", artist: "Pathaan", type: "Bollywood", ytId: "YxWlaYCA8MU", inTime: "0:15", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 46, mixOutPoint: 155 }, cueNote: "Start on Jhoome hook. Big recent anthem." },
+      { num: 45, id: "trk_045", phase: 3, title: "What Jhumka?", artist: "Rocky Aur Rani", type: "Bollywood", ytId: "87JIOAX3NjM", inTime: "0:12", outTime: "2:42", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 162 }, cueNote: "Start on the chorus. Pairs with Pathaan on tempo." },
+      { num: 46, id: "trk_046", phase: 3, title: "Uptown Funk", artist: "Bruno Mars", type: "English", ytId: "OPf0YbXqDm0", inTime: "0:08", outTime: "2:38", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 40, mixOutPoint: 158 }, cueNote: "Funk peak. Everyone dances to this, no intro needed." },
+      { num: 47, id: "trk_047", phase: 3, title: "Shut Up And Dance", artist: "Walk The Moon", type: "English", ytId: "6JCLY0RmxwQ", inTime: "0:08", outTime: "2:33", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 38, mixOutPoint: 153 }, cueNote: "English peak breather, start on guitar riff." },
+      { num: 48, id: "trk_048", phase: 3, title: "Character Dheela", artist: "Ready", type: "Bollywood", ytId: "bO4fG943L_Y", inTime: "0:12", outTime: "2:47", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 167 }, cueNote: "Salman-era party throwback for this age group." },
+      { num: 49, id: "trk_049", phase: 3, title: "Dhinka Chika", artist: "Ready", type: "Bollywood", ytId: "rZ1Hn1E3B_c", inTime: "0:10", outTime: "2:30", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 40, mixOutPoint: 150 }, cueNote: "Close Phase 3 on a high, fade on chorus." },
+      { num: 50, id: "trk_050", phase: 3, title: "Anarkali Disco Chali", artist: "Housefull 2", type: "Bollywood", ytId: "q5i82eK0Pcs", inTime: "0:12", outTime: "2:42", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 162 }, cueNote: "Desi disco, start on chorus." },
+      { num: 51, id: "trk_051", phase: 3, title: "Chamma Chamma", artist: "China Gate", type: "Bollywood", ytId: "uKq1h8H4Nn0", inTime: "0:15", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 48, mixOutPoint: 165 }, cueNote: "90s throwback, start on Chamma hook." },
+
+      // PHASE 4: CROSSOVER PEAK (52–69)
+      { num: 52, id: "trk_052", phase: 4, title: "Arabic Kuthu", artist: "Beast (Tamil)", type: "South Indian", ytId: "KUN5Uf9mObQ", inTime: "0:15", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 48, mixOutPoint: 160 }, cueNote: "Start on Halamithi hook. Tamil dance floor moment." },
+      { num: 53, id: "trk_053", phase: 4, title: "Vaathi Coming", artist: "Master (Tamil)", type: "South Indian", ytId: "vx2u5uUu3DE", inTime: "0:12", outTime: "2:47", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 167 }, cueNote: "Start on Vaathi beat drop." },
+      { num: 54, id: "trk_054", phase: 4, title: "Rowdy Baby", artist: "Maari 2 (Tamil)", type: "South Indian", ytId: "x6Q7c9RyMzk", inTime: "0:10", outTime: "2:30", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 42, mixOutPoint: 150 }, cueNote: "High-energy Tamil hit. Fade before outro." },
+      { num: 55, id: "trk_055", phase: 4, title: "Butta Bomma", artist: "Ala Vaikunthapurramuloo (Telugu)", type: "South Indian", ytId: "2mDCVzruYzQ", inTime: "0:15", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 48, mixOutPoint: 165 }, cueNote: "Telugu groove. Start on chorus." },
+      { num: 56, id: "trk_056", phase: 4, title: "Naatu Naatu", artist: "RRR (Telugu)", type: "South Indian", ytId: "OsU0CGZoV8E", inTime: "0:15", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 50, mixOutPoint: 165 }, cueNote: "Telugu dance explosion, start on Naatu hook. Instant Rescue Track!" },
+      { num: 57, id: "trk_057", phase: 4, title: "Hukum", artist: "Jailer (Tamil)", type: "South Indian", ytId: "1F3hm6MfR1E", inTime: "0:12", outTime: "2:37", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 44, mixOutPoint: 157 }, cueNote: "Mass Tamil beat, start on Hukum drop." },
+      { num: 58, id: "trk_058", phase: 4, title: "Zingaat", artist: "Sairat (Marathi)", type: "Marathi", ytId: "8g_H4P_8o8Q", inTime: "0:12", outTime: "2:47", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 167 }, cueNote: "Marathi dance explosion. Start on Zingaat hook." },
+      { num: 59, id: "trk_059", phase: 4, title: "Wajle Ki Bara", artist: "Natarang (Marathi)", type: "Marathi", ytId: "8uP1fD_4XyE", inTime: "0:15", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 45, mixOutPoint: 155 }, cueNote: "Traditional dhol-tasha energy. Great Diwali moment." },
+      { num: 60, id: "trk_060", phase: 4, title: "Ooh La La", artist: "The Dirty Picture", type: "Bollywood", ytId: "f0wP_R_l74s", inTime: "0:12", outTime: "2:42", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 162 }, cueNote: "Bold item number, start on chorus." },
+      { num: 61, id: "trk_061", phase: 4, title: "Lungi Dance", artist: "Chennai Express", type: "Bollywood", ytId: "69CEiHfS_mc", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 160 }, cueNote: "South-flavoured Bollywood bridge back to Hindi." },
+      { num: 62, id: "trk_062", phase: 4, title: "1234 Get On The Dance Floor", artist: "Chennai Express", type: "Bollywood", ytId: "7L_8qT3H6e8", inTime: "0:12", outTime: "2:37", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 42, mixOutPoint: 157 }, cueNote: "Start on count-in beat." },
+      { num: 63, id: "trk_063", phase: 4, title: "Dance Monkey", artist: "Tones and I", type: "English", ytId: "q0hyYWKXF0Q", inTime: "0:08", outTime: "2:43", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 40, mixOutPoint: 163 }, cueNote: "Radio edit. Instantly recognisable." },
+      { num: 64, id: "trk_064", phase: 4, title: "Blinding Lights", artist: "The Weeknd", type: "English", ytId: "4NRXx6U8ABQ", inTime: "0:05", outTime: "2:25", cuePoints: { introStart: 0, mixInPoint: 5, dropTimestamp: 35, mixOutPoint: 145 }, cueNote: "80s synth peak. Start on synth intro beat." },
+      { num: 65, id: "trk_065", phase: 4, title: "Despacito (Remix)", artist: "Luis Fonsi ft. Justin Bieber", type: "English", ytId: "72UO0v5ESUo", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 160 }, cueNote: "Latin crossover peak." },
+      { num: 66, id: "trk_066", phase: 4, title: "Timber", artist: "Pitbull ft. Kesha", type: "English", ytId: "hHUbLv4ThOo", inTime: "0:08", outTime: "2:38", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 38, mixOutPoint: 158 }, cueNote: "Party classic for 30s/40s crowd. Start on harmonica hook." },
+      { num: 67, id: "trk_067", phase: 4, title: "Party Rock Anthem", artist: "LMFAO", type: "English", ytId: "KQ6zr6kCPj8", inTime: "0:10", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 42, mixOutPoint: 155 }, cueNote: "Throwback peak. Start on Party Rock beat." },
+      { num: 68, id: "trk_068", phase: 4, title: "Turn Down For What", artist: "DJ Snake & Lil Jon", type: "English", ytId: "HMUDVMiITOU", inTime: "0:08", outTime: "2:43", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 40, mixOutPoint: 163 }, cueNote: "High-energy drop track." },
+      { num: 69, id: "trk_069", phase: 4, title: "I Gotta Feeling", artist: "Black Eyed Peas", type: "English", ytId: "uSD4vsh1zDA", inTime: "0:12", outTime: "2:32", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 40, mixOutPoint: 152 }, cueNote: "Singalong peak. Let chorus run." },
+
+      // PHASE 5: FINALE: DIWALI ANTHEMS (70–80)
+      { num: 70, id: "trk_070", phase: 5, title: "It's The Time To Disco", artist: "Kal Ho Naa Ho", type: "Bollywood", ytId: "w_Cq_v53QnQ", inTime: "0:12", outTime: "2:47", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 167 }, cueNote: "Disco finale opener. Start on beat." },
+      { num: 71, id: "trk_071", phase: 5, title: "Mauja Hi Mauja", artist: "Jab We Met", type: "Bollywood", ytId: "0bL_0jA4UeM", inTime: "0:10", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 45, mixOutPoint: 165 }, cueNote: "Joyful, everyone joins in." },
+      { num: 72, id: "trk_072", phase: 5, title: "Crazy Kiya Re", artist: "Dhoom 2", type: "Bollywood", ytId: "e4k7e74T9lM", inTime: "0:15", outTime: "2:50", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 48, mixOutPoint: 170 }, cueNote: "2000s Dhoom energy for finale run." },
+      { num: 73, id: "trk_073", phase: 5, title: "Go Go Govinda", artist: "OMG – Oh My God!", type: "Bollywood", ytId: "j6fK7E_j8Fw", inTime: "0:10", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 165 }, cueNote: "Festive Govinda groove for finale run." },
+      { num: 74, id: "trk_074", phase: 5, title: "Burj Khalifa", artist: "Laxmii", type: "Bollywood", ytId: "y_Nq_x3_31M", inTime: "0:10", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 45, mixOutPoint: 165 }, cueNote: "Modern dance hit. Short window, keep it moving." },
+      { num: 75, id: "trk_075", phase: 5, title: "Param Sundari", artist: "Mimi", type: "Bollywood", ytId: "nfnc0kCbZZs", inTime: "0:12", outTime: "2:47", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 167 }, cueNote: "Start on Param Sundari hook." },
+      { num: 76, id: "trk_076", phase: 5, title: "Dil Chori", artist: "Sonu Ke Titu Ki Sweety", type: "Bollywood", ytId: "xWi8nDUjHGA", inTime: "0:10", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 165 }, cueNote: "Modern Punjabi party beat, start on hook." },
+      { num: 77, id: "trk_077", phase: 5, title: "Naach Meri Rani", artist: "Guru Randhawa", type: "Bollywood", ytId: "TCx1yRe1I9o", inTime: "0:10", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 165 }, cueNote: "High-tempo penultimate track." },
+      { num: 78, id: "trk_078", phase: 5, title: "Jumma Chumma De De", artist: "Hum", type: "Bollywood", ytId: "zVp8U8_5G4Q", inTime: "0:18", outTime: "3:03", cuePoints: { introStart: 0, mixInPoint: 18, dropTimestamp: 55, mixOutPoint: 183 }, cueNote: "Classic throwback, huge singalong for this crowd." },
+      { num: 79, id: "trk_079", phase: 5, title: "Tamma Tamma Again", artist: "Badrinath Ki Dulhania", type: "Bollywood", ytId: "EEX_XM6SxmY", inTime: "0:12", outTime: "2:57", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 48, mixOutPoint: 177 }, cueNote: "90s revival. Huge singalong for this crowd." },
+      { num: 80, id: "trk_080", phase: 5, title: "Shava Shava", artist: "Kabhi Khushi Kabhie Gham...", type: "Bollywood", ytId: "ca0_h2G7Eeg", inTime: "0:20", outTime: "3:05", cuePoints: { introStart: 0, mixInPoint: 20, dropTimestamp: 60, mixOutPoint: 185 }, cueNote: "Finale: family singalong, sparklers / Diwali wishes moment. Let it play out!" }
     ];
 
+    // Enrich missing fields with standard defaults
+    PARTY_TRACKS.forEach((t) => {
+      t.duration = t.cuePoints.mixOutPoint + 10;
+      t.artwork = "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&q=80";
+      t.audioProfile = {
+        bpm: 126 + (t.phase * 1),
+        camelotKey: "4A",
+        rootKey: "C# Minor",
+        energyLevel: t.phase >= 3 ? "Peak" : "Warm-Up"
+      };
+    });
+
     /* =====================================================================
-       2. DJ STATE & WEB AUDIO SYNTHESIZER FALLBACK
+       DJ STATE MANAGEMENT & AUTO-DJ
        ===================================================================== */
+    let autoDjActive = false;
+    let selectedPhase = 'all';
+
     const djState = {
       activeMaster: 'A',
       crossfader: 0,
       audioCtx: null,
-      synthActive: false,
       deckA: {
         track: PARTY_TRACKS[0],
         player: null,
@@ -793,71 +745,23 @@
       }
     };
 
-    // Web Audio Synthesizer (Zero-latency fallback if YouTube is blocked by file:// or network)
-    function initWebAudio() {
-      if (!djState.audioCtx) {
-        djState.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (djState.audioCtx.state === 'suspended') {
-        djState.audioCtx.resume();
+    function toggleAutoDJ() {
+      autoDjActive = !autoDjActive;
+      const statusEl = document.getElementById('auto-dj-status');
+      const btn = document.getElementById('btn-auto-dj');
+      if (autoDjActive) {
+        statusEl.textContent = 'ON';
+        statusEl.className = 'text-brand-lime font-black animate-pulse';
+        btn.classList.add('border-brand-lime', 'bg-emerald-950/40');
+      } else {
+        statusEl.textContent = 'OFF';
+        statusEl.className = 'text-rose-400 font-bold';
+        btn.classList.remove('border-brand-lime', 'bg-emerald-950/40');
       }
     }
-
-    function playSynthBeat(deckLetter) {
-      if (!djState.audioCtx) return;
-      const deck = (deckLetter === 'A') ? djState.deckA : djState.deckB;
-      const vol = deck.volume / 100;
-      if (vol <= 0.01) return;
-
-      const now = djState.audioCtx.currentTime;
-
-      // Punchy Club Kick
-      const osc = djState.audioCtx.createOscillator();
-      const gain = djState.audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(140, now);
-      osc.frequency.exponentialRampToValueAtTime(36, now + 0.12);
-      gain.gain.setValueAtTime(0.5 * vol, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
-      osc.connect(gain);
-      gain.connect(djState.audioCtx.destination);
-      osc.start(now);
-      osc.stop(now + 0.18);
-
-      // Off-beat Hi-Hat
-      setTimeout(() => {
-        if (!deck.isPlaying || !djState.audioCtx) return;
-        const hatNow = djState.audioCtx.currentTime;
-        const bufferSize = djState.audioCtx.sampleRate * 0.04;
-        const buffer = djState.audioCtx.createBuffer(1, bufferSize, djState.audioCtx.sampleRate);
-        const data = buffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-
-        const noise = djState.audioCtx.createBufferSource();
-        noise.buffer = buffer;
-        const filter = djState.audioCtx.createBiquadFilter();
-        filter.type = 'highpass';
-        filter.frequency.value = 7500;
-
-        const hatGain = djState.audioCtx.createGain();
-        hatGain.gain.setValueAtTime(0.18 * vol, hatNow);
-        hatGain.gain.exponentialRampToValueAtTime(0.001, hatNow + 0.04);
-
-        noise.connect(filter);
-        filter.connect(hatGain);
-        hatGain.connect(djState.audioCtx.destination);
-        noise.start(hatNow);
-      }, (60 / (deck.track.audioProfile.bpm * deck.pitch) * 500));
-    }
-
-    // Regular beat pulses for synth fallback
-    setInterval(() => {
-      if (djState.deckA.isPlaying && djState.synthActive) playSynthBeat('A');
-      if (djState.deckB.isPlaying && djState.synthActive) playSynthBeat('B');
-    }, 470);
 
     /* =====================================================================
-       3. YOUTUBE IFRAME PLAYER API INITIALIZATION
+       YOUTUBE IFRAME INITIALIZER
        ===================================================================== */
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
@@ -865,59 +769,24 @@
     firstScript.parentNode.insertBefore(tag, firstScript);
 
     window.onYouTubeIframeAPIReady = function() {
-      // Deck A Player
       djState.deckA.player = new YT.Player('yt-player-a', {
-        height: '180',
-        width: '320',
-        videoId: djState.deckA.track.ytId,
-        playerVars: {
-          autoplay: 0,
-          controls: 0,
-          disablekb: 1,
-          fs: 0,
-          modestbranding: 1,
-          rel: 0,
-          playsinline: 1
-        },
+        height: '180', width: '320', videoId: djState.deckA.track.ytId,
+        playerVars: { autoplay: 0, controls: 0, disablekb: 1, fs: 0, modestbranding: 1, rel: 0, playsinline: 1 },
         events: {
-          'onReady': () => {
-            if (djState.deckA.player.setVolume) djState.deckA.player.setVolume(100);
-          },
-          'onStateChange': (e) => onPlayerStateChange('A', e),
-          'onError': () => activateSynthFallback('Deck A')
+          'onReady': () => { if (djState.deckA.player.setVolume) djState.deckA.player.setVolume(100); },
+          'onStateChange': (e) => onPlayerStateChange('A', e)
         }
       });
 
-      // Deck B Player
       djState.deckB.player = new YT.Player('yt-player-b', {
-        height: '180',
-        width: '320',
-        videoId: djState.deckB.track.ytId,
-        playerVars: {
-          autoplay: 0,
-          controls: 0,
-          disablekb: 1,
-          fs: 0,
-          modestbranding: 1,
-          rel: 0,
-          playsinline: 1
-        },
+        height: '180', width: '320', videoId: djState.deckB.track.ytId,
+        playerVars: { autoplay: 0, controls: 0, disablekb: 1, fs: 0, modestbranding: 1, rel: 0, playsinline: 1 },
         events: {
-          'onReady': () => {
-            if (djState.deckB.player.setVolume) djState.deckB.player.setVolume(0);
-          },
-          'onStateChange': (e) => onPlayerStateChange('B', e),
-          'onError': () => activateSynthFallback('Deck B')
+          'onReady': () => { if (djState.deckB.player.setVolume) djState.deckB.player.setVolume(0); },
+          'onStateChange': (e) => onPlayerStateChange('B', e)
         }
       });
     };
-
-    function activateSynthFallback(deckName) {
-      djState.synthActive = true;
-      const badge = document.getElementById('audio-engine-badge');
-      badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse"></span> SYNTH AUDIO ACTIVE`;
-      badge.className = "flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-cyan-950/60 border border-brand-cyan/40 text-cyan-300";
-    }
 
     function onPlayerStateChange(deckLetter, event) {
       const isPlay = (event.data === YT.PlayerState.PLAYING);
@@ -926,67 +795,25 @@
       updateDeckPlayingVisuals(deckLetter, isPlay);
     }
 
-    /* =====================================================================
-       4. CAMELOT HARMONIC ENGINE
-       ===================================================================== */
-    function parseCamelot(keyStr) {
-      const match = keyStr.match(/^(\d+)([AB])$/i);
-      if (!match) return { num: 1, letter: 'A' };
-      return { num: parseInt(match[1]), letter: match[2].toUpperCase() };
-    }
-
-    function getHarmonicMatch(sourceKeyStr, targetKeyStr) {
-      const src = parseCamelot(sourceKeyStr);
-      const tgt = parseCamelot(targetKeyStr);
-
-      if (src.num === tgt.num && src.letter === tgt.letter) {
-        return { match: true, score: 100, label: "Exact Key", color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30" };
-      }
-      if (src.num === tgt.num && src.letter !== tgt.letter) {
-        return { match: true, score: 95, label: "Relative Key", color: "text-purple-400 bg-purple-500/10 border-purple-500/30" };
-      }
-      const plusOne = (src.num % 12) + 1;
-      const minusOne = (src.num === 1) ? 12 : src.num - 1;
-
-      if (tgt.letter === src.letter && tgt.num === plusOne) {
-        return { match: true, score: 90, label: "Energy Boost (+1)", color: "text-brand-cyan bg-cyan-500/10 border-cyan-500/30" };
-      }
-      if (tgt.letter === src.letter && tgt.num === minusOne) {
-        return { match: true, score: 85, label: "Energy Step (-1)", color: "text-blue-400 bg-blue-500/10 border-blue-500/30" };
-      }
-      return { match: false, score: 35, label: "Non-Harmonic", color: "text-slate-400 bg-zinc-800 border-white/5" };
-    }
-
     function formatTime(sec) {
       const m = Math.floor(sec / 60);
       const s = Math.floor(sec % 60);
       return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
     }
 
-    /* =====================================================================
-       5. UI RENDERERS
-       ===================================================================== */
     function updateDeckUI(deckLetter) {
       const isA = (deckLetter === 'A');
       const deck = isA ? djState.deckA : djState.deckB;
       const t = deck.track;
       const prefix = `deck-${deckLetter.toLowerCase()}`;
 
-      document.getElementById(`${prefix}-title`).textContent = t.title;
+      document.getElementById(`${prefix}-title`).textContent = `#${t.num} ${t.title}`;
       document.getElementById(`${prefix}-artist`).textContent = t.artist;
       document.getElementById(`${prefix}-bpm`).textContent = `${t.audioProfile.bpm} BPM`;
-      document.getElementById(`${prefix}-camelot`).textContent = `${t.audioProfile.camelotKey} - ${t.audioProfile.rootKey}`;
-      document.getElementById(`${prefix}-artwork`).style.backgroundImage = `url('${t.artwork}')`;
-      document.getElementById(`${prefix}-duration`).textContent = ` / ${formatTime(t.duration)}`;
-
-      document.getElementById(`${prefix}-cue-in`).textContent = `IN ${formatTime(t.cuePoints.mixInPoint)}`;
-      document.getElementById(`${prefix}-cue-drop`).textContent = `DROP @ ${formatTime(t.cuePoints.dropTimestamp)}`;
-      document.getElementById(`${prefix}-cue-out`).textContent = `OUT ${formatTime(t.cuePoints.mixOutPoint)}`;
-
-      const dropPct = (t.cuePoints.dropTimestamp / t.duration) * 100;
-      const outPct = (t.cuePoints.mixOutPoint / t.duration) * 100;
-      document.getElementById(`${prefix}-drop-pin`).style.left = `${dropPct}%`;
-      document.getElementById(`${prefix}-out-pin`).style.left = `${outPct}%`;
+      document.getElementById(`${prefix}-camelot`).textContent = `PHASE ${t.phase}`;
+      document.getElementById(`${prefix}-duration`).textContent = ` / ${formatTime(t.cuePoints.mixOutPoint - t.cuePoints.mixInPoint)}`;
+      document.getElementById(`${prefix}-cue-in`).textContent = `IN ${t.inTime}`;
+      document.getElementById(`${prefix}-cue-out`).textContent = `OUT ${t.outTime}`;
     }
 
     function updateDeckPlayingVisuals(deckLetter, isPlaying) {
@@ -1008,43 +835,41 @@
       }
     }
 
+    /* =====================================================================
+       CRATE RENDERING & PHASE FILTERING
+       ===================================================================== */
     function renderPartyCrate() {
       const tbody = document.getElementById('crate-table-body');
       const searchTerm = document.getElementById('crate-search-input').value.toLowerCase();
       tbody.innerHTML = '';
 
       PARTY_TRACKS.filter(t => {
-        return t.title.toLowerCase().includes(searchTerm) ||
-               t.artist.toLowerCase().includes(searchTerm) ||
-               t.audioProfile.camelotKey.toLowerCase().includes(searchTerm);
+        const matchesPhase = (selectedPhase === 'all' || t.phase === parseInt(selectedPhase));
+        const matchesSearch = t.title.toLowerCase().includes(searchTerm) || t.artist.toLowerCase().includes(searchTerm);
+        return matchesPhase && matchesSearch;
       }).forEach(track => {
         const tr = document.createElement('tr');
         tr.className = "hover:bg-white/[0.04] transition-colors group";
         tr.innerHTML = `
-          <td class="py-3 flex items-center gap-3">
-            <img src="${track.artwork}" alt="Cover" class="w-9 h-9 rounded-lg object-cover border border-white/10 flex-shrink-0">
-            <div class="truncate">
-              <span class="font-bold text-slate-100 block group-hover:text-brand-cyan transition-colors truncate">${track.title}</span>
-              <span class="text-[11px] text-slate-400 font-medium truncate">${track.artist}</span>
-            </div>
+          <td class="py-2.5 font-digital text-amber-400 font-bold">${track.num}</td>
+          <td class="py-2.5">
+            <span class="font-bold text-slate-100 block group-hover:text-brand-cyan transition-colors truncate max-w-[160px]">${track.title}</span>
+            <span class="text-[11px] text-slate-400 font-medium truncate block max-w-[160px]">${track.artist}</span>
           </td>
-          <td class="py-3 text-center font-digital font-bold text-amber-400">${track.audioProfile.bpm}</td>
-          <td class="py-3 text-center">
-            <span class="px-2 py-0.5 rounded text-[10px] font-digital font-bold bg-indigo-950/70 text-cyan-300 border border-cyan-500/30">
-              ${track.audioProfile.camelotKey}
+          <td class="py-2.5">
+            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-zinc-800 text-slate-300 border border-white/5">
+              ${track.type}
             </span>
           </td>
-          <td class="py-3 text-center">
-            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-rose-500/10 text-rose-300 border border-rose-500/20">
-              ${track.audioProfile.energyLevel}
-            </span>
+          <td class="py-2.5 text-center font-digital text-cyan-300">${track.inTime} – ${track.outTime}</td>
+          <td class="py-2.5 text-center font-digital text-slate-400">${formatTime(track.cuePoints.mixOutPoint - track.cuePoints.mixInPoint)}</td>
+          <td class="py-2.5 text-[11px] text-slate-300 max-w-[200px] truncate" title="${track.cueNote}">
+            ${track.cueNote}
           </td>
-          <td class="py-3 text-center font-digital text-brand-magenta font-semibold">${formatTime(track.cuePoints.dropTimestamp)}</td>
-          <td class="py-3 text-center font-digital text-slate-400">${formatTime(track.duration)}</td>
-          <td class="py-3 text-right">
-            <div class="flex items-center justify-end gap-1.5">
-              <button onclick="loadTrackToDeck('A', '${track.id}')" class="px-2 py-1 rounded bg-zinc-800 hover:bg-brand-cyan hover:text-black font-digital text-[10px] font-bold text-cyan-300 transition-all border border-cyan-500/20 active:scale-95">LOAD A</button>
-              <button onclick="loadTrackToDeck('B', '${track.id}')" class="px-2 py-1 rounded bg-zinc-800 hover:bg-brand-magenta hover:text-white font-digital text-[10px] font-bold text-pink-300 transition-all border border-pink-500/20 active:scale-95">LOAD B</button>
+          <td class="py-2.5 text-right">
+            <div class="flex items-center justify-end gap-1">
+              <button onclick="loadTrackToDeck('A', '${track.id}')" class="px-2 py-1 rounded bg-zinc-800 hover:bg-brand-cyan hover:text-black font-digital text-[10px] font-bold text-cyan-300 transition-all active:scale-95">LOAD A</button>
+              <button onclick="loadTrackToDeck('B', '${track.id}')" class="px-2 py-1 rounded bg-zinc-800 hover:bg-brand-magenta hover:text-white font-digital text-[10px] font-bold text-pink-300 transition-all active:scale-95">LOAD B</button>
             </div>
           </td>
         `;
@@ -1052,49 +877,20 @@
       });
     }
 
-    function updateSuggestions() {
-      const container = document.getElementById('smart-suggestions-list');
-      const activeDeckObj = (djState.activeMaster === 'A') ? djState.deckA : djState.deckB;
-      const activeBPM = activeDeckObj.track.audioProfile.bpm;
-      const activeKey = activeDeckObj.track.audioProfile.camelotKey;
-
-      const suggestions = PARTY_TRACKS.filter(t => t.id !== activeDeckObj.track.id).map(track => {
-        const bpmDiff = Math.abs(track.audioProfile.bpm - activeBPM);
-        const harmonic = getHarmonicMatch(activeKey, track.audioProfile.camelotKey);
-        let priority = 0;
-        if (bpmDiff <= 4) priority += 60;
-        if (harmonic.match) priority += harmonic.score;
-        return { track, bpmDiff, harmonic, priority };
-      }).sort((a, b) => b.priority - a.priority);
-
-      container.innerHTML = '';
-      suggestions.slice(0, 4).forEach(({ track, bpmDiff, harmonic }) => {
-        const diffText = (bpmDiff === 0) ? "Exact BPM" : `${track.audioProfile.bpm > activeBPM ? '+' : '-'}${bpmDiff} BPM`;
-        const card = document.createElement('div');
-        card.className = "p-2.5 rounded-xl bg-black/45 border border-white/5 hover:border-brand-cyan/40 transition-all flex items-center justify-between gap-3";
-        card.innerHTML = `
-          <div class="flex items-center gap-3 truncate">
-            <img src="${track.artwork}" alt="Cover" class="w-10 h-10 rounded-lg object-cover flex-shrink-0 border border-white/10">
-            <div class="truncate">
-              <div class="flex items-center gap-2 truncate">
-                <span class="font-bold text-xs text-white truncate">${track.title}</span>
-                <span class="px-1.5 py-0.2 rounded text-[9px] font-digital font-bold ${harmonic.color}">${harmonic.label}</span>
-              </div>
-              <div class="flex items-center gap-2 mt-0.5 text-[10px] text-slate-400">
-                <span>${track.artist}</span>
-                <span>•</span>
-                <span class="font-digital text-amber-400 font-bold">${track.audioProfile.bpm} BPM (${diffText})</span>
-              </div>
-            </div>
-          </div>
-          <button onclick="loadTrackToDeck('B', '${track.id}')" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-brand-magenta/30 to-rose-600/30 hover:from-brand-magenta hover:to-rose-600 border border-brand-magenta/50 text-white font-digital text-[10px] font-bold flex-shrink-0 active:scale-95 transition-all">Load to B</button>
-        `;
-        container.appendChild(card);
+    function filterPhase(phase) {
+      selectedPhase = phase;
+      document.querySelectorAll('.phase-btn').forEach(btn => {
+        if (btn.dataset.phase === String(phase)) {
+          btn.className = "phase-btn px-3 py-1 rounded-lg bg-brand-cyan text-black font-bold";
+        } else {
+          btn.className = "phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white";
+        }
       });
+      renderPartyCrate();
     }
 
     /* =====================================================================
-       6. DJ ACTIONS & INTERACTIVITY
+       DJ ACTIONS & QUICK CROSSFADE
        ===================================================================== */
     window.loadTrackToDeck = function(deckLetter, trackId) {
       const track = PARTY_TRACKS.find(t => t.id === trackId);
@@ -1102,23 +898,20 @@
 
       const deck = (deckLetter === 'A') ? djState.deckA : djState.deckB;
       deck.track = track;
-      deck.currentTime = 0;
+      deck.currentTime = track.cuePoints.mixInPoint;
       deck.duration = track.duration;
 
       updateDeckUI(deckLetter);
 
       if (deck.player && deck.player.cueVideoById) {
-        deck.player.cueVideoById({ videoId: track.ytId, startSeconds: 0 });
+        deck.player.cueVideoById({ videoId: track.ytId, startSeconds: track.cuePoints.mixInPoint });
       }
 
-      updateSuggestions();
       updateAIAdvice();
     };
 
     function togglePlay(deckLetter) {
-      initWebAudio();
       const deck = (deckLetter === 'A') ? djState.deckA : djState.deckB;
-
       if (!deck.player || !deck.player.playVideo) {
         deck.isPlaying = !deck.isPlaying;
         updateDeckPlayingVisuals(deckLetter, deck.isPlaying);
@@ -1133,41 +926,7 @@
         deck.player.playVideo();
         deck.isPlaying = true;
         updateDeckPlayingVisuals(deckLetter, true);
-
-        if (deckLetter === 'A' && djState.crossfader === 0) setActiveMaster('A');
-        else if (deckLetter === 'B' && djState.crossfader === 100) setActiveMaster('B');
       }
-    }
-
-    function setActiveMaster(targetDeck) {
-      djState.activeMaster = targetDeck;
-      const isA = (targetDeck === 'A');
-
-      const tagA = document.getElementById('deck-a-active-tag');
-      const tagB = document.getElementById('deck-b-active-tag');
-      const contA = document.getElementById('deck-container-a');
-      const contB = document.getElementById('deck-container-b');
-      const aiDeckLabel = document.getElementById('ai-active-deck-label');
-
-      if (isA) {
-        tagA.textContent = "MASTER ON-AIR";
-        tagA.className = "px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
-        tagB.textContent = "QUEUED / STANDBY";
-        tagB.className = "px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30";
-        contA.classList.add('border-brand-cyan/60');
-        contB.classList.remove('border-brand-magenta/60');
-        aiDeckLabel.textContent = "MONITORING DECK A";
-      } else {
-        tagB.textContent = "MASTER ON-AIR";
-        tagB.className = "px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
-        tagA.textContent = "QUEUED / STANDBY";
-        tagA.className = "px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30";
-        contB.classList.add('border-brand-magenta/60');
-        contA.classList.remove('border-brand-cyan/60');
-        aiDeckLabel.textContent = "MONITORING DECK B";
-      }
-
-      updateSuggestions();
     }
 
     function applyCrossfade(value) {
@@ -1178,24 +937,16 @@
       djState.deckA.volume = Math.round(volA * 100);
       djState.deckB.volume = Math.round(volB * 100);
 
-      if (djState.deckA.player && djState.deckA.player.setVolume) {
-        djState.deckA.player.setVolume(djState.deckA.volume);
-      }
-      if (djState.deckB.player && djState.deckB.player.setVolume) {
-        djState.deckB.player.setVolume(djState.deckB.volume);
-      }
-
-      if (value < 35 && djState.activeMaster !== 'A') setActiveMaster('A');
-      else if (value > 65 && djState.activeMaster !== 'B') setActiveMaster('B');
+      if (djState.deckA.player && djState.deckA.player.setVolume) djState.deckA.player.setVolume(djState.deckA.volume);
+      if (djState.deckB.player && djState.deckB.player.setVolume) djState.deckB.player.setVolume(djState.deckB.volume);
     }
 
-    // Quick Crossfade Transition
     function executeQuickCrossfade() {
       const containerA = document.getElementById('deck-container-a');
       const containerB = document.getElementById('deck-container-b');
 
-      containerA.classList.add('scale-95', 'opacity-60', 'blur-[1px]');
-      containerB.classList.add('scale-105', 'border-brand-cyan', 'shadow-brand-cyan/30');
+      containerA.classList.add('scale-95', 'opacity-60');
+      containerB.classList.add('scale-105', 'border-brand-cyan');
 
       setTimeout(() => {
         const incomingTrack = djState.deckB.track;
@@ -1203,13 +954,12 @@
         djState.deckA.currentTime = djState.deckB.currentTime;
         djState.deckA.duration = incomingTrack.duration;
 
-        const nextTrack = PARTY_TRACKS.find(t => 
-          t.id !== incomingTrack.id && 
-          Math.abs(t.audioProfile.bpm - incomingTrack.audioProfile.bpm) <= 3
-        ) || PARTY_TRACKS[(PARTY_TRACKS.indexOf(incomingTrack) + 1) % PARTY_TRACKS.length];
+        // Auto-advance to next sequential song in the 80-track order
+        const nextIndex = (PARTY_TRACKS.findIndex(t => t.id === incomingTrack.id) + 1) % PARTY_TRACKS.length;
+        const nextTrack = PARTY_TRACKS[nextIndex];
         
         djState.deckB.track = nextTrack;
-        djState.deckB.currentTime = 0;
+        djState.deckB.currentTime = nextTrack.cuePoints.mixInPoint;
         djState.deckB.duration = nextTrack.duration;
 
         updateDeckUI('A');
@@ -1218,7 +968,6 @@
         const faderInput = document.getElementById('crossfader');
         faderInput.value = 0;
         applyCrossfade(0);
-        setActiveMaster('A');
 
         if (djState.deckA.player && djState.deckA.player.loadVideoById) {
           djState.deckA.player.loadVideoById({ videoId: djState.deckA.track.ytId, startSeconds: djState.deckA.currentTime });
@@ -1227,84 +976,40 @@
         }
 
         if (djState.deckB.player && djState.deckB.player.cueVideoById) {
-          djState.deckB.player.cueVideoById(djState.deckB.track.ytId);
+          djState.deckB.player.cueVideoById({ videoId: djState.deckB.track.ytId, startSeconds: djState.deckB.currentTime });
           djState.deckB.isPlaying = false;
           updateDeckPlayingVisuals('B', false);
         }
 
-        containerA.classList.remove('scale-95', 'opacity-60', 'blur-[1px]');
-        containerB.classList.remove('scale-105', 'border-brand-cyan', 'shadow-brand-cyan/30');
+        containerA.classList.remove('scale-95', 'opacity-60');
+        containerB.classList.remove('scale-105', 'border-brand-cyan');
 
-        updateSuggestions();
         updateAIAdvice();
       }, 400);
     }
 
     /* =====================================================================
-       7. AI CUE & DROP ASSISTANT REAL-TIME EVALUATOR
-       ===================================================================== */
+       AI COACH & DROP COUNTDOWN
+       ==================================================================== */
     function updateAIAdvice() {
-      const activeDeckObj = (djState.activeMaster === 'A') ? djState.deckA : djState.deckB;
-      const otherDeckObj = (djState.activeMaster === 'A') ? djState.deckB : djState.deckA;
-      const track = activeDeckObj.track;
-      const currentTime = activeDeckObj.currentTime;
-      const cue = track.cuePoints;
+      const active = djState.deckA;
+      const t = active.track;
+      const timeRemaining = Math.max(0, t.cuePoints.mixOutPoint - active.currentTime);
 
-      const countdownEl = document.getElementById('ai-drop-countdown');
-      const barCountEl = document.getElementById('ai-bar-count');
-      const phaseEl = document.getElementById('ai-track-phase');
-      const headlineEl = document.getElementById('ai-prompt-headline');
-      const detailEl = document.getElementById('ai-prompt-detail');
+      document.getElementById('ai-drop-countdown').textContent = formatTime(timeRemaining);
+      document.getElementById('ai-track-phase').textContent = `PHASE ${t.phase}: ${t.phase === 1 ? 'WARM-UP' : t.phase === 2 ? 'BUILD' : t.phase === 3 ? 'PEAK BOLLYWOOD' : t.phase === 4 ? 'CROSSOVER' : 'FINALE'}`;
+      document.getElementById('ai-prompt-detail').textContent = t.cueNote;
 
-      const timeToDrop = cue.dropTimestamp - currentTime;
-      if (timeToDrop > 0) {
-        countdownEl.textContent = `00:${Math.ceil(timeToDrop).toString().padStart(2, '0')}.${Math.floor((timeToDrop % 1) * 10)}`;
-        countdownEl.className = "text-2xl sm:text-3xl font-digital font-black text-brand-magenta tracking-wider";
-        const barsRemaining = Math.max(1, Math.round(timeToDrop / (60 / track.audioProfile.bpm * 4)));
-        barCountEl.textContent = `BAR ${barsRemaining * 4} // CHORUS BUILD IMPACT`;
-      } else if (currentTime < cue.mixOutPoint) {
-        countdownEl.textContent = "🔥 DROP ACTIVE";
-        countdownEl.className = "text-2xl sm:text-3xl font-digital font-black text-brand-lime tracking-wider animate-pulse";
-        barCountEl.textContent = "PEAK ENERGY DANCEFLOOR";
-      } else {
-        countdownEl.textContent = "MIX-OUT OPEN";
-        countdownEl.className = "text-2xl sm:text-3xl font-digital font-black text-amber-400 tracking-wider";
-        barCountEl.textContent = "CROSSFADE TO QUEUED DECK";
-      }
-
-      if (currentTime < cue.mixInPoint) {
-        phaseEl.textContent = "INTRO GROOVE";
-        phaseEl.className = "inline-block mt-1 px-3 py-1 rounded-full text-xs font-bold font-digital bg-cyan-500/20 text-cyan-300 border border-cyan-500/30";
-        headlineEl.textContent = "Intro Beatmatch Locked";
-        detailEl.textContent = `Active tempo ${track.audioProfile.bpm} BPM. Camelot key is ${track.audioProfile.camelotKey}. Aligning next incoming bassline.`;
-      } else if (currentTime < cue.dropTimestamp - 10) {
-        phaseEl.textContent = "BUILD-UP TENSION";
-        phaseEl.className = "inline-block mt-1 px-3 py-1 rounded-full text-xs font-bold font-digital bg-yellow-500/20 text-amber-300 border border-amber-500/30";
-        headlineEl.textContent = "Mix incoming bassline here";
-        detailEl.textContent = `Prep filter sweep. Deck B Camelot ${otherDeckObj.track.audioProfile.camelotKey} is primed. Cut low EQ on incoming deck.`;
-      } else if (currentTime < cue.dropTimestamp) {
-        phaseEl.textContent = "⚠️ IMPACT INCOMING";
-        phaseEl.className = "inline-block mt-1 px-3 py-1 rounded-full text-xs font-bold font-digital bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-bounce";
-        headlineEl.textContent = "8 beats to Drop! Engage crowd!";
-        detailEl.textContent = "Standby on master bass volume. Prepare dancefloor for maximum impact.";
-      } else if (currentTime < cue.mixOutPoint) {
-        phaseEl.textContent = "MAIN CHORUS DROP";
-        phaseEl.className = "inline-block mt-1 px-3 py-1 rounded-full text-xs font-bold font-digital bg-brand-lime/20 text-brand-lime border border-brand-lime/30";
-        headlineEl.textContent = "Drop Hot: Full Power";
-        detailEl.textContent = `Harmonic compatibility confirmed with queue. Ready Deck ${djState.activeMaster === 'A' ? 'B' : 'A'} at Mix-In marker.`;
-      } else {
-        phaseEl.textContent = "OUTRO MIX WINDOW";
-        phaseEl.className = "inline-block mt-1 px-3 py-1 rounded-full text-xs font-bold font-digital bg-purple-500/20 text-purple-300 border border-purple-500/30";
-        headlineEl.textContent = "Mix-Out Window Open: Sweep crossfader";
-        detailEl.textContent = `Smoothly sweep crossfader to Deck ${djState.activeMaster === 'A' ? 'B' : 'A'} for continuous high-energy party pulse.`;
+      // Auto-DJ Trigger (6-8 seconds before out time)
+      if (autoDjActive && active.isPlaying && active.currentTime >= (t.cuePoints.mixOutPoint - 7)) {
+        executeQuickCrossfade();
       }
     }
 
     /* =====================================================================
-       8. MAIN TICK LOOP
-       ===================================================================== */
+       MAIN TICK LOOP
+       ==================================================================== */
     setInterval(() => {
-      // Sync Deck A Playhead
       if (djState.deckA.player && djState.deckA.player.getCurrentTime) {
         const timeA = djState.deckA.player.getCurrentTime();
         if (timeA && !isNaN(timeA)) {
@@ -1313,71 +1018,48 @@
           document.getElementById('deck-a-progress').style.width = `${Math.min((timeA / djState.deckA.duration) * 100, 100)}%`;
         }
       } else if (djState.deckA.isPlaying) {
-        djState.deckA.currentTime = (djState.deckA.currentTime + 0.15 * djState.deckA.pitch) % djState.deckA.duration;
+        djState.deckA.currentTime = (djState.deckA.currentTime + 0.25) % djState.deckA.duration;
         document.getElementById('deck-a-time').textContent = formatTime(djState.deckA.currentTime);
         document.getElementById('deck-a-progress').style.width = `${(djState.deckA.currentTime / djState.deckA.duration) * 100}%`;
       }
 
-      // Sync Deck B Playhead
-      if (djState.deckB.player && djState.deckB.player.getCurrentTime) {
-        const timeB = djState.deckB.player.getCurrentTime();
-        if (timeB && !isNaN(timeB)) {
-          djState.deckB.currentTime = timeB;
-          document.getElementById('deck-b-time').textContent = formatTime(timeB);
-          document.getElementById('deck-b-progress').style.width = `${Math.min((timeB / djState.deckB.duration) * 100, 100)}%`;
-        }
-      } else if (djState.deckB.isPlaying) {
-        djState.deckB.currentTime = (djState.deckB.currentTime + 0.15 * djState.deckB.pitch) % djState.deckB.duration;
-        document.getElementById('deck-b-time').textContent = formatTime(djState.deckB.currentTime);
-        document.getElementById('deck-b-progress').style.width = `${(djState.deckB.currentTime / djState.deckB.duration) * 100}%`;
-      }
-
       updateAIAdvice();
 
-      // Master VU Meters
-      const activeObj = (djState.activeMaster === 'A') ? djState.deckA : djState.deckB;
-      const isLive = activeObj.isPlaying;
-      const meterL = document.getElementById('meter-l');
-      const meterR = document.getElementById('meter-r');
-      if (isLive) {
-        meterL.style.height = `${45 + Math.random() * 50}%`;
-        meterR.style.height = `${40 + Math.random() * 55}%`;
+      // Audio meters
+      if (djState.deckA.isPlaying) {
+        document.getElementById('meter-l').style.height = `${45 + Math.random() * 50}%`;
+        document.getElementById('meter-r').style.height = `${40 + Math.random() * 55}%`;
       } else {
-        meterL.style.height = '12%';
-        meterR.style.height = '12%';
+        document.getElementById('meter-l').style.height = '12%';
+        document.getElementById('meter-r').style.height = '12%';
       }
-    }, 150);
+    }, 200);
 
     /* =====================================================================
-       9. CUSTOM MODAL AND EVENT LISTENERS
-       ===================================================================== */
-    function openCustomUrlModal() {
-      document.getElementById('custom-url-modal').classList.remove('hidden');
-    }
-    function closeCustomUrlModal() {
-      document.getElementById('custom-url-modal').classList.add('hidden');
-    }
+       DOM EVENT BINDINGS
+       ==================================================================== */
+    function openCustomUrlModal() { document.getElementById('custom-url-modal').classList.remove('hidden'); }
+    function closeCustomUrlModal() { document.getElementById('custom-url-modal').classList.add('hidden'); }
     function submitCustomTrack(deckLetter) {
       const urlInput = document.getElementById('custom-yt-input').value.trim();
-      const bpm = parseInt(document.getElementById('custom-bpm-input').value) || 126;
-      const key = document.getElementById('custom-key-input').value.trim() || '4A';
-
       if (!urlInput) return;
       let vid = urlInput;
       const match = urlInput.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
       if (match) vid = match[1];
 
       const customTrack = {
+        num: PARTY_TRACKS.length + 1,
         id: "custom_" + Date.now(),
+        phase: 3,
         title: "Custom YouTube Audio",
-        artist: "User Load",
+        artist: "User Added",
+        type: "Custom",
         ytId: vid,
-        duration: 210,
-        artwork: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&q=80",
-        audioProfile: { bpm, camelotKey: key, rootKey: "Custom", energyLevel: "Custom", energyScore: 9.0 },
-        cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 45, mixOutPoint: 180 }
+        inTime: "0:00",
+        outTime: "3:00",
+        cuePoints: { introStart: 0, mixInPoint: 0, dropTimestamp: 45, mixOutPoint: 180 },
+        cueNote: "User loaded custom track."
       };
-
       PARTY_TRACKS.unshift(customTrack);
       loadTrackToDeck(deckLetter, customTrack.id);
       renderPartyCrate();
@@ -1388,7 +1070,6 @@
       updateDeckUI('A');
       updateDeckUI('B');
       renderPartyCrate();
-      updateSuggestions();
 
       document.getElementById('btn-play-a').addEventListener('click', () => togglePlay('A'));
       document.getElementById('btn-play-b').addEventListener('click', () => togglePlay('B'));
@@ -1396,76 +1077,30 @@
       document.getElementById('vinyl-b').addEventListener('click', () => togglePlay('B'));
 
       document.getElementById('btn-cue-a').addEventListener('click', () => {
-        const mixIn = djState.deckA.track.cuePoints.mixInPoint;
-        djState.deckA.currentTime = mixIn;
-        if (djState.deckA.player && djState.deckA.player.seekTo) djState.deckA.player.seekTo(mixIn, true);
+        const inPt = djState.deckA.track.cuePoints.mixInPoint;
+        djState.deckA.currentTime = inPt;
+        if (djState.deckA.player && djState.deckA.player.seekTo) djState.deckA.player.seekTo(inPt, true);
       });
       document.getElementById('btn-cue-b').addEventListener('click', () => {
-        const mixIn = djState.deckB.track.cuePoints.mixInPoint;
-        djState.deckB.currentTime = mixIn;
-        if (djState.deckB.player && djState.deckB.player.seekTo) djState.deckB.player.seekTo(mixIn, true);
-      });
-
-      document.getElementById('btn-sync-a').addEventListener('click', () => {
-        const ratio = parseFloat((djState.deckB.track.audioProfile.bpm / djState.deckA.track.audioProfile.bpm).toFixed(2));
-        djState.deckA.pitch = ratio;
-        document.getElementById('deck-a-tempo').value = ratio;
-        document.getElementById('deck-a-tempo-val').textContent = `${((ratio - 1) * 100).toFixed(1)}%`;
-        if (djState.deckA.player && djState.deckA.player.setPlaybackRate) djState.deckA.player.setPlaybackRate(ratio);
-      });
-      document.getElementById('btn-sync-b').addEventListener('click', () => {
-        const ratio = parseFloat((djState.deckA.track.audioProfile.bpm / djState.deckB.track.audioProfile.bpm).toFixed(2));
-        djState.deckB.pitch = ratio;
-        document.getElementById('deck-b-tempo').value = ratio;
-        document.getElementById('deck-b-tempo-val').textContent = `${((ratio - 1) * 100).toFixed(1)}%`;
-        if (djState.deckB.player && djState.deckB.player.setPlaybackRate) djState.deckB.player.setPlaybackRate(ratio);
-      });
-
-      document.getElementById('deck-a-tempo').addEventListener('input', (e) => {
-        const val = parseFloat(e.target.value);
-        djState.deckA.pitch = val;
-        document.getElementById('deck-a-tempo-val').textContent = `${((val - 1) * 100).toFixed(1)}%`;
-        if (djState.deckA.player && djState.deckA.player.setPlaybackRate) djState.deckA.player.setPlaybackRate(val);
-      });
-      document.getElementById('deck-b-tempo').addEventListener('input', (e) => {
-        const val = parseFloat(e.target.value);
-        djState.deckB.pitch = val;
-        document.getElementById('deck-b-tempo-val').textContent = `${((val - 1) * 100).toFixed(1)}%`;
-        if (djState.deckB.player && djState.deckB.player.setPlaybackRate) djState.deckB.player.setPlaybackRate(val);
-      });
-
-      document.getElementById('deck-a-timeline-wrap').addEventListener('click', (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const seekTime = ((e.clientX - rect.left) / rect.width) * djState.deckA.duration;
-        djState.deckA.currentTime = seekTime;
-        if (djState.deckA.player && djState.deckA.player.seekTo) djState.deckA.player.seekTo(seekTime, true);
-      });
-      document.getElementById('deck-b-timeline-wrap').addEventListener('click', (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const seekTime = ((e.clientX - rect.left) / rect.width) * djState.deckB.duration;
-        djState.deckB.currentTime = seekTime;
-        if (djState.deckB.player && djState.deckB.player.seekTo) djState.deckB.player.seekTo(seekTime, true);
+        const inPt = djState.deckB.track.cuePoints.mixInPoint;
+        djState.deckB.currentTime = inPt;
+        if (djState.deckB.player && djState.deckB.player.seekTo) djState.deckB.player.seekTo(inPt, true);
       });
 
       document.getElementById('jump-intro').addEventListener('click', () => {
-        const deck = (djState.activeMaster === 'A') ? djState.deckA : djState.deckB;
-        deck.currentTime = deck.track.cuePoints.introStart;
-        if (deck.player && deck.player.seekTo) deck.player.seekTo(deck.track.cuePoints.introStart, true);
+        djState.deckA.currentTime = djState.deckA.track.cuePoints.mixInPoint;
+        if (djState.deckA.player && djState.deckA.player.seekTo) djState.deckA.player.seekTo(djState.deckA.currentTime, true);
       });
       document.getElementById('jump-drop').addEventListener('click', () => {
-        const deck = (djState.activeMaster === 'A') ? djState.deckA : djState.deckB;
-        deck.currentTime = Math.max(0, deck.track.cuePoints.dropTimestamp - 2);
-        if (deck.player && deck.player.seekTo) deck.player.seekTo(deck.currentTime, true);
+        djState.deckA.currentTime = djState.deckA.track.cuePoints.dropTimestamp;
+        if (djState.deckA.player && djState.deckA.player.seekTo) djState.deckA.player.seekTo(djState.deckA.currentTime, true);
       });
       document.getElementById('jump-outro').addEventListener('click', () => {
-        const deck = (djState.activeMaster === 'A') ? djState.deckA : djState.deckB;
-        deck.currentTime = deck.track.cuePoints.mixOutPoint;
-        if (deck.player && deck.player.seekTo) deck.player.seekTo(deck.track.cuePoints.mixOutPoint, true);
+        djState.deckA.currentTime = Math.max(0, djState.deckA.track.cuePoints.mixOutPoint - 5);
+        if (djState.deckA.player && djState.deckA.player.seekTo) djState.deckA.player.seekTo(djState.deckA.currentTime, true);
       });
 
-      document.getElementById('crossfader').addEventListener('input', (e) => {
-        applyCrossfade(parseInt(e.target.value));
-      });
+      document.getElementById('crossfader').addEventListener('input', (e) => applyCrossfade(parseInt(e.target.value)));
       document.getElementById('btn-quick-crossfade').addEventListener('click', executeQuickCrossfade);
       document.getElementById('crate-search-input').addEventListener('input', renderPartyCrate);
     });
