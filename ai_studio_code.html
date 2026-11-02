@@ -37,13 +37,11 @@
           },
           keyframes: {
             'spin-vinyl': { '0%': { transform: 'rotate(0deg)' }, '100%': { transform: 'rotate(360deg)' } },
-            'pulse-neon': { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0.6' } },
-            'glow-pink': { '0%, 100%': { filter: 'drop-shadow(0 0 12px rgba(255, 0, 127, 0.8))' }, '50%': { filter: 'drop-shadow(0 0 4px rgba(255, 0, 127, 0.3))' } }
+            'pulse-neon': { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0.6' } }
           },
           animation: {
             'spin-vinyl': 'spin-vinyl 2.2s linear infinite',
-            'pulse-neon': 'pulse-neon 1.6s ease-in-out infinite',
-            'glow-pink': 'glow-pink 1.6s ease-in-out infinite',
+            'pulse-neon': 'pulse-neon 1.6s ease-in-out infinite'
           }
         }
       }
@@ -65,9 +63,11 @@
     }
     .tonearm { transform-origin: 22px 22px; transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1); }
     .tonearm.engaged { transform: rotate(26deg); }
+    
     input[type=range] { -webkit-appearance: none; background: #181d2a; border-radius: 9999px; }
-    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 20px; width: 14px; border-radius: 3px; background: #00f5ff; cursor: pointer; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 18px; width: 14px; border-radius: 3px; background: #00f5ff; cursor: pointer; border: 1px solid #fff; }
     .crossfader::-webkit-slider-thumb { height: 38px; width: 22px; background: linear-gradient(180deg, #ff007f 0%, #00f5ff 100%); cursor: pointer; border-radius: 4px; }
+    .seek-slider::-webkit-slider-thumb { height: 16px; width: 16px; border-radius: 50%; background: #ffd000; box-shadow: 0 0 8px #ffd000; cursor: pointer; }
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #08090d; }
     ::-webkit-scrollbar-thumb { background: #1e2436; border-radius: 4px; }
@@ -90,7 +90,7 @@
           <h1 class="font-extrabold text-lg lg:text-xl tracking-tight bg-gradient-to-r from-amber-300 via-pink-400 to-brand-cyan bg-clip-text text-transparent flex items-center gap-2">
             Diwali Dance Party <span class="text-xs uppercase px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-digital">80 Tracks</span>
           </h1>
-          <p class="text-[11px] text-slate-400 font-medium">Auto-Recovery Engine • In-App Song Fixer</p>
+          <p class="text-[11px] text-slate-400 font-medium">Auto-Recovery • Live Pitch & Sync • DJ FX Launchpad</p>
         </div>
       </div>
 
@@ -117,9 +117,9 @@
         </div>
       </div>
 
-      <!-- Actions -->
+      <!-- Header Actions -->
       <div class="flex items-center gap-2 text-[11px] font-digital">
-        <button id="btn-audit" onclick="runCrateHealthCheck()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-950/60 border border-indigo-500/50 text-indigo-300 hover:text-white transition-all shadow-lg" title="Test all 80 videos for dead links or embed restrictions">
+        <button id="btn-audit" onclick="runCrateHealthCheck()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-950/60 border border-indigo-500/50 text-indigo-300 hover:text-white transition-all shadow-lg" title="Test all 80 videos for dead links">
           <i class="fa-solid fa-bolt-lightning text-amber-400"></i>
           <span id="audit-btn-text">Audit All 80</span>
         </button>
@@ -129,13 +129,47 @@
           <span>Auto-DJ: <strong id="auto-dj-status" class="text-brand-lime font-black animate-pulse">ON</strong></span>
         </button>
 
-        <button onclick="openCustomUrlModal()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-cyan-300 border border-cyan-500/30 transition-all">
+        <button onclick="openCustomUrlModal()" class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-cyan-300 border border-cyan-500/40 transition-all font-bold">
           <i class="fa-brands fa-youtube text-red-500"></i> + Add URL
         </button>
       </div>
 
     </div>
   </header>
+
+  <!-- DJ SOUNDBOARD / HYPE FX LAUNCHPAD -->
+  <div class="max-w-7xl mx-auto w-full px-3 lg:px-6 pt-4">
+    <div class="bg-gradient-to-r from-[#121422] via-[#1a1528] to-[#121422] border border-brand-border rounded-2xl p-3 flex flex-wrap items-center justify-between gap-3 shadow-xl">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center">
+          <i class="fa-solid fa-bullhorn text-xs"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-xs uppercase tracking-wider text-slate-200">Party FX Launchpad</h4>
+          <p class="text-[10px] text-slate-400">Click anytime over the music to hype up the dancefloor</p>
+        </div>
+      </div>
+
+      <!-- FX Pads -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button onclick="playDJEffect('airhorn')" class="px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500 border border-amber-500/40 text-amber-300 hover:text-black font-digital text-xs font-bold transition-all active:scale-95 flex items-center gap-1.5 shadow-md">
+          🎺 Air Horn
+        </button>
+        <button onclick="playDJEffect('dhol')" class="px-3 py-1.5 rounded-xl bg-brand-cyan/20 hover:bg-brand-cyan border border-brand-cyan/40 text-cyan-300 hover:text-black font-digital text-xs font-bold transition-all active:scale-95 flex items-center gap-1.5 shadow-md">
+          🥁 Dhol Roll
+        </button>
+        <button onclick="playDJEffect('siren')" class="px-3 py-1.5 rounded-xl bg-brand-magenta/20 hover:bg-brand-magenta border border-brand-magenta/40 text-pink-300 hover:text-white font-digital text-xs font-bold transition-all active:scale-95 flex items-center gap-1.5 shadow-md">
+          🚨 Laser Siren
+        </button>
+        <button onclick="playDJEffect('subdrop')" class="px-3 py-1.5 rounded-xl bg-purple-500/20 hover:bg-purple-600 border border-purple-500/40 text-purple-300 hover:text-white font-digital text-xs font-bold transition-all active:scale-95 flex items-center gap-1.5 shadow-md">
+          💣 808 Sub Boom
+        </button>
+        <button onclick="playDJEffect('scratch')" class="px-3 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-white/10 text-slate-200 font-digital text-xs font-bold transition-all active:scale-95 flex items-center gap-1.5 shadow-md">
+          💽 Vinyl Scratch
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Notification Banner -->
   <div id="deck-alert" class="hidden max-w-7xl mx-auto w-full px-4 pt-3">
@@ -156,6 +190,7 @@
       <!-- DECK A -->
       <section id="deck-container-a" class="lg:col-span-5 bg-brand-card rounded-2xl border-2 border-brand-cyan/40 p-5 pt-6 flex flex-col justify-between shadow-xl shadow-cyan-950/15 relative transition-all duration-500">
         <div>
+          <!-- Top Bar -->
           <div class="flex items-center justify-between pb-3.5 border-b border-brand-border">
             <div class="flex items-center gap-2">
               <span class="px-2.5 py-1 rounded-md bg-brand-cyan text-black font-extrabold text-xs font-digital tracking-wide shadow-md shadow-brand-cyan/30">DECK A</span>
@@ -167,6 +202,7 @@
             </div>
           </div>
 
+          <!-- Metadata -->
           <div class="mt-4 flex items-center justify-between">
             <div class="truncate pr-3">
               <h2 id="deck-a-title" class="text-base font-bold text-white truncate hover:text-brand-cyan transition-colors">#1 Gallan Goodiyaan</h2>
@@ -178,6 +214,7 @@
             </div>
           </div>
 
+          <!-- Turntable Platter -->
           <div class="relative my-6 flex items-center justify-center">
             <div class="w-60 h-60 sm:w-64 sm:h-64 rounded-full p-2.5 bg-[#0a0c12] border-4 border-[#1c2132] shadow-2xl flex items-center justify-center relative">
               <div id="deck-a-rim" class="absolute inset-1 rounded-full border border-brand-cyan/30 transition-all"></div>
@@ -198,36 +235,53 @@
             </div>
           </div>
 
+          <!-- DRAGGABLE SEEK TIMELINE SLIDER -->
           <div class="space-y-1.5">
             <div class="flex justify-between text-[10px] text-slate-400 font-digital">
               <span id="deck-a-cue-in">IN 00:10</span>
-              <span id="deck-a-cue-drop" class="text-amber-400 font-bold">CUE HOOK</span>
+              <span class="text-amber-400 font-bold">DRAG SLIDER TO SCRUB</span>
               <span id="deck-a-cue-out">OUT 02:40</span>
             </div>
-            <div class="relative w-full h-3 bg-zinc-900 rounded-full overflow-hidden cursor-pointer border border-white/10" id="deck-a-timeline-wrap">
-              <div id="deck-a-progress" class="h-full bg-gradient-to-r from-cyan-600 to-brand-cyan w-0% transition-all duration-100"></div>
-              <div id="deck-a-drop-pin" class="absolute top-0 bottom-0 w-1 bg-amber-400" style="left: 30%;" title="Hook Point"></div>
-              <div id="deck-a-out-pin" class="absolute top-0 bottom-0 w-1 bg-rose-500" style="left: 95%;" title="Fade Point"></div>
+            <div class="relative w-full flex items-center">
+              <input type="range" id="deck-a-seek" min="0" max="160" value="0" step="0.5" class="seek-slider w-full h-2 rounded-lg cursor-pointer accent-amber-400">
             </div>
           </div>
         </div>
 
-        <div class="mt-6 pt-4 border-t border-brand-border space-y-4">
-          <div class="flex items-center justify-between gap-3">
-            <button id="btn-cue-a" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5 transition-all">
-              <i class="fa-solid fa-backward-step mr-1.5"></i> CUE
+        <!-- Transport, Fast-Forward/Rewind & Pitch -->
+        <div class="mt-5 pt-4 border-t border-brand-border space-y-3.5">
+          <div class="flex items-center justify-between gap-2">
+            <!-- Rewind 10s -->
+            <button id="btn-rw-a" class="px-2.5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-300 font-digital text-xs border border-white/5" title="Rewind 10 Seconds">
+              <i class="fa-solid fa-backward"></i> -10s
             </button>
+
+            <!-- CUE Button -->
+            <button id="btn-cue-a" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5 transition-all">
+              CUE
+            </button>
+
+            <!-- PLAY / PAUSE -->
             <button id="btn-play-a" class="flex-[2] py-3 rounded-xl bg-gradient-to-r from-brand-cyan to-blue-500 hover:from-cyan-400 hover:to-blue-400 active:scale-95 text-black font-extrabold text-sm uppercase font-digital shadow-lg shadow-brand-cyan/25 flex items-center justify-center gap-2 transition-all">
               <i class="fa-solid fa-play text-base" id="icon-play-a"></i> PLAY
             </button>
-            <button id="btn-sync-a" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5 transition-all">
+
+            <!-- Forward 10s -->
+            <button id="btn-ff-a" class="px-2.5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-300 font-digital text-xs border border-white/5" title="Forward 10 Seconds">
+              +10s <i class="fa-solid fa-forward"></i>
+            </button>
+
+            <!-- SYNC -->
+            <button id="btn-sync-a" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-amber-400 font-bold text-xs uppercase font-digital border border-amber-500/30 transition-all" title="Instantly matches speed to Deck B">
               <i class="fa-solid fa-bolt mr-1"></i> SYNC
             </button>
           </div>
+
+          <!-- Working Pitch / Speed Slider -->
           <div class="flex items-center gap-3 bg-black/40 px-3 py-2 rounded-xl border border-white/5">
-            <span class="text-[10px] font-digital text-slate-400">PITCH</span>
-            <input type="range" id="deck-a-tempo" min="0.90" max="1.10" step="0.01" value="1.00" class="w-full h-1.5">
-            <span id="deck-a-tempo-val" class="font-digital text-xs text-brand-cyan w-10 text-right">0.0%</span>
+            <span class="text-[10px] font-digital text-slate-400">PITCH SPEED</span>
+            <input type="range" id="deck-a-tempo" min="0.90" max="1.10" step="0.01" value="1.00" class="w-full h-1.5 accent-cyan-400">
+            <span id="deck-a-tempo-val" class="font-digital text-xs text-brand-cyan w-12 text-right">0.0%</span>
           </div>
         </div>
       </section>
@@ -287,6 +341,7 @@
       <!-- DECK B -->
       <section id="deck-container-b" class="lg:col-span-5 bg-brand-card rounded-2xl border-2 border-brand-magenta/30 p-5 pt-6 flex flex-col justify-between shadow-xl shadow-pink-950/15 relative transition-all duration-500">
         <div>
+          <!-- Top Bar -->
           <div class="flex items-center justify-between pb-3.5 border-b border-brand-border">
             <div class="flex items-center gap-2">
               <span class="px-2.5 py-1 rounded-md bg-brand-magenta text-white font-extrabold text-xs font-digital tracking-wide shadow-md shadow-brand-magenta/30">DECK B</span>
@@ -298,6 +353,7 @@
             </div>
           </div>
 
+          <!-- Metadata -->
           <div class="mt-4 flex items-center justify-between">
             <div class="truncate pr-3">
               <h2 id="deck-b-title" class="text-base font-bold text-white truncate hover:text-brand-magenta transition-colors">#2 London Thumakda</h2>
@@ -309,6 +365,7 @@
             </div>
           </div>
 
+          <!-- Turntable Platter -->
           <div class="relative my-6 flex items-center justify-center">
             <div class="w-60 h-60 sm:w-64 sm:h-64 rounded-full p-2.5 bg-[#0a0c12] border-4 border-[#1c2132] shadow-2xl flex items-center justify-center relative">
               <div id="deck-b-rim" class="absolute inset-1 rounded-full border border-brand-magenta/30 transition-all"></div>
@@ -329,36 +386,53 @@
             </div>
           </div>
 
+          <!-- DRAGGABLE SEEK TIMELINE SLIDER -->
           <div class="space-y-1.5">
             <div class="flex justify-between text-[10px] text-slate-400 font-digital">
               <span id="deck-b-cue-in">IN 00:08</span>
-              <span id="deck-b-cue-drop" class="text-amber-400 font-bold">CLAP BEAT</span>
+              <span class="text-amber-400 font-bold">DRAG SLIDER TO SCRUB</span>
               <span id="deck-b-cue-out">OUT 02:33</span>
             </div>
-            <div class="relative w-full h-3 bg-zinc-900 rounded-full overflow-hidden cursor-pointer border border-white/10" id="deck-b-timeline-wrap">
-              <div id="deck-b-progress" class="h-full bg-gradient-to-r from-pink-600 to-brand-magenta w-0% transition-all duration-100"></div>
-              <div id="deck-b-drop-pin" class="absolute top-0 bottom-0 w-1 bg-amber-400" style="left: 30%;" title="Hook Point"></div>
-              <div id="deck-b-out-pin" class="absolute top-0 bottom-0 w-1 bg-rose-500" style="left: 95%;" title="Fade Point"></div>
+            <div class="relative w-full flex items-center">
+              <input type="range" id="deck-b-seek" min="0" max="153" value="0" step="0.5" class="seek-slider w-full h-2 rounded-lg cursor-pointer accent-amber-400">
             </div>
           </div>
         </div>
 
-        <div class="mt-6 pt-4 border-t border-brand-border space-y-4">
-          <div class="flex items-center justify-between gap-3">
-            <button id="btn-cue-b" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5 transition-all">
-              <i class="fa-solid fa-backward-step mr-1.5"></i> CUE
+        <!-- Transport, Fast-Forward/Rewind & Pitch -->
+        <div class="mt-5 pt-4 border-t border-brand-border space-y-3.5">
+          <div class="flex items-center justify-between gap-2">
+            <!-- Rewind 10s -->
+            <button id="btn-rw-b" class="px-2.5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-300 font-digital text-xs border border-white/5" title="Rewind 10 Seconds">
+              <i class="fa-solid fa-backward"></i> -10s
             </button>
+
+            <!-- CUE Button -->
+            <button id="btn-cue-b" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5 transition-all">
+              CUE
+            </button>
+
+            <!-- PLAY / PAUSE -->
             <button id="btn-play-b" class="flex-[2] py-3 rounded-xl bg-gradient-to-r from-brand-magenta to-rose-600 hover:from-pink-500 hover:to-rose-500 active:scale-95 text-white font-extrabold text-sm uppercase font-digital shadow-lg shadow-brand-magenta/25 flex items-center justify-center gap-2 transition-all">
               <i class="fa-solid fa-play text-base" id="icon-play-b"></i> PLAY
             </button>
-            <button id="btn-sync-b" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5 transition-all">
+
+            <!-- Forward 10s -->
+            <button id="btn-ff-b" class="px-2.5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-300 font-digital text-xs border border-white/5" title="Forward 10 Seconds">
+              +10s <i class="fa-solid fa-forward"></i>
+            </button>
+
+            <!-- SYNC -->
+            <button id="btn-sync-b" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-amber-400 font-bold text-xs uppercase font-digital border border-amber-500/30 transition-all" title="Instantly matches speed to Deck A">
               <i class="fa-solid fa-bolt mr-1"></i> SYNC
             </button>
           </div>
+
+          <!-- Working Pitch / Speed Slider -->
           <div class="flex items-center gap-3 bg-black/40 px-3 py-2 rounded-xl border border-white/5">
-            <span class="text-[10px] font-digital text-slate-400">PITCH</span>
-            <input type="range" id="deck-b-tempo" min="0.90" max="1.10" step="0.01" value="1.00" class="w-full h-1.5">
-            <span id="deck-b-tempo-val" class="font-digital text-xs text-brand-magenta w-10 text-right">0.0%</span>
+            <span class="text-[10px] font-digital text-slate-400">PITCH SPEED</span>
+            <input type="range" id="deck-b-tempo" min="0.90" max="1.10" step="0.01" value="1.00" class="w-full h-1.5 accent-pink-500">
+            <span id="deck-b-tempo-val" class="font-digital text-xs text-brand-magenta w-12 text-right">0.0%</span>
           </div>
         </div>
       </section>
@@ -374,7 +448,7 @@
           </div>
           <div>
             <h3 class="font-bold text-base text-white">Full Diwali Party Playlist (80 Songs)</h3>
-            <p class="text-xs text-slate-400">Click any <span class="text-rose-400 font-bold">🔴 Check</span> badge to quickly fix and replace that song!</p>
+            <p class="text-xs text-slate-400">Click any <span class="text-rose-400 font-bold">🔴 Fix</span> badge to instantly swap broken links!</p>
           </div>
         </div>
 
@@ -431,43 +505,49 @@
       </div>
 
       <div class="mt-4 space-y-3">
-        <p class="text-xs text-slate-300">
-          Step 1: Click to open working YouTube videos for this song:
-        </p>
+        <p class="text-xs text-slate-300">1. Click to search official/working audio on YouTube:</p>
         <a id="fix-modal-yt-search-btn" href="#" target="_blank" class="w-full py-2.5 px-3 rounded-xl bg-red-600/20 hover:bg-red-600 text-red-300 hover:text-white border border-red-500/40 text-xs font-bold flex items-center justify-center gap-2 transition-all">
           <i class="fa-brands fa-youtube"></i> Search Working Audio on YouTube
         </a>
 
-        <p class="text-xs text-slate-300 pt-2">
-          Step 2: Copy the link from YouTube and paste it here:
-        </p>
+        <p class="text-xs text-slate-300 pt-2">2. Paste the video link or ID here:</p>
         <input type="text" id="fix-modal-input" placeholder="Paste YouTube link or ID..." class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-cyan">
-
         <input type="hidden" id="fix-modal-track-id">
 
-        <div class="pt-2 flex gap-2">
-          <button onclick="saveFixedSong()" class="w-full py-2.5 rounded-xl bg-brand-cyan hover:bg-cyan-400 text-black font-digital font-bold text-xs active:scale-95 transition-all">
-            ✓ Save & Fix Song
-          </button>
-        </div>
+        <button onclick="saveFixedSong()" class="w-full py-2.5 rounded-xl bg-brand-cyan hover:bg-cyan-400 text-black font-digital font-bold text-xs active:scale-95 transition-all">
+          ✓ Save & Fix Song
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Custom URL Modal -->
+  <!-- UNIVERSAL CUSTOM URL MODAL -->
   <div id="custom-url-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-[#12141f] border border-brand-border rounded-2xl max-w-md w-full p-6 shadow-2xl">
       <div class="flex items-center justify-between pb-3 border-b border-brand-border">
         <h3 class="font-bold text-white text-sm flex items-center gap-2">
-          <i class="fa-brands fa-youtube text-red-500"></i> Load Custom YouTube Track
+          <i class="fa-brands fa-youtube text-red-500"></i> Load YouTube Track On-The-Fly
         </h3>
         <button onclick="closeCustomUrlModal()" class="text-slate-400 hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="mt-4 space-y-3">
-        <input type="text" id="custom-yt-input" placeholder="Paste YouTube link here..." class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-cyan">
+        <div>
+          <label class="block text-xs font-digital text-slate-400 mb-1">Paste any YouTube URL or Video ID</label>
+          <input type="text" id="custom-yt-input" placeholder="e.g. https://youtu.be/... or watch?v=..." class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-cyan">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-digital text-slate-400 mb-1">Track Title (Optional)</label>
+            <input type="text" id="custom-title-input" placeholder="Party Request" class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white">
+          </div>
+          <div>
+            <label class="block text-xs font-digital text-slate-400 mb-1">BPM (Default 128)</label>
+            <input type="number" id="custom-bpm-input" value="128" class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white">
+          </div>
+        </div>
         <div class="pt-3 flex gap-2">
-          <button onclick="submitCustomTrack('A')" class="flex-1 py-2 rounded-xl bg-brand-cyan text-black font-digital font-bold text-xs hover:bg-cyan-400 transition-all">Load to Deck A</button>
-          <button onclick="submitCustomTrack('B')" class="flex-1 py-2 rounded-xl bg-brand-magenta text-white font-digital font-bold text-xs hover:bg-pink-600 transition-all">Load to Deck B</button>
+          <button onclick="submitCustomTrack('A')" class="flex-1 py-2.5 rounded-xl bg-brand-cyan text-black font-digital font-bold text-xs hover:bg-cyan-400 transition-all">Load & Play Deck A</button>
+          <button onclick="submitCustomTrack('B')" class="flex-1 py-2.5 rounded-xl bg-brand-magenta text-white font-digital font-bold text-xs hover:bg-pink-600 transition-all">Cue into Deck B</button>
         </div>
       </div>
     </div>
@@ -567,7 +647,7 @@
       { num: 80, id: "trk_080", phase: 5, title: "Shava Shava", artist: "Kabhi Khushi Kabhie Gham...", type: "Bollywood", ytId: "ca0_h2G7Eeg", inTime: "0:20", outTime: "3:05", cuePoints: { introStart: 0, mixInPoint: 20, dropTimestamp: 60, mixOutPoint: 185 }, cueNote: "Finale: family singalong & Diwali wishes moment. Let it play out!" }
     ];
 
-    // Load any user fixes saved in browser localStorage
+    // Local Storage Cache
     const savedOverrides = JSON.parse(localStorage.getItem('diwali_dj_yt_overrides') || '{}');
     PARTY_TRACKS.forEach((t) => {
       if (savedOverrides[t.id]) {
@@ -587,66 +667,107 @@
     const djState = {
       activeMaster: 'A',
       crossfader: 0,
-      deckA: { track: PARTY_TRACKS[0], player: null, isPlaying: false, currentTime: 0, duration: PARTY_TRACKS[0].duration, volume: 100 },
-      deckB: { track: PARTY_TRACKS[1], player: null, isPlaying: false, currentTime: 0, duration: PARTY_TRACKS[1].duration, volume: 0 }
+      audioCtx: null,
+      deckA: { track: PARTY_TRACKS[0], player: null, isPlaying: false, currentTime: 0, duration: PARTY_TRACKS[0].duration, volume: 100, pitch: 1.0 },
+      deckB: { track: PARTY_TRACKS[1], player: null, isPlaying: false, currentTime: 0, duration: PARTY_TRACKS[1].duration, volume: 0, pitch: 1.0 }
     };
 
-    // Real-time YouTube probe
-    async function runCrateHealthCheck() {
-      const btnText = document.getElementById('audit-btn-text');
-      btnText.textContent = "Auditing (0/80)...";
-      let passed = 0, failed = 0;
+    /* =====================================================================
+       WEB AUDIO SYNTHESIZED DJ SOUNDBOARD (AIR HORN, DHOL, SIREN, SUB, SCRATCH)
+       ===================================================================== */
+    function initAudioContext() {
+      if (!djState.audioCtx) djState.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (djState.audioCtx.state === 'suspended') djState.audioCtx.resume();
+    }
 
-      for (let i = 0; i < PARTY_TRACKS.length; i++) {
-        const track = PARTY_TRACKS[i];
-        btnText.textContent = `Auditing (${i + 1}/80)...`;
-        const isValid = await checkYouTubeVideoAvailable(track.ytId);
-        track.healthStatus = isValid ? 'valid' : 'blocked';
-        if (isValid) passed++; else failed++;
-        updateTableRowStatus(track.id, track.healthStatus);
+    function playDJEffect(fxType) {
+      initAudioContext();
+      const ctx = djState.audioCtx;
+      const now = ctx.currentTime;
+
+      if (fxType === 'airhorn') {
+        // Classic Triple-Burst Air Horn
+        [0, 0.22, 0.44].forEach((delay) => {
+          [293.66, 369.99, 440.0].forEach((freq) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(freq, now + delay);
+            gain.gain.setValueAtTime(0.18, now + delay);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + delay + 0.18);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now + delay);
+            osc.stop(now + delay + 0.18);
+          });
+        });
+      } else if (fxType === 'dhol') {
+        // Punjabi Dhol Fast Crescendo Roll
+        for (let i = 0; i < 7; i++) {
+          const t = now + i * 0.08;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(140 + i * 15, t);
+          osc.frequency.exponentialRampToValueAtTime(55, t + 0.07);
+          gain.gain.setValueAtTime(0.3 + i * 0.08, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.07);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(t);
+          osc.stop(t + 0.07);
+        }
+      } else if (fxType === 'siren') {
+        // High-Pitch Reggae/EDM Laser Riser Siren
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(550, now);
+        osc.frequency.linearRampToValueAtTime(1400, now + 0.6);
+        osc.frequency.linearRampToValueAtTime(550, now + 1.2);
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.25);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 1.25);
+      } else if (fxType === 'subdrop') {
+        // Deep 808 Sub Boom
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(130, now);
+        osc.frequency.exponentialRampToValueAtTime(32, now + 1.2);
+        gain.gain.setValueAtTime(0.6, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 1.2);
+      } else if (fxType === 'scratch') {
+        // Vinyl Rewind Tape Scratch
+        const bufferSize = ctx.sampleRate * 0.35;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(300, now);
+        filter.frequency.exponentialRampToValueAtTime(2600, now + 0.15);
+        filter.frequency.exponentialRampToValueAtTime(200, now + 0.35);
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(0.35, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+        noise.start(now);
       }
-      btnText.innerHTML = `✓ ${passed} Ready <span class="text-rose-400">(${failed} to fix)</span>`;
-      renderPartyCrate();
     }
 
-    function checkYouTubeVideoAvailable(ytId) {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = function() {
-          if (this.naturalWidth === 120 && this.naturalHeight === 90) resolve(false);
-          else resolve(true);
-        };
-        img.onerror = () => resolve(false);
-        img.src = `https://img.youtube.com/vi/${ytId}/mqdefault.jpg`;
-      });
-    }
-
-    function updateTableRowStatus(trackId, status) {
-      const el = document.getElementById(`status-${trackId}`);
-      if (!el) return;
-      if (status === 'valid') {
-        el.innerHTML = `<span onclick="openFixModal('${trackId}')" class="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 cursor-pointer hover:bg-emerald-500/40" title="Click to edit link">🟢 Ready</span>`;
-      } else {
-        el.innerHTML = `<span onclick="openFixModal('${trackId}')" class="px-2 py-0.5 rounded text-[9px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30 cursor-pointer hover:bg-rose-500/40 animate-pulse" title="Click to fix link">🔴 Fix</span>`;
-      }
-    }
-
-    function toggleAutoDJ() {
-      autoDjActive = !autoDjActive;
-      const statusEl = document.getElementById('auto-dj-status');
-      const btn = document.getElementById('btn-auto-dj');
-      if (autoDjActive) {
-        statusEl.textContent = 'ON';
-        statusEl.className = 'text-brand-lime font-black animate-pulse';
-        btn.classList.add('border-brand-lime', 'bg-emerald-950/40');
-      } else {
-        statusEl.textContent = 'OFF';
-        statusEl.className = 'text-rose-400 font-bold';
-        btn.classList.remove('border-brand-lime', 'bg-emerald-950/40');
-      }
-    }
-
-    // Embed API
+    // YouTube API
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     document.getElementsByTagName('script')[0].parentNode.insertBefore(tag, document.getElementsByTagName('script')[0]);
@@ -686,13 +807,12 @@
       const badTrack = (deckLetter === 'A') ? djState.deckA.track : djState.deckB.track;
       
       alertBox.classList.remove('hidden');
-      alertText.textContent = `Song #${badTrack.num} (${badTrack.title}) blocked by label. Auto-skipping in 2s...`;
+      alertText.textContent = `Song #${badTrack.num} (${badTrack.title}) blocked by record label. Auto-skipping in 2s...`;
 
       setTimeout(() => {
         alertBox.classList.add('hidden');
-        if (deckLetter === 'A') {
-          executeQuickCrossfade();
-        } else {
+        if (deckLetter === 'A') executeQuickCrossfade();
+        else {
           const nextIndex = (PARTY_TRACKS.findIndex(t => t.id === badTrack.id) + 1) % PARTY_TRACKS.length;
           loadTrackToDeck('B', PARTY_TRACKS[nextIndex].id);
         }
@@ -713,11 +833,15 @@
 
       document.getElementById(`${prefix}-title`).textContent = `#${t.num} ${t.title}`;
       document.getElementById(`${prefix}-artist`).textContent = t.artist;
-      document.getElementById(`${prefix}-bpm`).textContent = `${t.audioProfile.bpm} BPM`;
+      document.getElementById(`${prefix}-bpm`).textContent = `${Math.round(t.audioProfile.bpm * deck.pitch)} BPM`;
       document.getElementById(`${prefix}-camelot`).textContent = `PHASE ${t.phase}`;
       document.getElementById(`${prefix}-duration`).textContent = ` / ${formatTime(t.cuePoints.mixOutPoint - t.cuePoints.mixInPoint)}`;
       document.getElementById(`${prefix}-cue-in`).textContent = `IN ${t.inTime}`;
       document.getElementById(`${prefix}-cue-out`).textContent = `OUT ${t.outTime}`;
+      
+      const seekEl = document.getElementById(`${prefix}-seek`);
+      seekEl.max = t.cuePoints.mixOutPoint;
+      seekEl.value = deck.currentTime;
     }
 
     function updateDeckPlayingVisuals(deckLetter, isPlaying) {
@@ -772,10 +896,10 @@
           </td>
           <td class="py-2.5 text-right">
             <div class="flex items-center justify-end gap-1.5">
-              <button onclick="openFixModal('${track.id}')" title="Fix/Replace YouTube link" class="p-1 px-1.5 rounded bg-zinc-800 hover:bg-amber-500 hover:text-black text-amber-300 border border-white/5 transition-all text-[10px]">
+              <button onclick="openFixModal('${track.id}')" title="Fix YouTube link" class="p-1 px-1.5 rounded bg-zinc-800 hover:bg-amber-500 hover:text-black text-amber-300 border border-white/5 transition-all text-[10px]">
                 <i class="fa-solid fa-wrench"></i>
               </button>
-              <button onclick="loadTrackToDeck('A', '${track.id}')" class="px-2 py-1 rounded bg-zinc-800 hover:bg-brand-cyan hover:text-black font-digital text-[10px] font-bold text-cyan-300 transition-all active:scale-95">LOAD A</button>
+              <button onclick="loadTrackToDeck('A', '${track.id}', true)" class="px-2 py-1 rounded bg-zinc-800 hover:bg-brand-cyan hover:text-black font-digital text-[10px] font-bold text-cyan-300 transition-all active:scale-95">LOAD A</button>
               <button onclick="loadTrackToDeck('B', '${track.id}')" class="px-2 py-1 rounded bg-zinc-800 hover:bg-brand-magenta hover:text-white font-digital text-[10px] font-bold text-pink-300 transition-all active:scale-95">LOAD B</button>
             </div>
           </td>
@@ -787,33 +911,75 @@
     function filterPhase(phase) {
       selectedPhase = phase;
       document.querySelectorAll('.phase-btn').forEach(btn => {
-        if (btn.dataset.phase === String(phase)) {
-          btn.className = "phase-btn px-3 py-1 rounded-lg bg-brand-cyan text-black font-bold";
-        } else {
-          btn.className = "phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white";
-        }
+        if (btn.dataset.phase === String(phase)) btn.className = "phase-btn px-3 py-1 rounded-lg bg-brand-cyan text-black font-bold";
+        else btn.className = "phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white";
       });
       renderPartyCrate();
     }
 
-    // IN-APP FIX MODAL LOGIC
+    function toggleAutoDJ() {
+      autoDjActive = !autoDjActive;
+      const statusEl = document.getElementById('auto-dj-status');
+      const btn = document.getElementById('btn-auto-dj');
+      if (autoDjActive) {
+        statusEl.textContent = 'ON';
+        statusEl.className = 'text-brand-lime font-black animate-pulse';
+        btn.classList.add('border-brand-lime', 'bg-emerald-950/40');
+      } else {
+        statusEl.textContent = 'OFF';
+        statusEl.className = 'text-rose-400 font-bold';
+        btn.classList.remove('border-brand-lime', 'bg-emerald-950/40');
+      }
+    }
+
+    // Crate Health Check
+    async function runCrateHealthCheck() {
+      const btnText = document.getElementById('audit-btn-text');
+      btnText.textContent = "Auditing (0/80)...";
+      let passed = 0, failed = 0;
+
+      for (let i = 0; i < PARTY_TRACKS.length; i++) {
+        const track = PARTY_TRACKS[i];
+        btnText.textContent = `Auditing (${i + 1}/80)...`;
+        const isValid = await checkYouTubeVideoAvailable(track.ytId);
+        track.healthStatus = isValid ? 'valid' : 'blocked';
+        if (isValid) passed++; else failed++;
+        updateTableRowStatus(track.id, track.healthStatus);
+      }
+      btnText.innerHTML = `✓ ${passed} Ready <span class="text-rose-400">(${failed} to fix)</span>`;
+      renderPartyCrate();
+    }
+
+    function checkYouTubeVideoAvailable(ytId) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = function() {
+          if (this.naturalWidth === 120 && this.naturalHeight === 90) resolve(false);
+          else resolve(true);
+        };
+        img.onerror = () => resolve(false);
+        img.src = `https://img.youtube.com/vi/${ytId}/mqdefault.jpg`;
+      });
+    }
+
+    function updateTableRowStatus(trackId, status) {
+      const el = document.getElementById(`status-${trackId}`);
+      if (!el) return;
+      if (status === 'valid') el.innerHTML = `<span onclick="openFixModal('${trackId}')" class="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 cursor-pointer hover:bg-emerald-500/40">🟢 Ready</span>`;
+      else el.innerHTML = `<span onclick="openFixModal('${trackId}')" class="px-2 py-0.5 rounded text-[9px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30 cursor-pointer hover:bg-rose-500/40 animate-pulse">🔴 Fix</span>`;
+    }
+
+    // In-App Fix Modal
     function openFixModal(trackId) {
       const track = PARTY_TRACKS.find(t => t.id === trackId);
       if (!track) return;
-
       document.getElementById('fix-modal-track-id').value = trackId;
       document.getElementById('fix-modal-title').textContent = `Fix #${track.num}: ${track.title}`;
       document.getElementById('fix-modal-input').value = `https://www.youtube.com/watch?v=${track.ytId}`;
-      
-      const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(track.title + ' ' + track.artist + ' audio')}`;
-      document.getElementById('fix-modal-yt-search-btn').href = searchUrl;
-
+      document.getElementById('fix-modal-yt-search-btn').href = `https://www.youtube.com/results?search_query=${encodeURIComponent(track.title + ' ' + track.artist + ' audio')}`;
       document.getElementById('fix-song-modal').classList.remove('hidden');
     }
-
-    function closeFixModal() {
-      document.getElementById('fix-song-modal').classList.add('hidden');
-    }
+    function closeFixModal() { document.getElementById('fix-song-modal').classList.add('hidden'); }
 
     function saveFixedSong() {
       const trackId = document.getElementById('fix-modal-track-id').value;
@@ -821,19 +987,16 @@
       const track = PARTY_TRACKS.find(t => t.id === trackId);
       if (!track || !urlInput) return;
 
-      let vid = urlInput;
-      const match = urlInput.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
-      if (match) vid = match[1];
+      const vid = extractYouTubeId(urlInput);
+      if (!vid) { alert("Invalid YouTube URL or ID"); return; }
 
       track.ytId = vid;
       track.healthStatus = 'valid';
 
-      // Save permanently in local browser memory!
       const saved = JSON.parse(localStorage.getItem('diwali_dj_yt_overrides') || '{}');
       saved[track.id] = vid;
       localStorage.setItem('diwali_dj_yt_overrides', JSON.stringify(saved));
 
-      // Reload into active deck if it was currently selected
       if (djState.deckA.track.id === track.id) loadTrackToDeck('A', track.id);
       if (djState.deckB.track.id === track.id) loadTrackToDeck('B', track.id);
 
@@ -841,7 +1004,18 @@
       closeFixModal();
     }
 
-    window.loadTrackToDeck = function(deckLetter, trackId) {
+    // Universal YouTube ID Extractor
+    function extractYouTubeId(url) {
+      if (!url) return null;
+      url = url.trim();
+      if (/^[a-zA-Z0-9_-]{11}$/.test(url)) return url;
+      const regExp = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/|live\/))([a-zA-Z0-9_-]{11})/;
+      const match = url.match(regExp);
+      return match ? match[1] : null;
+    }
+
+    // Load Track to Deck
+    window.loadTrackToDeck = function(deckLetter, trackId, autoPlay = false) {
       const track = PARTY_TRACKS.find(t => t.id === trackId);
       if (!track) return;
 
@@ -852,8 +1026,14 @@
 
       updateDeckUI(deckLetter);
 
-      if (deck.player && deck.player.cueVideoById) {
-        deck.player.cueVideoById({ videoId: track.ytId, startSeconds: track.cuePoints.mixInPoint });
+      if (deck.player) {
+        if (autoPlay) {
+          deck.player.loadVideoById({ videoId: track.ytId, startSeconds: track.cuePoints.mixInPoint });
+          deck.isPlaying = true;
+          updateDeckPlayingVisuals(deckLetter, true);
+        } else {
+          deck.player.cueVideoById({ videoId: track.ytId, startSeconds: track.cuePoints.mixInPoint });
+        }
       }
     };
 
@@ -875,14 +1055,56 @@
       }
     }
 
+    // PITCH & SPEED CONTROLLER
+    function applyPitch(deckLetter, rate) {
+      const deck = (deckLetter === 'A') ? djState.deckA : djState.deckB;
+      deck.pitch = parseFloat(rate);
+      
+      const valEl = document.getElementById(`deck-${deckLetter.toLowerCase()}-tempo-val`);
+      const pct = Math.round((deck.pitch - 1.0) * 100);
+      valEl.textContent = `${pct > 0 ? '+' : ''}${pct}%`;
+
+      if (deck.player && deck.player.setPlaybackRate) {
+        deck.player.setPlaybackRate(deck.pitch);
+      }
+      updateDeckUI(deckLetter);
+    }
+
+    // SYNC BEATMATCH CONTROLLER
+    function applySync(deckLetter) {
+      const thisDeck = (deckLetter === 'A') ? djState.deckA : djState.deckB;
+      const otherDeck = (deckLetter === 'A') ? djState.deckB : djState.deckA;
+
+      const targetBpm = otherDeck.track.audioProfile.bpm * otherDeck.pitch;
+      const thisBpm = thisDeck.track.audioProfile.bpm;
+
+      const neededRatio = Math.max(0.90, Math.min(1.10, targetBpm / thisBpm));
+      document.getElementById(`deck-${deckLetter.toLowerCase()}-tempo`).value = neededRatio.toFixed(2);
+      applyPitch(deckLetter, neededRatio);
+    }
+
+    // SEEK / REWIND / FORWARD CONTROLLERS
+    function seekDeck(deckLetter, targetSeconds) {
+      const deck = (deckLetter === 'A') ? djState.deckA : djState.deckB;
+      const clamped = Math.max(0, Math.min(deck.track.cuePoints.mixOutPoint, targetSeconds));
+      deck.currentTime = clamped;
+      if (deck.player && deck.player.seekTo) {
+        deck.player.seekTo(clamped, true);
+      }
+      updateDeckUI(deckLetter);
+    }
+
+    function skipDeck(deckLetter, offset) {
+      const deck = (deckLetter === 'A') ? djState.deckA : djState.deckB;
+      seekDeck(deckLetter, deck.currentTime + offset);
+    }
+
     function applyCrossfade(value) {
       djState.crossfader = value;
       const volA = Math.cos((value / 100) * 0.5 * Math.PI);
       const volB = Math.sin((value / 100) * 0.5 * Math.PI);
-
       djState.deckA.volume = Math.round(volA * 100);
       djState.deckB.volume = Math.round(volB * 100);
-
       if (djState.deckA.player && djState.deckA.player.setVolume) djState.deckA.player.setVolume(djState.deckA.volume);
       if (djState.deckB.player && djState.deckB.player.setVolume) djState.deckB.player.setVolume(djState.deckB.volume);
     }
@@ -931,13 +1153,22 @@
       }, 400);
     }
 
+    // MAIN TICK LOOP
     setInterval(() => {
       if (djState.deckA.player && djState.deckA.player.getCurrentTime) {
         const timeA = djState.deckA.player.getCurrentTime();
         if (timeA && !isNaN(timeA)) {
           djState.deckA.currentTime = timeA;
           document.getElementById('deck-a-time').textContent = formatTime(timeA);
-          document.getElementById('deck-a-progress').style.width = `${Math.min((timeA / djState.deckA.duration) * 100, 100)}%`;
+          document.getElementById('deck-a-seek').value = timeA;
+        }
+      }
+      if (djState.deckB.player && djState.deckB.player.getCurrentTime) {
+        const timeB = djState.deckB.player.getCurrentTime();
+        if (timeB && !isNaN(timeB)) {
+          djState.deckB.currentTime = timeB;
+          document.getElementById('deck-b-time').textContent = formatTime(timeB);
+          document.getElementById('deck-b-seek').value = timeB;
         }
       }
 
@@ -955,55 +1186,78 @@
       }
     }, 250);
 
+    // Universal URL Modal
     function openCustomUrlModal() { document.getElementById('custom-url-modal').classList.remove('hidden'); }
     function closeCustomUrlModal() { document.getElementById('custom-url-modal').classList.add('hidden'); }
+
     function submitCustomTrack(deckLetter) {
       const urlInput = document.getElementById('custom-yt-input').value.trim();
-      if (!urlInput) return;
-      let vid = urlInput;
-      const match = urlInput.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
-      if (match) vid = match[1];
+      const titleInput = document.getElementById('custom-title-input').value.trim() || "Party Request";
+      const bpmInput = parseInt(document.getElementById('custom-bpm-input').value) || 128;
+
+      if (!urlInput) { alert("Please paste a YouTube link or ID"); return; }
+      const vid = extractYouTubeId(urlInput);
+      if (!vid) { alert("Could not read YouTube ID from that link. Please paste a standard YouTube video link."); return; }
 
       const customTrack = {
         num: PARTY_TRACKS.length + 1,
         id: "custom_" + Date.now(),
         phase: 3,
-        title: "Custom YouTube Audio",
-        artist: "User Added",
+        title: titleInput,
+        artist: "Guest Request",
         type: "Custom",
         ytId: vid,
         inTime: "0:00",
         outTime: "3:00",
         cuePoints: { introStart: 0, mixInPoint: 0, dropTimestamp: 45, mixOutPoint: 180 },
-        cueNote: "User loaded custom track."
+        cueNote: "Guest party request",
+        duration: 190,
+        artwork: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&q=80",
+        audioProfile: { bpm: bpmInput, camelotKey: "4A", energyLevel: "Peak" },
+        healthStatus: "valid"
       };
+
       PARTY_TRACKS.unshift(customTrack);
-      loadTrackToDeck(deckLetter, customTrack.id);
       renderPartyCrate();
+      loadTrackToDeck(deckLetter, customTrack.id, deckLetter === 'A');
       closeCustomUrlModal();
     }
 
+    // ALL EVENT LISTENERS WIRED HERE
     document.addEventListener('DOMContentLoaded', () => {
       updateDeckUI('A');
       updateDeckUI('B');
       renderPartyCrate();
 
+      // Play & Pause
       document.getElementById('btn-play-a').addEventListener('click', () => togglePlay('A'));
       document.getElementById('btn-play-b').addEventListener('click', () => togglePlay('B'));
       document.getElementById('vinyl-a').addEventListener('click', () => togglePlay('A'));
       document.getElementById('vinyl-b').addEventListener('click', () => togglePlay('B'));
 
-      document.getElementById('btn-cue-a').addEventListener('click', () => {
-        const inPt = djState.deckA.track.cuePoints.mixInPoint;
-        djState.deckA.currentTime = inPt;
-        if (djState.deckA.player && djState.deckA.player.seekTo) djState.deckA.player.seekTo(inPt, true);
-      });
-      document.getElementById('btn-cue-b').addEventListener('click', () => {
-        const inPt = djState.deckB.track.cuePoints.mixInPoint;
-        djState.deckB.currentTime = inPt;
-        if (djState.deckB.player && djState.deckB.player.seekTo) djState.deckB.player.seekTo(inPt, true);
-      });
+      // Cue
+      document.getElementById('btn-cue-a').addEventListener('click', () => seekDeck('A', djState.deckA.track.cuePoints.mixInPoint));
+      document.getElementById('btn-cue-b').addEventListener('click', () => seekDeck('B', djState.deckB.track.cuePoints.mixInPoint));
 
+      // Fast-Forward & Rewind (+10s / -10s)
+      document.getElementById('btn-rw-a').addEventListener('click', () => skipDeck('A', -10));
+      document.getElementById('btn-ff-a').addEventListener('click', () => skipDeck('A', 10));
+      document.getElementById('btn-rw-b').addEventListener('click', () => skipDeck('B', -10));
+      document.getElementById('btn-ff-b').addEventListener('click', () => skipDeck('B', 10));
+
+      // Interactive Seek Slider Scrubbing
+      document.getElementById('deck-a-seek').addEventListener('input', (e) => seekDeck('A', parseFloat(e.target.value)));
+      document.getElementById('deck-b-seek').addEventListener('input', (e) => seekDeck('B', parseFloat(e.target.value)));
+
+      // Pitch Speed Sliders
+      document.getElementById('deck-a-tempo').addEventListener('input', (e) => applyPitch('A', e.target.value));
+      document.getElementById('deck-b-tempo').addEventListener('input', (e) => applyPitch('B', e.target.value));
+
+      // SYNC Beatmatch Buttons
+      document.getElementById('btn-sync-a').addEventListener('click', () => applySync('A'));
+      document.getElementById('btn-sync-b').addEventListener('click', () => applySync('B'));
+
+      // Crossfader & Search
       document.getElementById('crossfader').addEventListener('input', (e) => applyCrossfade(parseInt(e.target.value)));
       document.getElementById('btn-quick-crossfade').addEventListener('click', executeQuickCrossfade);
       document.getElementById('crate-search-input').addEventListener('input', renderPartyCrate);
