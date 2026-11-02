@@ -7,10 +7,8 @@
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
   <!-- FontAwesome Icons CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,7 +90,7 @@
           <h1 class="font-extrabold text-lg lg:text-xl tracking-tight bg-gradient-to-r from-amber-300 via-pink-400 to-brand-cyan bg-clip-text text-transparent flex items-center gap-2">
             Diwali Dance Party <span class="text-xs uppercase px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-digital">80 Tracks</span>
           </h1>
-          <p class="text-[11px] text-slate-400 font-medium">Auto-Recovery Engine • Self-Auditing Playlist</p>
+          <p class="text-[11px] text-slate-400 font-medium">Auto-Recovery Engine • In-App Song Fixer</p>
         </div>
       </div>
 
@@ -119,9 +117,8 @@
         </div>
       </div>
 
-      <!-- Auto-DJ, Audit & Custom Load Buttons -->
+      <!-- Actions -->
       <div class="flex items-center gap-2 text-[11px] font-digital">
-        <!-- AUDIT ALL TRACKS BUTTON -->
         <button id="btn-audit" onclick="runCrateHealthCheck()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-950/60 border border-indigo-500/50 text-indigo-300 hover:text-white transition-all shadow-lg" title="Test all 80 videos for dead links or embed restrictions">
           <i class="fa-solid fa-bolt-lightning text-amber-400"></i>
           <span id="audit-btn-text">Audit All 80</span>
@@ -140,12 +137,12 @@
     </div>
   </header>
 
-  <!-- Notification Banner for Auto-Recovery -->
+  <!-- Notification Banner -->
   <div id="deck-alert" class="hidden max-w-7xl mx-auto w-full px-4 pt-3">
     <div class="p-3 bg-amber-950/60 border border-amber-500/40 rounded-xl text-amber-200 text-xs flex items-center justify-between">
       <div class="flex items-center gap-2">
         <i class="fa-solid fa-triangle-exclamation text-amber-400"></i>
-        <span id="deck-alert-text">Record label restricted this embed. Auto-skipping to keep party flowing...</span>
+        <span id="deck-alert-text">Record label restricted this embed. Auto-skipping in 2s...</span>
       </div>
       <button onclick="executeQuickCrossfade()" class="px-2.5 py-1 rounded bg-amber-500 text-black font-bold font-digital text-[10px]">Skip Now</button>
     </div>
@@ -154,13 +151,11 @@
   <!-- ================= MAIN DJ BOOTH CONSOLE ================= -->
   <main class="max-w-7xl mx-auto w-full px-3 lg:px-6 py-4 flex-1 flex flex-col gap-6">
 
-    <!-- DUAL DECK STAGE -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
       
-      <!-- ==================== DECK A (LEFT) ==================== -->
+      <!-- DECK A -->
       <section id="deck-container-a" class="lg:col-span-5 bg-brand-card rounded-2xl border-2 border-brand-cyan/40 p-5 pt-6 flex flex-col justify-between shadow-xl shadow-cyan-950/15 relative transition-all duration-500">
         <div>
-          <!-- Top Bar -->
           <div class="flex items-center justify-between pb-3.5 border-b border-brand-border">
             <div class="flex items-center gap-2">
               <span class="px-2.5 py-1 rounded-md bg-brand-cyan text-black font-extrabold text-xs font-digital tracking-wide shadow-md shadow-brand-cyan/30">DECK A</span>
@@ -172,7 +167,6 @@
             </div>
           </div>
 
-          <!-- Track Metadata -->
           <div class="mt-4 flex items-center justify-between">
             <div class="truncate pr-3">
               <h2 id="deck-a-title" class="text-base font-bold text-white truncate hover:text-brand-cyan transition-colors">#1 Gallan Goodiyaan</h2>
@@ -184,7 +178,6 @@
             </div>
           </div>
 
-          <!-- Turntable Platter -->
           <div class="relative my-6 flex items-center justify-center">
             <div class="w-60 h-60 sm:w-64 sm:h-64 rounded-full p-2.5 bg-[#0a0c12] border-4 border-[#1c2132] shadow-2xl flex items-center justify-center relative">
               <div id="deck-a-rim" class="absolute inset-1 rounded-full border border-brand-cyan/30 transition-all"></div>
@@ -194,8 +187,6 @@
                   <div class="w-5 h-5 rounded-full bg-[#0a0c12] border border-white/40 z-10"></div>
                 </div>
               </div>
-
-              <!-- Tonearm -->
               <div id="tonearm-a" class="tonearm absolute top-1 right-3 w-16 h-28 pointer-events-none z-20">
                 <svg width="60" height="110" viewBox="0 0 60 110" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="45" cy="15" r="10" fill="#2d3748" stroke="#718096" stroke-width="2"/>
@@ -207,7 +198,6 @@
             </div>
           </div>
 
-          <!-- Timeline -->
           <div class="space-y-1.5">
             <div class="flex justify-between text-[10px] text-slate-400 font-digital">
               <span id="deck-a-cue-in">IN 00:10</span>
@@ -222,7 +212,6 @@
           </div>
         </div>
 
-        <!-- Controls -->
         <div class="mt-6 pt-4 border-t border-brand-border space-y-4">
           <div class="flex items-center justify-between gap-3">
             <button id="btn-cue-a" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5 transition-all">
@@ -235,7 +224,6 @@
               <i class="fa-solid fa-bolt mr-1"></i> SYNC
             </button>
           </div>
-
           <div class="flex items-center gap-3 bg-black/40 px-3 py-2 rounded-xl border border-white/5">
             <span class="text-[10px] font-digital text-slate-400">PITCH</span>
             <input type="range" id="deck-a-tempo" min="0.90" max="1.10" step="0.01" value="1.00" class="w-full h-1.5">
@@ -244,40 +232,32 @@
         </div>
       </section>
 
-      <!-- ==================== CENTRAL MIXER CONSOLE ==================== -->
+      <!-- MIXER -->
       <section class="lg:col-span-2 bg-[#0c0e17] rounded-2xl border border-brand-border p-4 flex flex-col justify-between items-center shadow-2xl relative">
         <div class="w-full flex items-center justify-between border-b border-brand-border/60 pb-2">
           <span class="text-[10px] font-digital tracking-widest text-slate-400 uppercase">DIWALI-CORE</span>
           <div class="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></div>
         </div>
 
-        <!-- 3-Band EQ Simulation -->
         <div class="w-full grid grid-cols-2 gap-4 my-2">
           <div class="flex flex-col items-center gap-2">
             <span class="text-[9px] font-digital font-bold text-brand-cyan">EQ A</span>
             <div class="flex flex-col items-center gap-1.5 text-[9px] font-digital text-slate-400">
-              <span>HI</span>
-              <input type="range" class="w-12 h-1 accent-cyan-400" min="0" max="100" value="80">
-              <span>MID</span>
-              <input type="range" class="w-12 h-1 accent-cyan-400" min="0" max="100" value="80">
-              <span>LOW</span>
-              <input type="range" class="w-12 h-1 accent-cyan-400" min="0" max="100" value="85">
+              <span>HI</span><input type="range" class="w-12 h-1 accent-cyan-400" min="0" max="100" value="80">
+              <span>MID</span><input type="range" class="w-12 h-1 accent-cyan-400" min="0" max="100" value="80">
+              <span>LOW</span><input type="range" class="w-12 h-1 accent-cyan-400" min="0" max="100" value="85">
             </div>
           </div>
           <div class="flex flex-col items-center gap-2">
             <span class="text-[9px] font-digital font-bold text-brand-magenta">EQ B</span>
             <div class="flex flex-col items-center gap-1.5 text-[9px] font-digital text-slate-400">
-              <span>HI</span>
-              <input type="range" class="w-12 h-1 accent-pink-500" min="0" max="100" value="80">
-              <span>MID</span>
-              <input type="range" class="w-12 h-1 accent-pink-500" min="0" max="100" value="80">
-              <span>LOW</span>
-              <input type="range" class="w-12 h-1 accent-pink-500" min="0" max="100" value="85">
+              <span>HI</span><input type="range" class="w-12 h-1 accent-pink-500" min="0" max="100" value="80">
+              <span>MID</span><input type="range" class="w-12 h-1 accent-pink-500" min="0" max="100" value="80">
+              <span>LOW</span><input type="range" class="w-12 h-1 accent-pink-500" min="0" max="100" value="85">
             </div>
           </div>
         </div>
 
-        <!-- Dual Level VU Meters -->
         <div class="w-full my-2 bg-black/60 p-2 rounded-xl border border-white/5 flex justify-center gap-4">
           <div class="flex gap-1 h-20 items-end">
             <div class="w-1.5 bg-zinc-800 rounded-sm h-full relative overflow-hidden">
@@ -289,13 +269,10 @@
           </div>
         </div>
 
-        <!-- Crossfade Controls -->
         <div class="w-full space-y-3 pt-2">
           <button id="btn-quick-crossfade" class="w-full py-2.5 px-2 rounded-xl bg-gradient-to-r from-brand-cyan/20 via-brand-magenta/30 to-brand-cyan/20 border border-brand-magenta/40 hover:border-brand-magenta text-slate-100 font-digital font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-lg shadow-brand-magenta/15 hover:shadow-brand-magenta/30 active:scale-95 transition-all">
-            <i class="fa-solid fa-shuffle text-brand-magenta"></i>
-            Quick Crossfade
+            <i class="fa-solid fa-shuffle text-brand-magenta"></i> Quick Crossfade
           </button>
-
           <div class="space-y-1">
             <div class="flex justify-between text-[10px] font-digital font-bold px-1">
               <span class="text-brand-cyan">DECK A</span>
@@ -307,10 +284,9 @@
         </div>
       </section>
 
-      <!-- ==================== DECK B (RIGHT) ==================== -->
+      <!-- DECK B -->
       <section id="deck-container-b" class="lg:col-span-5 bg-brand-card rounded-2xl border-2 border-brand-magenta/30 p-5 pt-6 flex flex-col justify-between shadow-xl shadow-pink-950/15 relative transition-all duration-500">
         <div>
-          <!-- Top Bar -->
           <div class="flex items-center justify-between pb-3.5 border-b border-brand-border">
             <div class="flex items-center gap-2">
               <span class="px-2.5 py-1 rounded-md bg-brand-magenta text-white font-extrabold text-xs font-digital tracking-wide shadow-md shadow-brand-magenta/30">DECK B</span>
@@ -322,7 +298,6 @@
             </div>
           </div>
 
-          <!-- Track Metadata -->
           <div class="mt-4 flex items-center justify-between">
             <div class="truncate pr-3">
               <h2 id="deck-b-title" class="text-base font-bold text-white truncate hover:text-brand-magenta transition-colors">#2 London Thumakda</h2>
@@ -334,7 +309,6 @@
             </div>
           </div>
 
-          <!-- Turntable Platter -->
           <div class="relative my-6 flex items-center justify-center">
             <div class="w-60 h-60 sm:w-64 sm:h-64 rounded-full p-2.5 bg-[#0a0c12] border-4 border-[#1c2132] shadow-2xl flex items-center justify-center relative">
               <div id="deck-b-rim" class="absolute inset-1 rounded-full border border-brand-magenta/30 transition-all"></div>
@@ -344,8 +318,6 @@
                   <div class="w-5 h-5 rounded-full bg-[#0a0c12] border border-white/40 z-10"></div>
                 </div>
               </div>
-
-              <!-- Tonearm -->
               <div id="tonearm-b" class="tonearm absolute top-1 right-3 w-16 h-28 pointer-events-none z-20">
                 <svg width="60" height="110" viewBox="0 0 60 110" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="45" cy="15" r="10" fill="#2d3748" stroke="#718096" stroke-width="2"/>
@@ -357,7 +329,6 @@
             </div>
           </div>
 
-          <!-- Timeline -->
           <div class="space-y-1.5">
             <div class="flex justify-between text-[10px] text-slate-400 font-digital">
               <span id="deck-b-cue-in">IN 00:08</span>
@@ -372,7 +343,6 @@
           </div>
         </div>
 
-        <!-- Controls -->
         <div class="mt-6 pt-4 border-t border-brand-border space-y-4">
           <div class="flex items-center justify-between gap-3">
             <button id="btn-cue-b" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5 transition-all">
@@ -385,7 +355,6 @@
               <i class="fa-solid fa-bolt mr-1"></i> SYNC
             </button>
           </div>
-
           <div class="flex items-center gap-3 bg-black/40 px-3 py-2 rounded-xl border border-white/5">
             <span class="text-[10px] font-digital text-slate-400">PITCH</span>
             <input type="range" id="deck-b-tempo" min="0.90" max="1.10" step="0.01" value="1.00" class="w-full h-1.5">
@@ -405,18 +374,17 @@
           </div>
           <div>
             <h3 class="font-bold text-base text-white">Full Diwali Party Playlist (80 Songs)</h3>
-            <p class="text-xs text-slate-400">Auto-Skip is active. Click <strong>Audit All 80</strong> in top-right to health-check all tracks before party starts.</p>
+            <p class="text-xs text-slate-400">Click any <span class="text-rose-400 font-bold">🔴 Check</span> badge to quickly fix and replace that song!</p>
           </div>
         </div>
 
-        <!-- Search Bar -->
         <div class="relative w-full sm:w-64">
           <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-500"></i>
           <input type="text" id="crate-search-input" placeholder="Search track, artist, film..." class="w-full bg-black/50 border border-brand-border rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-cyan transition-colors">
         </div>
       </div>
 
-      <!-- Phase Filter Tabs -->
+      <!-- Phase Tabs -->
       <div class="flex flex-wrap items-center gap-2 mt-4 pb-2 border-b border-brand-border/50 text-xs font-digital">
         <button onclick="filterPhase('all')" class="phase-btn px-3 py-1 rounded-lg bg-brand-cyan text-black font-bold" data-phase="all">All (80)</button>
         <button onclick="filterPhase(1)" class="phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white" data-phase="1">Phase 1: Warm-Up (1-14)</button>
@@ -433,7 +401,7 @@
             <tr class="text-slate-500 font-digital uppercase text-[10px] border-b border-brand-border/60">
               <th class="pb-3 w-8">#</th>
               <th class="pb-3 font-semibold">Track & Film</th>
-              <th class="pb-3 font-semibold text-center">Health Status</th>
+              <th class="pb-3 font-semibold text-center">Health</th>
               <th class="pb-3 font-semibold text-center">Play Window</th>
               <th class="pb-3 font-semibold">Cue Note</th>
               <th class="pb-3 font-semibold text-right">Actions</th>
@@ -446,29 +414,60 @@
 
   </main>
 
-  <!-- Off-Screen YouTube Containers -->
+  <!-- Off-Screen YouTube Players -->
   <div class="fixed -bottom-[300px] left-0 opacity-0 pointer-events-none z-[-10]">
     <div id="yt-player-a" style="width: 320px; height: 180px;"></div>
     <div id="yt-player-b" style="width: 320px; height: 180px;"></div>
   </div>
 
-  <!-- Modal for Custom URL -->
+  <!-- IN-APP SONG FIXER MODAL -->
+  <div id="fix-song-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-[#12141f] border border-brand-border rounded-2xl max-w-md w-full p-6 shadow-2xl">
+      <div class="flex items-center justify-between pb-3 border-b border-brand-border">
+        <h3 class="font-bold text-white text-sm flex items-center gap-2">
+          <i class="fa-solid fa-wrench text-amber-400"></i> <span id="fix-modal-title">Fix Song</span>
+        </h3>
+        <button onclick="closeFixModal()" class="text-slate-400 hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="mt-4 space-y-3">
+        <p class="text-xs text-slate-300">
+          Step 1: Click to open working YouTube videos for this song:
+        </p>
+        <a id="fix-modal-yt-search-btn" href="#" target="_blank" class="w-full py-2.5 px-3 rounded-xl bg-red-600/20 hover:bg-red-600 text-red-300 hover:text-white border border-red-500/40 text-xs font-bold flex items-center justify-center gap-2 transition-all">
+          <i class="fa-brands fa-youtube"></i> Search Working Audio on YouTube
+        </a>
+
+        <p class="text-xs text-slate-300 pt-2">
+          Step 2: Copy the link from YouTube and paste it here:
+        </p>
+        <input type="text" id="fix-modal-input" placeholder="Paste YouTube link or ID..." class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-cyan">
+
+        <input type="hidden" id="fix-modal-track-id">
+
+        <div class="pt-2 flex gap-2">
+          <button onclick="saveFixedSong()" class="w-full py-2.5 rounded-xl bg-brand-cyan hover:bg-cyan-400 text-black font-digital font-bold text-xs active:scale-95 transition-all">
+            ✓ Save & Fix Song
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom URL Modal -->
   <div id="custom-url-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-[#12141f] border border-brand-border rounded-2xl max-w-md w-full p-6 shadow-2xl">
       <div class="flex items-center justify-between pb-3 border-b border-brand-border">
         <h3 class="font-bold text-white text-sm flex items-center gap-2">
-          <i class="fa-brands fa-youtube text-red-500"></i> Load or Replace YouTube Track
+          <i class="fa-brands fa-youtube text-red-500"></i> Load Custom YouTube Track
         </h3>
         <button onclick="closeCustomUrlModal()" class="text-slate-400 hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="mt-4 space-y-3">
-        <div>
-          <label class="block text-xs font-digital text-slate-400 mb-1">YouTube URL or 11-char Video ID</label>
-          <input type="text" id="custom-yt-input" placeholder="Paste YouTube link here..." class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-cyan">
-        </div>
+        <input type="text" id="custom-yt-input" placeholder="Paste YouTube link here..." class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-cyan">
         <div class="pt-3 flex gap-2">
-          <button onclick="submitCustomTrack('A')" class="flex-1 py-2 rounded-xl bg-brand-cyan text-black font-digital font-bold text-xs hover:bg-cyan-400 active:scale-95 transition-all">Load to Deck A</button>
-          <button onclick="submitCustomTrack('B')" class="flex-1 py-2 rounded-xl bg-brand-magenta text-white font-digital font-bold text-xs hover:bg-pink-600 active:scale-95 transition-all">Load to Deck B</button>
+          <button onclick="submitCustomTrack('A')" class="flex-1 py-2 rounded-xl bg-brand-cyan text-black font-digital font-bold text-xs hover:bg-cyan-400 transition-all">Load to Deck A</button>
+          <button onclick="submitCustomTrack('B')" class="flex-1 py-2 rounded-xl bg-brand-magenta text-white font-digital font-bold text-xs hover:bg-pink-600 transition-all">Load to Deck B</button>
         </div>
       </div>
     </div>
@@ -476,9 +475,6 @@
 
   <!-- ================= JAVASCRIPT DJ ENGINE ================= -->
   <script>
-    /* =====================================================================
-       80-TRACK AUDITED DATABASE
-       ===================================================================== */
     const PARTY_TRACKS = [
       // PHASE 1: WARM-UP & WELCOME (1–14)
       { num: 1, id: "trk_001", phase: 1, title: "Gallan Goodiyaan", artist: "Dil Dhadakne Do", type: "Bollywood", ytId: "jCEdTq3j-0U", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 45, mixOutPoint: 160 }, cueNote: "Skip soft intro, enter on first dhol groove." },
@@ -498,7 +494,7 @@
 
       // PHASE 2: BUILD (15–31)
       { num: 15, id: "trk_015", phase: 2, title: "Chaiyya Chaiyya", artist: "Dil Se..", type: "Bollywood", ytId: "UzXc_gJOC1Y", inTime: "0:12", outTime: "2:42", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 48, mixOutPoint: 162 }, cueNote: "Iconic train rhythm. Start on percussion." },
-      { num: 16, id: "trk_016", phase: 2, title: "Desi Girl", artist: "Dostana", type: "Bollywood", ytId: "wDIrpvH8MzE", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 45, mixOutPoint: 160 }, cueNote: "Start at first chorus. Sony Music canonical upload." },
+      { num: 16, id: "trk_016", phase: 2, title: "Desi Girl", artist: "Dostana", type: "Bollywood", ytId: "wDIrpvH8MzE", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 45, mixOutPoint: 160 }, cueNote: "Start at first chorus. Sony Music official upload." },
       { num: 17, id: "trk_017", phase: 2, title: "Dhoom Machale", artist: "Dhoom", type: "Bollywood", ytId: "2uUmHTgT65I", inTime: "0:15", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 45, mixOutPoint: 160 }, cueNote: "Enter on main guitar riff." },
       { num: 18, id: "trk_018", phase: 2, title: "Kajra Re", artist: "Bunty Aur Babli", type: "Bollywood", ytId: "4dsFQFCvVGU", inTime: "0:18", outTime: "2:53", cuePoints: { introStart: 0, mixInPoint: 18, dropTimestamp: 50, mixOutPoint: 173 }, cueNote: "Start just before the Kajra Re hook." },
       { num: 19, id: "trk_019", phase: 2, title: "Ek Do Teen", artist: "Tezaab", type: "Bollywood", ytId: "pW_r0V8hV_M", inTime: "0:15", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 45, mixOutPoint: 155 }, cueNote: "90s nostalgia. Start on the Ek Do Teen hook." },
@@ -571,11 +567,18 @@
       { num: 80, id: "trk_080", phase: 5, title: "Shava Shava", artist: "Kabhi Khushi Kabhie Gham...", type: "Bollywood", ytId: "ca0_h2G7Eeg", inTime: "0:20", outTime: "3:05", cuePoints: { introStart: 0, mixInPoint: 20, dropTimestamp: 60, mixOutPoint: 185 }, cueNote: "Finale: family singalong & Diwali wishes moment. Let it play out!" }
     ];
 
+    // Load any user fixes saved in browser localStorage
+    const savedOverrides = JSON.parse(localStorage.getItem('diwali_dj_yt_overrides') || '{}');
     PARTY_TRACKS.forEach((t) => {
+      if (savedOverrides[t.id]) {
+        t.ytId = savedOverrides[t.id];
+        t.healthStatus = 'valid';
+      } else {
+        t.healthStatus = "untested";
+      }
       t.duration = t.cuePoints.mixOutPoint + 10;
       t.artwork = "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&q=80";
       t.audioProfile = { bpm: 126 + t.phase, camelotKey: "4A", energyLevel: t.phase >= 3 ? "Peak" : "Warm-Up" };
-      t.healthStatus = "untested"; // 'valid', 'blocked', 'untested'
     });
 
     let autoDjActive = true;
@@ -588,29 +591,20 @@
       deckB: { track: PARTY_TRACKS[1], player: null, isPlaying: false, currentTime: 0, duration: PARTY_TRACKS[1].duration, volume: 0 }
     };
 
-    /* =====================================================================
-       AUTOMATED CRATE HEALTH AUDITOR
-       Probes the YouTube thumbnail endpoint for each video in real-time.
-       ===================================================================== */
+    // Real-time YouTube probe
     async function runCrateHealthCheck() {
       const btnText = document.getElementById('audit-btn-text');
       btnText.textContent = "Auditing (0/80)...";
-      let passed = 0;
-      let failed = 0;
+      let passed = 0, failed = 0;
 
       for (let i = 0; i < PARTY_TRACKS.length; i++) {
         const track = PARTY_TRACKS[i];
         btnText.textContent = `Auditing (${i + 1}/80)...`;
-        
-        // Fast probe via YouTube Image CDN
         const isValid = await checkYouTubeVideoAvailable(track.ytId);
         track.healthStatus = isValid ? 'valid' : 'blocked';
         if (isValid) passed++; else failed++;
-        
-        // Update table row in real time
         updateTableRowStatus(track.id, track.healthStatus);
       }
-
       btnText.innerHTML = `✓ ${passed} Ready <span class="text-rose-400">(${failed} to fix)</span>`;
       renderPartyCrate();
     }
@@ -619,12 +613,8 @@
       return new Promise((resolve) => {
         const img = new Image();
         img.onload = function() {
-          // YouTube returns a 120px wide generic grey placeholder if video is removed/dead
-          if (this.naturalWidth === 120 && this.naturalHeight === 90) {
-            resolve(false);
-          } else {
-            resolve(true);
-          }
+          if (this.naturalWidth === 120 && this.naturalHeight === 90) resolve(false);
+          else resolve(true);
         };
         img.onerror = () => resolve(false);
         img.src = `https://img.youtube.com/vi/${ytId}/mqdefault.jpg`;
@@ -635,9 +625,9 @@
       const el = document.getElementById(`status-${trackId}`);
       if (!el) return;
       if (status === 'valid') {
-        el.innerHTML = `<span class="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">🟢 Ready</span>`;
+        el.innerHTML = `<span onclick="openFixModal('${trackId}')" class="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 cursor-pointer hover:bg-emerald-500/40" title="Click to edit link">🟢 Ready</span>`;
       } else {
-        el.innerHTML = `<span class="px-2 py-0.5 rounded text-[9px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">🔴 Check</span>`;
+        el.innerHTML = `<span onclick="openFixModal('${trackId}')" class="px-2 py-0.5 rounded text-[9px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30 cursor-pointer hover:bg-rose-500/40 animate-pulse" title="Click to fix link">🔴 Fix</span>`;
       }
     }
 
@@ -656,9 +646,7 @@
       }
     }
 
-    /* =====================================================================
-       YOUTUBE IFRAME WITH ZERO-SILENCE AUTO-RECOVERY
-       ===================================================================== */
+    // Embed API
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     document.getElementsByTagName('script')[0].parentNode.insertBefore(tag, document.getElementsByTagName('script')[0]);
@@ -698,7 +686,7 @@
       const badTrack = (deckLetter === 'A') ? djState.deckA.track : djState.deckB.track;
       
       alertBox.classList.remove('hidden');
-      alertText.textContent = `Song #${badTrack.num} (${badTrack.title}) blocked by record label. Auto-skipping in 2s...`;
+      alertText.textContent = `Song #${badTrack.num} (${badTrack.title}) blocked by label. Auto-skipping in 2s...`;
 
       setTimeout(() => {
         alertBox.classList.add('hidden');
@@ -763,13 +751,12 @@
       }).forEach(track => {
         const tr = document.createElement('tr');
         tr.className = "hover:bg-white/[0.04] transition-colors group";
-        const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(track.title + ' ' + track.artist + ' audio')}`;
         
-        let statusBadge = `<span id="status-${track.id}" class="text-[10px] text-slate-500 font-digital">—</span>`;
+        let statusBadge = `<span onclick="openFixModal('${track.id}')" id="status-${track.id}" class="text-[10px] text-slate-500 font-digital cursor-pointer">—</span>`;
         if (track.healthStatus === 'valid') {
-          statusBadge = `<span id="status-${track.id}" class="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">🟢 Ready</span>`;
+          statusBadge = `<span onclick="openFixModal('${track.id}')" id="status-${track.id}" class="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 cursor-pointer hover:bg-emerald-500/40">🟢 Ready</span>`;
         } else if (track.healthStatus === 'blocked') {
-          statusBadge = `<span id="status-${track.id}" class="px-2 py-0.5 rounded text-[9px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">🔴 Check</span>`;
+          statusBadge = `<span onclick="openFixModal('${track.id}')" id="status-${track.id}" class="px-2 py-0.5 rounded text-[9px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30 cursor-pointer hover:bg-rose-500/40 animate-pulse">🔴 Fix</span>`;
         }
 
         tr.innerHTML = `
@@ -785,9 +772,9 @@
           </td>
           <td class="py-2.5 text-right">
             <div class="flex items-center justify-end gap-1.5">
-              <a href="${searchUrl}" target="_blank" title="Search song on YouTube" class="p-1 px-1.5 rounded bg-zinc-800 hover:bg-red-600/30 text-red-400 border border-white/5 transition-all text-[10px]">
-                <i class="fa-brands fa-youtube"></i>
-              </a>
+              <button onclick="openFixModal('${track.id}')" title="Fix/Replace YouTube link" class="p-1 px-1.5 rounded bg-zinc-800 hover:bg-amber-500 hover:text-black text-amber-300 border border-white/5 transition-all text-[10px]">
+                <i class="fa-solid fa-wrench"></i>
+              </button>
               <button onclick="loadTrackToDeck('A', '${track.id}')" class="px-2 py-1 rounded bg-zinc-800 hover:bg-brand-cyan hover:text-black font-digital text-[10px] font-bold text-cyan-300 transition-all active:scale-95">LOAD A</button>
               <button onclick="loadTrackToDeck('B', '${track.id}')" class="px-2 py-1 rounded bg-zinc-800 hover:bg-brand-magenta hover:text-white font-digital text-[10px] font-bold text-pink-300 transition-all active:scale-95">LOAD B</button>
             </div>
@@ -807,6 +794,51 @@
         }
       });
       renderPartyCrate();
+    }
+
+    // IN-APP FIX MODAL LOGIC
+    function openFixModal(trackId) {
+      const track = PARTY_TRACKS.find(t => t.id === trackId);
+      if (!track) return;
+
+      document.getElementById('fix-modal-track-id').value = trackId;
+      document.getElementById('fix-modal-title').textContent = `Fix #${track.num}: ${track.title}`;
+      document.getElementById('fix-modal-input').value = `https://www.youtube.com/watch?v=${track.ytId}`;
+      
+      const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(track.title + ' ' + track.artist + ' audio')}`;
+      document.getElementById('fix-modal-yt-search-btn').href = searchUrl;
+
+      document.getElementById('fix-song-modal').classList.remove('hidden');
+    }
+
+    function closeFixModal() {
+      document.getElementById('fix-song-modal').classList.add('hidden');
+    }
+
+    function saveFixedSong() {
+      const trackId = document.getElementById('fix-modal-track-id').value;
+      const urlInput = document.getElementById('fix-modal-input').value.trim();
+      const track = PARTY_TRACKS.find(t => t.id === trackId);
+      if (!track || !urlInput) return;
+
+      let vid = urlInput;
+      const match = urlInput.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+      if (match) vid = match[1];
+
+      track.ytId = vid;
+      track.healthStatus = 'valid';
+
+      // Save permanently in local browser memory!
+      const saved = JSON.parse(localStorage.getItem('diwali_dj_yt_overrides') || '{}');
+      saved[track.id] = vid;
+      localStorage.setItem('diwali_dj_yt_overrides', JSON.stringify(saved));
+
+      // Reload into active deck if it was currently selected
+      if (djState.deckA.track.id === track.id) loadTrackToDeck('A', track.id);
+      if (djState.deckB.track.id === track.id) loadTrackToDeck('B', track.id);
+
+      renderPartyCrate();
+      closeFixModal();
     }
 
     window.loadTrackToDeck = function(deckLetter, trackId) {
@@ -832,7 +864,6 @@
         updateDeckPlayingVisuals(deckLetter, deck.isPlaying);
         return;
       }
-
       if (deck.isPlaying) {
         deck.player.pauseVideo();
         deck.isPlaying = false;
@@ -869,7 +900,6 @@
         djState.deckA.currentTime = djState.deckB.currentTime;
         djState.deckA.duration = incomingTrack.duration;
 
-        // Auto-advance sequentially in 80-track set
         const nextIndex = (PARTY_TRACKS.findIndex(t => t.id === incomingTrack.id) + 1) % PARTY_TRACKS.length;
         const nextTrack = PARTY_TRACKS[nextIndex];
         
@@ -901,7 +931,6 @@
       }, 400);
     }
 
-    // Main Tick Loop
     setInterval(() => {
       if (djState.deckA.player && djState.deckA.player.getCurrentTime) {
         const timeA = djState.deckA.player.getCurrentTime();
@@ -912,13 +941,11 @@
         }
       }
 
-      // Auto-DJ Trigger (7s before mix out)
       const active = djState.deckA;
       if (autoDjActive && active.isPlaying && active.currentTime >= (active.track.cuePoints.mixOutPoint - 7)) {
         executeQuickCrossfade();
       }
 
-      // Audio Meters
       if (djState.deckA.isPlaying) {
         document.getElementById('meter-l').style.height = `${45 + Math.random() * 50}%`;
         document.getElementById('meter-r').style.height = `${40 + Math.random() * 55}%`;
