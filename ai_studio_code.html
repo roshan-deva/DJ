@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PartyPulse AI YouTube DJ Booth — Diwali Edition</title>
+  <title>PartyPulse AI YouTube DJ Booth — Diwali Master Edition</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -19,30 +19,10 @@
       darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            digital: ['"Orbitron"', 'monospace'],
-          },
-          colors: {
-            brand: {
-              cyan: '#00f5ff',
-              magenta: '#ff007f',
-              lime: '#00ff66',
-              amber: '#ffd000',
-              violet: '#7928ca',
-              dark: '#08090d',
-              card: '#11131b',
-              border: '#1f2436'
-            }
-          },
-          keyframes: {
-            'spin-vinyl': { '0%': { transform: 'rotate(0deg)' }, '100%': { transform: 'rotate(360deg)' } },
-            'pulse-neon': { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0.6' } }
-          },
-          animation: {
-            'spin-vinyl': 'spin-vinyl 2.2s linear infinite',
-            'pulse-neon': 'pulse-neon 1.6s ease-in-out infinite'
-          }
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], digital: ['"Orbitron"', 'monospace'] },
+          colors: { brand: { cyan: '#00f5ff', magenta: '#ff007f', lime: '#00ff66', amber: '#ffd000', dark: '#08090d', card: '#11131b', border: '#1f2436' } },
+          keyframes: { 'spin-vinyl': { '0%': { transform: 'rotate(0deg)' }, '100%': { transform: 'rotate(360deg)' } } },
+          animation: { 'spin-vinyl': 'spin-vinyl 2.2s linear infinite' }
         }
       }
     }
@@ -50,20 +30,11 @@
 
   <style>
     .vinyl-grooves {
-      background: radial-gradient(circle, 
-        #111116 0%, #111116 26%, 
-        #1a1a22 26.5%, #101015 27%,
-        #22222a 38%, #0f0f14 39%,
-        #282834 52%, #0d0d12 53%,
-        #2d2d3a 70%, #0b0b0f 71%,
-        #21212a 86%, #07070a 88%,
-        #17171e 98%, #050507 100%
-      );
+      background: radial-gradient(circle, #111116 0%, #111116 26%, #1a1a22 26.5%, #101015 27%, #22222a 38%, #0f0f14 39%, #282834 52%, #0d0d12 53%, #2d2d3a 70%, #0b0b0f 71%, #21212a 86%, #07070a 88%, #17171e 98%, #050507 100%);
       box-shadow: inset 0 0 25px rgba(0,0,0,0.95), 0 12px 30px rgba(0,0,0,0.85);
     }
     .tonearm { transform-origin: 22px 22px; transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1); }
     .tonearm.engaged { transform: rotate(26deg); }
-    
     input[type=range] { -webkit-appearance: none; background: #181d2a; border-radius: 9999px; }
     input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 18px; width: 14px; border-radius: 3px; background: #00f5ff; cursor: pointer; border: 1px solid #fff; }
     .crossfader::-webkit-slider-thumb { height: 38px; width: 22px; background: linear-gradient(180deg, #ff007f 0%, #00f5ff 100%); cursor: pointer; border-radius: 4px; }
@@ -75,11 +46,9 @@
 </head>
 <body class="bg-[#07080c] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-brand-magenta selection:text-white pb-12">
 
-  <!-- ================= TOP DJ BOOTH HEADER ================= -->
+  <!-- TOP HEADER -->
   <header class="border-b border-brand-border bg-[#0d0f17]/95 backdrop-blur-md sticky top-0 z-50 px-4 lg:px-8 py-3">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
-      
-      <!-- Brand Logo -->
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-amber via-brand-magenta to-brand-cyan p-0.5 shadow-lg flex items-center justify-center">
           <div class="w-full h-full bg-[#0d0f17] rounded-[10px] flex items-center justify-center">
@@ -88,40 +57,16 @@
         </div>
         <div>
           <h1 class="font-extrabold text-lg lg:text-xl tracking-tight bg-gradient-to-r from-amber-300 via-pink-400 to-brand-cyan bg-clip-text text-transparent flex items-center gap-2">
-            Diwali Dance Party <span class="text-xs uppercase px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-digital">80 Tracks</span>
+            Diwali Dance Party <span class="text-xs uppercase px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-digital" id="crate-count-badge">Master Set</span>
           </h1>
-          <p class="text-[11px] text-slate-400 font-medium">Auto-Recovery • Live Pitch & Sync • DJ FX Launchpad</p>
+          <p class="text-[11px] text-slate-400 font-medium">Original 80 + YouTube List Merged • F5 Guard Active</p>
         </div>
       </div>
 
-      <!-- Live Party Energy & Master Pulse Monitor -->
-      <div class="flex items-center gap-4 bg-[#121520] px-4 py-2 rounded-xl border border-brand-border shadow-inner">
-        <div class="flex flex-col items-end">
-          <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Dancefloor Status</span>
-          <div class="flex items-center gap-1.5">
-            <span id="party-energy-text" class="text-xs font-digital font-bold text-amber-400">WARM-UP GROOVE</span>
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
-            </span>
-          </div>
-        </div>
-        
-        <div class="flex items-end gap-1 h-6 w-16 px-1 bg-black/50 rounded border border-white/5" id="master-visualizer">
-          <div class="w-1 bg-amber-400 h-3/6 rounded-t transition-all duration-75"></div>
-          <div class="w-1 bg-amber-400 h-5/6 rounded-t transition-all duration-75"></div>
-          <div class="w-1 bg-brand-cyan h-4/6 rounded-t transition-all duration-75"></div>
-          <div class="w-1 bg-brand-cyan h-6/6 rounded-t transition-all duration-75"></div>
-          <div class="w-1 bg-brand-magenta h-5/6 rounded-t transition-all duration-75"></div>
-          <div class="w-1 bg-brand-magenta h-2/6 rounded-t transition-all duration-75"></div>
-        </div>
-      </div>
-
-      <!-- Header Actions -->
       <div class="flex items-center gap-2 text-[11px] font-digital">
-        <button id="btn-audit" onclick="runCrateHealthCheck()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-950/60 border border-indigo-500/50 text-indigo-300 hover:text-white transition-all shadow-lg" title="Test all 80 videos for dead links">
+        <button id="btn-audit" onclick="runCrateHealthCheck()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-950/60 border border-indigo-500/50 text-indigo-300 hover:text-white transition-all shadow-lg">
           <i class="fa-solid fa-bolt-lightning text-amber-400"></i>
-          <span id="audit-btn-text">Audit All 80</span>
+          <span id="audit-btn-text">Audit Crate</span>
         </button>
 
         <button id="btn-auto-dj" onclick="toggleAutoDJ()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-950/40 border border-brand-lime text-brand-lime hover:text-white transition-all">
@@ -133,11 +78,10 @@
           <i class="fa-brands fa-youtube text-red-500"></i> + Add URL
         </button>
       </div>
-
     </div>
   </header>
 
-  <!-- DJ SOUNDBOARD / HYPE FX LAUNCHPAD -->
+  <!-- DJ FX LAUNCHPAD -->
   <div class="max-w-7xl mx-auto w-full px-3 lg:px-6 pt-4">
     <div class="bg-gradient-to-r from-[#121422] via-[#1a1528] to-[#121422] border border-brand-border rounded-2xl p-3 flex flex-wrap items-center justify-between gap-3 shadow-xl">
       <div class="flex items-center gap-2">
@@ -149,29 +93,17 @@
           <p class="text-[10px] text-slate-400">Click anytime over the music to hype up the dancefloor</p>
         </div>
       </div>
-
-      <!-- FX Pads -->
       <div class="flex flex-wrap items-center gap-2">
-        <button onclick="playDJEffect('airhorn')" class="px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500 border border-amber-500/40 text-amber-300 hover:text-black font-digital text-xs font-bold transition-all active:scale-95 flex items-center gap-1.5 shadow-md">
-          🎺 Air Horn
-        </button>
-        <button onclick="playDJEffect('dhol')" class="px-3 py-1.5 rounded-xl bg-brand-cyan/20 hover:bg-brand-cyan border border-brand-cyan/40 text-cyan-300 hover:text-black font-digital text-xs font-bold transition-all active:scale-95 flex items-center gap-1.5 shadow-md">
-          🥁 Dhol Roll
-        </button>
-        <button onclick="playDJEffect('siren')" class="px-3 py-1.5 rounded-xl bg-brand-magenta/20 hover:bg-brand-magenta border border-brand-magenta/40 text-pink-300 hover:text-white font-digital text-xs font-bold transition-all active:scale-95 flex items-center gap-1.5 shadow-md">
-          🚨 Laser Siren
-        </button>
-        <button onclick="playDJEffect('subdrop')" class="px-3 py-1.5 rounded-xl bg-purple-500/20 hover:bg-purple-600 border border-purple-500/40 text-purple-300 hover:text-white font-digital text-xs font-bold transition-all active:scale-95 flex items-center gap-1.5 shadow-md">
-          💣 808 Sub Boom
-        </button>
-        <button onclick="playDJEffect('scratch')" class="px-3 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-white/10 text-slate-200 font-digital text-xs font-bold transition-all active:scale-95 flex items-center gap-1.5 shadow-md">
-          💽 Vinyl Scratch
-        </button>
+        <button onclick="playDJEffect('airhorn')" class="px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500 border border-amber-500/40 text-amber-300 hover:text-black font-digital text-xs font-bold transition-all active:scale-95 shadow-md">🎺 Air Horn</button>
+        <button onclick="playDJEffect('dhol')" class="px-3 py-1.5 rounded-xl bg-brand-cyan/20 hover:bg-brand-cyan border border-brand-cyan/40 text-cyan-300 hover:text-black font-digital text-xs font-bold transition-all active:scale-95 shadow-md">🥁 Dhol Roll</button>
+        <button onclick="playDJEffect('siren')" class="px-3 py-1.5 rounded-xl bg-brand-magenta/20 hover:bg-brand-magenta border border-brand-magenta/40 text-pink-300 hover:text-white font-digital text-xs font-bold transition-all active:scale-95 shadow-md">🚨 Laser Siren</button>
+        <button onclick="playDJEffect('subdrop')" class="px-3 py-1.5 rounded-xl bg-purple-500/20 hover:bg-purple-600 border border-purple-500/40 text-purple-300 hover:text-white font-digital text-xs font-bold transition-all active:scale-95 shadow-md">💣 808 Sub Boom</button>
+        <button onclick="playDJEffect('scratch')" class="px-3 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-white/10 text-slate-200 font-digital text-xs font-bold transition-all active:scale-95 shadow-md">💽 Vinyl Scratch</button>
       </div>
     </div>
   </div>
 
-  <!-- Notification Banner -->
+  <!-- NOTIFICATION BANNER -->
   <div id="deck-alert" class="hidden max-w-7xl mx-auto w-full px-4 pt-3">
     <div class="p-3 bg-amber-950/60 border border-amber-500/40 rounded-xl text-amber-200 text-xs flex items-center justify-between">
       <div class="flex items-center gap-2">
@@ -182,15 +114,13 @@
     </div>
   </div>
 
-  <!-- ================= MAIN DJ BOOTH CONSOLE ================= -->
+  <!-- MAIN CONSOLE -->
   <main class="max-w-7xl mx-auto w-full px-3 lg:px-6 py-4 flex-1 flex flex-col gap-6">
-
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
       
       <!-- DECK A -->
       <section id="deck-container-a" class="lg:col-span-5 bg-brand-card rounded-2xl border-2 border-brand-cyan/40 p-5 pt-6 flex flex-col justify-between shadow-xl shadow-cyan-950/15 relative transition-all duration-500">
         <div>
-          <!-- Top Bar -->
           <div class="flex items-center justify-between pb-3.5 border-b border-brand-border">
             <div class="flex items-center gap-2">
               <span class="px-2.5 py-1 rounded-md bg-brand-cyan text-black font-extrabold text-xs font-digital tracking-wide shadow-md shadow-brand-cyan/30">DECK A</span>
@@ -198,11 +128,10 @@
             </div>
             <div class="flex items-center gap-1.5">
               <span id="deck-a-camelot" class="px-2.5 py-1 rounded-lg text-xs font-bold font-digital bg-indigo-950/80 text-cyan-300 border border-cyan-500/40">PHASE 1</span>
-              <span id="deck-a-bpm" class="px-2.5 py-1 rounded-lg text-xs font-bold font-digital bg-zinc-900 text-amber-400 border border-amber-500/30">127 BPM</span>
+              <span id="deck-a-bpm" class="px-2.5 py-1 rounded-lg text-xs font-bold font-digital bg-zinc-900 text-amber-400 border border-amber-500/30">126 BPM</span>
             </div>
           </div>
 
-          <!-- Metadata -->
           <div class="mt-4 flex items-center justify-between">
             <div class="truncate pr-3">
               <h2 id="deck-a-title" class="text-base font-bold text-white truncate hover:text-brand-cyan transition-colors">#1 Gallan Goodiyaan</h2>
@@ -214,7 +143,6 @@
             </div>
           </div>
 
-          <!-- Turntable Platter -->
           <div class="relative my-6 flex items-center justify-center">
             <div class="w-60 h-60 sm:w-64 sm:h-64 rounded-full p-2.5 bg-[#0a0c12] border-4 border-[#1c2132] shadow-2xl flex items-center justify-center relative">
               <div id="deck-a-rim" class="absolute inset-1 rounded-full border border-brand-cyan/30 transition-all"></div>
@@ -235,7 +163,6 @@
             </div>
           </div>
 
-          <!-- DRAGGABLE SEEK TIMELINE SLIDER -->
           <div class="space-y-1.5">
             <div class="flex justify-between text-[10px] text-slate-400 font-digital">
               <span id="deck-a-cue-in">IN 00:10</span>
@@ -248,36 +175,15 @@
           </div>
         </div>
 
-        <!-- Transport, Fast-Forward/Rewind & Pitch -->
         <div class="mt-5 pt-4 border-t border-brand-border space-y-3.5">
           <div class="flex items-center justify-between gap-2">
-            <!-- Rewind 10s -->
-            <button id="btn-rw-a" class="px-2.5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-300 font-digital text-xs border border-white/5" title="Rewind 10 Seconds">
-              <i class="fa-solid fa-backward"></i> -10s
-            </button>
-
-            <!-- CUE Button -->
-            <button id="btn-cue-a" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5 transition-all">
-              CUE
-            </button>
-
-            <!-- PLAY / PAUSE -->
-            <button id="btn-play-a" class="flex-[2] py-3 rounded-xl bg-gradient-to-r from-brand-cyan to-blue-500 hover:from-cyan-400 hover:to-blue-400 active:scale-95 text-black font-extrabold text-sm uppercase font-digital shadow-lg shadow-brand-cyan/25 flex items-center justify-center gap-2 transition-all">
-              <i class="fa-solid fa-play text-base" id="icon-play-a"></i> PLAY
-            </button>
-
-            <!-- Forward 10s -->
-            <button id="btn-ff-a" class="px-2.5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-300 font-digital text-xs border border-white/5" title="Forward 10 Seconds">
-              +10s <i class="fa-solid fa-forward"></i>
-            </button>
-
-            <!-- SYNC -->
-            <button id="btn-sync-a" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-amber-400 font-bold text-xs uppercase font-digital border border-amber-500/30 transition-all" title="Instantly matches speed to Deck B">
-              <i class="fa-solid fa-bolt mr-1"></i> SYNC
-            </button>
+            <button id="btn-rw-a" class="px-2.5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-300 font-digital text-xs border border-white/5"><i class="fa-solid fa-backward"></i> -10s</button>
+            <button id="btn-cue-a" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5">CUE</button>
+            <button id="btn-play-a" class="flex-[2] py-3 rounded-xl bg-gradient-to-r from-brand-cyan to-blue-500 hover:from-cyan-400 hover:to-blue-400 active:scale-95 text-black font-extrabold text-sm uppercase font-digital shadow-lg flex items-center justify-center gap-2"><i class="fa-solid fa-play text-base" id="icon-play-a"></i> PLAY</button>
+            <button id="btn-ff-a" class="px-2.5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-300 font-digital text-xs border border-white/5">+10s <i class="fa-solid fa-forward"></i></button>
+            <button id="btn-sync-a" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-amber-400 font-bold text-xs uppercase font-digital border border-amber-500/30"><i class="fa-solid fa-bolt mr-1"></i> SYNC</button>
           </div>
 
-          <!-- Working Pitch / Speed Slider -->
           <div class="flex items-center gap-3 bg-black/40 px-3 py-2 rounded-xl border border-white/5">
             <span class="text-[10px] font-digital text-slate-400">PITCH SPEED</span>
             <input type="range" id="deck-a-tempo" min="0.90" max="1.10" step="0.01" value="1.00" class="w-full h-1.5 accent-cyan-400">
@@ -324,7 +230,7 @@
         </div>
 
         <div class="w-full space-y-3 pt-2">
-          <button id="btn-quick-crossfade" class="w-full py-2.5 px-2 rounded-xl bg-gradient-to-r from-brand-cyan/20 via-brand-magenta/30 to-brand-cyan/20 border border-brand-magenta/40 hover:border-brand-magenta text-slate-100 font-digital font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-lg shadow-brand-magenta/15 hover:shadow-brand-magenta/30 active:scale-95 transition-all">
+          <button id="btn-quick-crossfade" class="w-full py-2.5 px-2 rounded-xl bg-gradient-to-r from-brand-cyan/20 via-brand-magenta/30 to-brand-cyan/20 border border-brand-magenta/40 hover:border-brand-magenta text-slate-100 font-digital font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-lg active:scale-95 transition-all">
             <i class="fa-solid fa-shuffle text-brand-magenta"></i> Quick Crossfade
           </button>
           <div class="space-y-1">
@@ -341,7 +247,6 @@
       <!-- DECK B -->
       <section id="deck-container-b" class="lg:col-span-5 bg-brand-card rounded-2xl border-2 border-brand-magenta/30 p-5 pt-6 flex flex-col justify-between shadow-xl shadow-pink-950/15 relative transition-all duration-500">
         <div>
-          <!-- Top Bar -->
           <div class="flex items-center justify-between pb-3.5 border-b border-brand-border">
             <div class="flex items-center gap-2">
               <span class="px-2.5 py-1 rounded-md bg-brand-magenta text-white font-extrabold text-xs font-digital tracking-wide shadow-md shadow-brand-magenta/30">DECK B</span>
@@ -349,11 +254,10 @@
             </div>
             <div class="flex items-center gap-1.5">
               <span id="deck-b-camelot" class="px-2.5 py-1 rounded-lg text-xs font-bold font-digital bg-fuchsia-950/80 text-fuchsia-300 border border-fuchsia-500/40">PHASE 1</span>
-              <span id="deck-b-bpm" class="px-2.5 py-1 rounded-lg text-xs font-bold font-digital bg-zinc-900 text-amber-400 border border-amber-500/30">127 BPM</span>
+              <span id="deck-b-bpm" class="px-2.5 py-1 rounded-lg text-xs font-bold font-digital bg-zinc-900 text-amber-400 border border-amber-500/30">126 BPM</span>
             </div>
           </div>
 
-          <!-- Metadata -->
           <div class="mt-4 flex items-center justify-between">
             <div class="truncate pr-3">
               <h2 id="deck-b-title" class="text-base font-bold text-white truncate hover:text-brand-magenta transition-colors">#2 London Thumakda</h2>
@@ -365,7 +269,6 @@
             </div>
           </div>
 
-          <!-- Turntable Platter -->
           <div class="relative my-6 flex items-center justify-center">
             <div class="w-60 h-60 sm:w-64 sm:h-64 rounded-full p-2.5 bg-[#0a0c12] border-4 border-[#1c2132] shadow-2xl flex items-center justify-center relative">
               <div id="deck-b-rim" class="absolute inset-1 rounded-full border border-brand-magenta/30 transition-all"></div>
@@ -386,49 +289,27 @@
             </div>
           </div>
 
-          <!-- DRAGGABLE SEEK TIMELINE SLIDER -->
           <div class="space-y-1.5">
             <div class="flex justify-between text-[10px] text-slate-400 font-digital">
               <span id="deck-b-cue-in">IN 00:08</span>
               <span class="text-amber-400 font-bold">DRAG SLIDER TO SCRUB</span>
-              <span id="deck-b-cue-out">OUT 02:33</span>
+              <span id="deck-b-cue-out">OUT 02:30</span>
             </div>
             <div class="relative w-full flex items-center">
-              <input type="range" id="deck-b-seek" min="0" max="153" value="0" step="0.5" class="seek-slider w-full h-2 rounded-lg cursor-pointer accent-amber-400">
+              <input type="range" id="deck-b-seek" min="0" max="150" value="0" step="0.5" class="seek-slider w-full h-2 rounded-lg cursor-pointer accent-amber-400">
             </div>
           </div>
         </div>
 
-        <!-- Transport, Fast-Forward/Rewind & Pitch -->
         <div class="mt-5 pt-4 border-t border-brand-border space-y-3.5">
           <div class="flex items-center justify-between gap-2">
-            <!-- Rewind 10s -->
-            <button id="btn-rw-b" class="px-2.5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-300 font-digital text-xs border border-white/5" title="Rewind 10 Seconds">
-              <i class="fa-solid fa-backward"></i> -10s
-            </button>
-
-            <!-- CUE Button -->
-            <button id="btn-cue-b" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5 transition-all">
-              CUE
-            </button>
-
-            <!-- PLAY / PAUSE -->
-            <button id="btn-play-b" class="flex-[2] py-3 rounded-xl bg-gradient-to-r from-brand-magenta to-rose-600 hover:from-pink-500 hover:to-rose-500 active:scale-95 text-white font-extrabold text-sm uppercase font-digital shadow-lg shadow-brand-magenta/25 flex items-center justify-center gap-2 transition-all">
-              <i class="fa-solid fa-play text-base" id="icon-play-b"></i> PLAY
-            </button>
-
-            <!-- Forward 10s -->
-            <button id="btn-ff-b" class="px-2.5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-300 font-digital text-xs border border-white/5" title="Forward 10 Seconds">
-              +10s <i class="fa-solid fa-forward"></i>
-            </button>
-
-            <!-- SYNC -->
-            <button id="btn-sync-b" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-amber-400 font-bold text-xs uppercase font-digital border border-amber-500/30 transition-all" title="Instantly matches speed to Deck A">
-              <i class="fa-solid fa-bolt mr-1"></i> SYNC
-            </button>
+            <button id="btn-rw-b" class="px-2.5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-300 font-digital text-xs border border-white/5"><i class="fa-solid fa-backward"></i> -10s</button>
+            <button id="btn-cue-b" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-200 font-bold text-xs uppercase font-digital border border-white/5">CUE</button>
+            <button id="btn-play-b" class="flex-[2] py-3 rounded-xl bg-gradient-to-r from-brand-magenta to-rose-600 hover:from-pink-500 hover:to-rose-500 active:scale-95 text-white font-extrabold text-sm uppercase font-digital shadow-lg flex items-center justify-center gap-2"><i class="fa-solid fa-play text-base" id="icon-play-b"></i> PLAY</button>
+            <button id="btn-ff-b" class="px-2.5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-slate-300 font-digital text-xs border border-white/5">+10s <i class="fa-solid fa-forward"></i></button>
+            <button id="btn-sync-b" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-amber-400 font-bold text-xs uppercase font-digital border border-amber-500/30"><i class="fa-solid fa-bolt mr-1"></i> SYNC</button>
           </div>
 
-          <!-- Working Pitch / Speed Slider -->
           <div class="flex items-center gap-3 bg-black/40 px-3 py-2 rounded-xl border border-white/5">
             <span class="text-[10px] font-digital text-slate-400">PITCH SPEED</span>
             <input type="range" id="deck-b-tempo" min="0.90" max="1.10" step="0.01" value="1.00" class="w-full h-1.5 accent-pink-500">
@@ -439,7 +320,7 @@
 
     </div>
 
-    <!-- ================= 80-TRACK DIWALI CRATE ================= -->
+    <!-- MASTER CRATE TABLE -->
     <section class="bg-brand-card rounded-2xl border border-brand-border p-5 shadow-lg">
       <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-brand-border">
         <div class="flex items-center gap-3">
@@ -447,37 +328,38 @@
             <i class="fa-solid fa-list-ol text-sm"></i>
           </div>
           <div>
-            <h3 class="font-bold text-base text-white">Full Diwali Party Playlist (80 Songs)</h3>
-            <p class="text-xs text-slate-400">Click any <span class="text-rose-400 font-bold">🔴 Fix</span> badge to instantly swap broken links!</p>
+            <h3 class="font-bold text-base text-white">Diwali Master Playlist (All 80 + YouTube Merged)</h3>
+            <p class="text-xs text-slate-400">Click any <span class="text-rose-400 font-bold">🔴 Fix</span> badge to edit. Hit Audit to verify!</p>
           </div>
         </div>
 
-        <div class="relative w-full sm:w-64">
-          <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-500"></i>
-          <input type="text" id="crate-search-input" placeholder="Search track, artist, film..." class="w-full bg-black/50 border border-brand-border rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-cyan transition-colors">
+        <div class="flex items-center gap-2">
+          <button onclick="exportSavedTracks()" class="px-2.5 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-white/10 text-cyan-300 font-digital text-xs font-bold transition-all">📋 Backup My Edits</button>
+          <div class="relative w-full sm:w-64">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-500"></i>
+            <input type="text" id="crate-search-input" placeholder="Search track, artist, film..." class="w-full bg-black/50 border border-brand-border rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-cyan">
+          </div>
         </div>
       </div>
 
-      <!-- Phase Tabs -->
       <div class="flex flex-wrap items-center gap-2 mt-4 pb-2 border-b border-brand-border/50 text-xs font-digital">
-        <button onclick="filterPhase('all')" class="phase-btn px-3 py-1 rounded-lg bg-brand-cyan text-black font-bold" data-phase="all">All (80)</button>
-        <button onclick="filterPhase(1)" class="phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white" data-phase="1">Phase 1: Warm-Up (1-14)</button>
-        <button onclick="filterPhase(2)" class="phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white" data-phase="2">Phase 2: Build (15-31)</button>
-        <button onclick="filterPhase(3)" class="phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white" data-phase="3">Phase 3: Peak Bollywood (32-51)</button>
-        <button onclick="filterPhase(4)" class="phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white" data-phase="4">Phase 4: Crossover (52-69)</button>
-        <button onclick="filterPhase(5)" class="phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white" data-phase="5">Phase 5: Finale (70-80)</button>
+        <button onclick="filterPhase('all')" class="phase-btn px-3 py-1 rounded-lg bg-brand-cyan text-black font-bold" data-phase="all">All Songs</button>
+        <button onclick="filterPhase(1)" class="phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white" data-phase="1">Phase 1: Warm-Up</button>
+        <button onclick="filterPhase(2)" class="phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white" data-phase="2">Phase 2: Build & Bounce</button>
+        <button onclick="filterPhase(3)" class="phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white" data-phase="3">Phase 3: Peak Bollywood</button>
+        <button onclick="filterPhase(4)" class="phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white" data-phase="4">Phase 4: Crossover & Mashups</button>
+        <button onclick="filterPhase(5)" class="phase-btn px-3 py-1 rounded-lg bg-zinc-900 text-slate-300 hover:text-white" data-phase="5">Phase 5: Finale & Anthems</button>
       </div>
 
-      <!-- Crate Table -->
       <div class="mt-4 overflow-x-auto max-h-[500px] overflow-y-auto pr-1">
         <table class="w-full text-left text-xs">
           <thead class="sticky top-0 bg-brand-card z-10">
             <tr class="text-slate-500 font-digital uppercase text-[10px] border-b border-brand-border/60">
               <th class="pb-3 w-8">#</th>
-              <th class="pb-3 font-semibold">Track & Film</th>
+              <th class="pb-3 font-semibold">Track & Artist</th>
+              <th class="pb-3 font-semibold">Type</th>
               <th class="pb-3 font-semibold text-center">Health</th>
               <th class="pb-3 font-semibold text-center">Play Window</th>
-              <th class="pb-3 font-semibold">Cue Note</th>
               <th class="pb-3 font-semibold text-right">Actions</th>
             </tr>
           </thead>
@@ -485,7 +367,6 @@
         </table>
       </div>
     </section>
-
   </main>
 
   <!-- Off-Screen YouTube Players -->
@@ -498,52 +379,34 @@
   <div id="fix-song-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-[#12141f] border border-brand-border rounded-2xl max-w-md w-full p-6 shadow-2xl">
       <div class="flex items-center justify-between pb-3 border-b border-brand-border">
-        <h3 class="font-bold text-white text-sm flex items-center gap-2">
-          <i class="fa-solid fa-wrench text-amber-400"></i> <span id="fix-modal-title">Fix Song</span>
-        </h3>
+        <h3 class="font-bold text-white text-sm flex items-center gap-2"><i class="fa-solid fa-wrench text-amber-400"></i> <span id="fix-modal-title">Fix Song</span></h3>
         <button onclick="closeFixModal()" class="text-slate-400 hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
       </div>
-
       <div class="mt-4 space-y-3">
-        <p class="text-xs text-slate-300">1. Click to search official/working audio on YouTube:</p>
+        <p class="text-xs text-slate-300">1. Click to search working audio on YouTube:</p>
         <a id="fix-modal-yt-search-btn" href="#" target="_blank" class="w-full py-2.5 px-3 rounded-xl bg-red-600/20 hover:bg-red-600 text-red-300 hover:text-white border border-red-500/40 text-xs font-bold flex items-center justify-center gap-2 transition-all">
           <i class="fa-brands fa-youtube"></i> Search Working Audio on YouTube
         </a>
-
         <p class="text-xs text-slate-300 pt-2">2. Paste the video link or ID here:</p>
         <input type="text" id="fix-modal-input" placeholder="Paste YouTube link or ID..." class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-cyan">
         <input type="hidden" id="fix-modal-track-id">
-
-        <button onclick="saveFixedSong()" class="w-full py-2.5 rounded-xl bg-brand-cyan hover:bg-cyan-400 text-black font-digital font-bold text-xs active:scale-95 transition-all">
-          ✓ Save & Fix Song
-        </button>
+        <button onclick="saveFixedSong()" class="w-full py-2.5 rounded-xl bg-brand-cyan hover:bg-cyan-400 text-black font-digital font-bold text-xs active:scale-95 transition-all">✓ Save & Fix Song</button>
       </div>
     </div>
   </div>
 
-  <!-- UNIVERSAL CUSTOM URL MODAL -->
+  <!-- CUSTOM URL MODAL -->
   <div id="custom-url-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-[#12141f] border border-brand-border rounded-2xl max-w-md w-full p-6 shadow-2xl">
       <div class="flex items-center justify-between pb-3 border-b border-brand-border">
-        <h3 class="font-bold text-white text-sm flex items-center gap-2">
-          <i class="fa-brands fa-youtube text-red-500"></i> Load YouTube Track On-The-Fly
-        </h3>
+        <h3 class="font-bold text-white text-sm flex items-center gap-2"><i class="fa-brands fa-youtube text-red-500"></i> Load YouTube Track On-The-Fly</h3>
         <button onclick="closeCustomUrlModal()" class="text-slate-400 hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="mt-4 space-y-3">
-        <div>
-          <label class="block text-xs font-digital text-slate-400 mb-1">Paste any YouTube URL or Video ID</label>
-          <input type="text" id="custom-yt-input" placeholder="e.g. https://youtu.be/... or watch?v=..." class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-cyan">
-        </div>
+        <input type="text" id="custom-yt-input" placeholder="Paste YouTube link or ID..." class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-cyan">
         <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-digital text-slate-400 mb-1">Track Title (Optional)</label>
-            <input type="text" id="custom-title-input" placeholder="Party Request" class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white">
-          </div>
-          <div>
-            <label class="block text-xs font-digital text-slate-400 mb-1">BPM (Default 128)</label>
-            <input type="number" id="custom-bpm-input" value="128" class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white">
-          </div>
+          <input type="text" id="custom-title-input" placeholder="Song Name" class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white">
+          <input type="text" id="custom-artist-input" placeholder="Artist" class="w-full bg-black/60 border border-brand-border rounded-xl px-3 py-2 text-xs text-white">
         </div>
         <div class="pt-3 flex gap-2">
           <button onclick="submitCustomTrack('A')" class="flex-1 py-2.5 rounded-xl bg-brand-cyan text-black font-digital font-bold text-xs hover:bg-cyan-400 transition-all">Load & Play Deck A</button>
@@ -553,112 +416,215 @@
     </div>
   </div>
 
-  <!-- ================= JAVASCRIPT DJ ENGINE ================= -->
+  <!-- EXPORT BACKUP MODAL -->
+  <div id="export-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-[#12141f] border border-brand-border rounded-2xl max-w-lg w-full p-6 shadow-2xl">
+      <div class="flex items-center justify-between pb-3 border-b border-brand-border">
+        <h3 class="font-bold text-white text-sm flex items-center gap-2"><i class="fa-solid fa-copy text-brand-cyan"></i> Backup / Export Saved Songs</h3>
+        <button onclick="document.getElementById('export-modal').classList.add('hidden')" class="text-slate-400 hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="mt-4 space-y-3">
+        <textarea id="export-textarea" class="w-full h-44 bg-black/80 border border-brand-border rounded-xl p-3 text-[11px] font-digital text-cyan-300 focus:outline-none" readonly></textarea>
+        <button onclick="copyExportCode()" class="w-full py-2.5 rounded-xl bg-brand-cyan text-black font-digital font-bold text-xs hover:bg-cyan-400 transition-all">📋 Copy to Clipboard</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT DJ ENGINE -->
   <script>
-    const PARTY_TRACKS = [
-      // PHASE 1: WARM-UP & WELCOME (1–14)
-      { num: 1, id: "trk_001", phase: 1, title: "Gallan Goodiyaan", artist: "Dil Dhadakne Do", type: "Bollywood", ytId: "jCEdTq3j-0U", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 45, mixOutPoint: 160 }, cueNote: "Skip soft intro, enter on first dhol groove." },
-      { num: 2, id: "trk_002", phase: 1, title: "London Thumakda", artist: "Queen", type: "Bollywood", ytId: "crrHSFnM3ic", inTime: "0:08", outTime: "2:33", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 40, mixOutPoint: 153 }, cueNote: "Start on clap beat. Singalong warm-up." },
-      { num: 3, id: "trk_003", phase: 1, title: "Abhi Toh Party Shuru Hui Hai", artist: "Khoobsurat", type: "Bollywood", ytId: "D8I2D6VLQQc", inTime: "0:12", outTime: "2:47", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 42, mixOutPoint: 167 }, cueNote: "Cut spoken intro. Hook gets people up." },
-      { num: 4, id: "trk_004", phase: 1, title: "Nachde Ne Saare", artist: "Baar Baar Dekho", type: "Bollywood", ytId: "HgIW7P4dsXU", inTime: "0:10", outTime: "2:30", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 150 }, cueNote: "Start at first beat drop, not piano intro." },
-      { num: 5, id: "trk_005", phase: 1, title: "Shape of You", artist: "Ed Sheeran", type: "English", ytId: "JGwWNGJdvx8", inTime: "0:05", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 5, dropTimestamp: 35, mixOutPoint: 155 }, cueNote: "Familiar crossover bridge. Fade during last chorus." },
-      { num: 6, id: "trk_006", phase: 1, title: "Kar Gayi Chull", artist: "Kapoor & Sons", type: "Bollywood", ytId: "NTHz9ephYTw", inTime: "0:15", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 45, mixOutPoint: 165 }, cueNote: "Start just before chorus drop." },
-      { num: 7, id: "trk_007", phase: 1, title: "The Breakup Song", artist: "Ae Dil Hai Mushkil", type: "Bollywood", ytId: "CvPdtf8Ijj4", inTime: "0:12", outTime: "2:37", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 42, mixOutPoint: 157 }, cueNote: "Skip dialogue intro. Keep chorus loop energy up." },
-      { num: 8, id: "trk_008", phase: 1, title: "Bole Chudiyan", artist: "Kabhi Khushi Kabhie Gham...", type: "Bollywood", ytId: "IBvg3WeqP1U", inTime: "0:20", outTime: "2:55", cuePoints: { introStart: 0, mixInPoint: 20, dropTimestamp: 60, mixOutPoint: 175 }, cueNote: "Diwali family singalong moment." },
-      { num: 9, id: "trk_009", phase: 1, title: "Senorita", artist: "Shawn Mendes & Camila Cabello", type: "English", ytId: "Pkh8UtuejGw", inTime: "0:10", outTime: "2:30", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 40, mixOutPoint: 150 }, cueNote: "Slower, romantic groove breather." },
-      { num: 10, id: "trk_010", phase: 1, title: "Happy", artist: "Pharrell Williams", type: "English", ytId: "ZbZSe6N_BXs", inTime: "0:08", outTime: "2:38", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 42, mixOutPoint: 158 }, cueNote: "Feel-good warm-up on the clap beat." },
-      { num: 11, id: "trk_011", phase: 1, title: "Nashe Si Chadh Gayi", artist: "Befikre", type: "Bollywood", ytId: "Wd2B8OAotU8", inTime: "0:18", outTime: "2:48", cuePoints: { introStart: 0, mixInPoint: 18, dropTimestamp: 50, mixOutPoint: 168 }, cueNote: "Start on the beat, skip vocal intro." },
-      { num: 12, id: "trk_012", phase: 1, title: "Ainvayi Ainvayi", artist: "Band Baaja Baaraat", type: "Bollywood", ytId: "pElk1ShPrcE", inTime: "0:15", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 48, mixOutPoint: 160 }, cueNote: "End of warm-up. Lift into Phase 2." },
-      { num: 13, id: "trk_013", phase: 1, title: "Sadi Gali", artist: "Tanu Weds Manu", type: "Bollywood", ytId: "w_HaezV0DqI", inTime: "0:12", outTime: "2:47", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 44, mixOutPoint: 167 }, cueNote: "Groovy singalong warm-up." },
-      { num: 14, id: "trk_014", phase: 1, title: "Second Hand Jawaani", artist: "Cocktail", type: "Bollywood", ytId: "bO1fD_Jj3aQ", inTime: "0:10", outTime: "2:30", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 40, mixOutPoint: 150 }, cueNote: "Light, cheeky groove to close warm-up." },
+    // COMPACT MASTER DATABASE MATRIX (All 80 original + 100 YouTube songs unified)
+    // Format: [id, phase, title, artist, genre, ytId, inSeconds, outSeconds, dropSeconds]
+    const MASTER_DATA = [
+      // PHASE 1: WARM-UP & WELCOME (Mellow groove, singalongs, Diljit hits, smooth build)
+      ["trk_001", 1, "Gallan Goodiyaan", "Dil Dhadakne Do", "Bollywood", "jCEdTq3j-0U", 10, 160, 45],
+      ["trk_002", 1, "London Thumakda", "Queen", "Bollywood", "crrHSFnM3ic", 8, 153, 40],
+      ["trk_003", 1, "Abhi Toh Party Shuru Hui Hai", "Khoobsurat", "Bollywood", "D8I2D6VLQQc", 12, 167, 42],
+      ["trk_004", 1, "Nachde Ne Saare", "Baar Baar Dekho", "Bollywood", "HgIW7P4dsXU", 10, 150, 44],
+      ["trk_005", 1, "Shape of You", "Ed Sheeran", "English", "JGwWNGJdvx8", 5, 155, 35],
+      ["trk_006", 1, "Kar Gayi Chull", "Kapoor & Sons", "Bollywood", "NTHz9ephYTw", 15, 165, 45],
+      ["trk_007", 1, "The Breakup Song", "Ae Dil Hai Mushkil", "Bollywood", "CvPdtf8Ijj4", 12, 157, 42],
+      ["trk_008", 1, "Bole Chudiyan", "Kabhi Khushi Kabhie Gham", "Bollywood", "IBvg3WeqP1U", 20, 175, 60],
+      ["trk_009", 1, "Senorita", "Shawn Mendes & Camila", "English", "Pkh8UtuejGw", 10, 150, 40],
+      ["trk_010", 1, "Happy", "Pharrell Williams", "English", "ZbZSe6N_BXs", 8, 158, 42],
+      ["trk_011", 1, "Nashe Si Chadh Gayi", "Befikre", "Bollywood", "Wd2B8OAotU8", 18, 168, 50],
+      ["trk_012", 1, "Ainvayi Ainvayi", "Band Baaja Baaraat", "Bollywood", "pElk1ShPrcE", 15, 160, 48],
+      ["yt_001", 1, "Kinni Kinni", "Diljit Dosanjh", "Punjabi", "09EOWqaU-NI", 5, 155, 35],
+      ["yt_002", 1, "Lover", "Diljit Dosanjh", "Punjabi", "KLBtgOzNAgI", 8, 150, 40],
+      ["yt_003", 1, "Lagdi Hai Thaai", "Guru Randhawa", "Bollywood", "snmpqZRE0WA", 5, 140, 35],
+      ["yt_004", 1, "Cutiepie", "Pritam (ADHM)", "Bollywood", "zVhY6vi9fCU", 10, 155, 45],
+      ["yt_005", 1, "Sadqay", "Aashir Wajahat", "Pop", "XXZ-tiFFJEg", 5, 135, 30],
+      ["yt_006", 1, "Naina", "Diljit Dosanjh (Crew)", "Bollywood", "BlZjTxPAmKc", 8, 150, 38],
+      ["yt_007", 1, "Kya Mujhe Pyar Hai", "K.K.", "Bollywood", "XPu9ZE4Onzc", 15, 165, 45],
+      ["yt_008", 1, "Raabta", "Jam8", "Bollywood", "piUHBTXsoiY", 12, 155, 40],
+      ["yt_009", 1, "Sajh Dhaj Ke", "Yo Yo Honey Singh", "Punjabi", "kMiH31brCZU", 10, 155, 42],
+      ["yt_010", 1, "Morni Banke", "Guru Randhawa", "Bollywood", "mDeToJRzm7o", 8, 158, 38],
+      ["yt_055", 1, "Chuttamalle", "Shilpa Rao (Devara)", "Telugu", "nZiJTYiujUs", 12, 160, 42],
+      ["trk_014", 1, "Second Hand Jawaani", "Cocktail", "Bollywood", "bO1fD_Jj3aQ", 10, 150, 40],
 
-      // PHASE 2: BUILD (15–31)
-      { num: 15, id: "trk_015", phase: 2, title: "Chaiyya Chaiyya", artist: "Dil Se..", type: "Bollywood", ytId: "UzXc_gJOC1Y", inTime: "0:12", outTime: "2:42", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 48, mixOutPoint: 162 }, cueNote: "Iconic train rhythm. Start on percussion." },
-      { num: 16, id: "trk_016", phase: 2, title: "Desi Girl", artist: "Dostana", type: "Bollywood", ytId: "wDIrpvH8MzE", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 45, mixOutPoint: 160 }, cueNote: "Start at first chorus. Sony Music official upload." },
-      { num: 17, id: "trk_017", phase: 2, title: "Dhoom Machale", artist: "Dhoom", type: "Bollywood", ytId: "2uUmHTgT65I", inTime: "0:15", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 45, mixOutPoint: 160 }, cueNote: "Enter on main guitar riff." },
-      { num: 18, id: "trk_018", phase: 2, title: "Kajra Re", artist: "Bunty Aur Babli", type: "Bollywood", ytId: "4dsFQFCvVGU", inTime: "0:18", outTime: "2:53", cuePoints: { introStart: 0, mixInPoint: 18, dropTimestamp: 50, mixOutPoint: 173 }, cueNote: "Start just before the Kajra Re hook." },
-      { num: 19, id: "trk_019", phase: 2, title: "Ek Do Teen", artist: "Tezaab", type: "Bollywood", ytId: "pW_r0V8hV_M", inTime: "0:15", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 45, mixOutPoint: 155 }, cueNote: "90s nostalgia. Start on the Ek Do Teen hook." },
-      { num: 20, id: "trk_020", phase: 2, title: "Cheap Thrills", artist: "Sia ft. Sean Paul", type: "English", ytId: "nYh-n75tAP8", inTime: "0:08", outTime: "2:38", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 42, mixOutPoint: 158 }, cueNote: "Radio clean edit. Straight into chorus groove." },
-      { num: 21, id: "trk_021", phase: 2, title: "Radha", artist: "Student of the Year", type: "Bollywood", ytId: "514W_2_eM7g", inTime: "0:12", outTime: "2:42", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 162 }, cueNote: "Bright, bouncy. Fade before rap outro drags." },
-      { num: 22, id: "trk_022", phase: 2, title: "Badtameez Dil", artist: "Yeh Jawaani Hai Deewani", type: "Bollywood", ytId: "II2EO3Nw4m0", inTime: "0:10", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 40, mixOutPoint: 155 }, cueNote: "Start on drum intro, cut before slow bridge." },
-      { num: 23, id: "trk_023", phase: 2, title: "Balam Pichkari", artist: "Yeh Jawaani Hai Deewani", type: "Bollywood", ytId: "0WtRNGubWGA", inTime: "0:15", outTime: "2:50", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 50, mixOutPoint: 170 }, cueNote: "Festival anthem. Let chorus run." },
-      { num: 24, id: "trk_024", phase: 2, title: "Dilliwaali Girlfriend", artist: "Yeh Jawaani Hai Deewani", type: "Bollywood", ytId: "1cDoRqPn9mM", inTime: "0:12", outTime: "2:32", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 42, mixOutPoint: 152 }, cueNote: "Keep tempo high after Balam Pichkari, no gap." },
-      { num: 25, id: "trk_025", phase: 2, title: "Don't Start Now", artist: "Dua Lipa", type: "English", ytId: "oygrmJFKYZY", inTime: "0:08", outTime: "2:38", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 38, mixOutPoint: 158 }, cueNote: "Modern disco groove. Start on the bassline." },
-      { num: 26, id: "trk_026", phase: 2, title: "Can't Stop The Feeling", artist: "Justin Timberlake", type: "English", ytId: "ru0K8uYEZWw", inTime: "0:05", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 5, dropTimestamp: 38, mixOutPoint: 155 }, cueNote: "Bright pop lift. Start right on the beat." },
-      { num: 27, id: "trk_027", phase: 2, title: "Dus Bahane", artist: "Dus", type: "Bollywood", ytId: "j6c_wP3fG6E", inTime: "0:10", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 40, mixOutPoint: 155 }, cueNote: "2000s throwback. Start on the beat drop." },
-      { num: 28, id: "trk_028", phase: 2, title: "Ghagra", artist: "Yeh Jawaani Hai Deewani", type: "Bollywood", ytId: "caoGNx1LF24", inTime: "0:15", outTime: "2:50", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 50, mixOutPoint: 170 }, cueNote: "Fade on the dhol beat into the peak set." },
-      { num: 29, id: "trk_029", phase: 2, title: "Swag Se Swagat", artist: "Tiger Zinda Hai", type: "Bollywood", ytId: "xmU0s2QtaEY", inTime: "0:10", outTime: "2:30", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 40, mixOutPoint: 150 }, cueNote: "Big chorus, start directly on it." },
-      { num: 30, id: "trk_030", phase: 2, title: "Afghan Jalebi", artist: "Phantom", type: "Bollywood", ytId: "1T2j6DqK_0o", inTime: "0:12", outTime: "2:42", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 162 }, cueNote: "High-energy, start on the hook." },
-      { num: 31, id: "trk_031", phase: 2, title: "Lat Lag Gayee", artist: "Race 2", type: "Bollywood", ytId: "w_n4F_E8-zU", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 160 }, cueNote: "Punchy club beat, keep the window tight." },
+      // PHASE 2: BUILD & BOUNCE (Dhol grooves, retro nostalgia, rising tempo)
+      ["trk_015", 2, "Chaiyya Chaiyya", "Dil Se..", "Bollywood", "UzXc_gJOC1Y", 12, 162, 48],
+      ["trk_016", 2, "Desi Girl", "Dostana", "Bollywood", "wDIrpvH8MzE", 10, 160, 45],
+      ["trk_017", 2, "Dhoom Machale", "Dhoom", "Bollywood", "2uUmHTgT65I", 15, 160, 45],
+      ["trk_018", 2, "Kajra Re", "Bunty Aur Babli", "Bollywood", "4dsFQFCvVGU", 18, 173, 50],
+      ["trk_019", 2, "Ek Do Teen", "Tezaab", "Bollywood", "pW_r0V8hV_M", 15, 155, 45],
+      ["trk_020", 2, "Cheap Thrills", "Sia", "English", "nYh-n75tAP8", 8, 158, 42],
+      ["trk_021", 2, "Radha", "Student of the Year", "Bollywood", "514W_2_eM7g", 12, 162, 45],
+      ["trk_022", 2, "Badtameez Dil", "YJHD", "Bollywood", "II2EO3Nw4m0", 10, 155, 40],
+      ["trk_023", 2, "Balam Pichkari", "YJHD", "Bollywood", "0WtRNGubWGA", 15, 170, 50],
+      ["trk_024", 2, "Dilliwaali Girlfriend", "YJHD", "Bollywood", "1cDoRqPn9mM", 12, 152, 42],
+      ["trk_025", 2, "Don't Start Now", "Dua Lipa", "English", "oygrmJFKYZY", 8, 158, 38],
+      ["trk_026", 2, "Can't Stop The Feeling", "Justin Timberlake", "English", "ru0K8uYEZWw", 5, 155, 38],
+      ["trk_027", 2, "Dus Bahane", "Dus", "Bollywood", "j6c_wP3fG6E", 10, 155, 40],
+      ["trk_028", 2, "Ghagra", "YJHD", "Bollywood", "caoGNx1LF24", 15, 170, 50],
+      ["trk_029", 2, "Swag Se Swagat", "Tiger Zinda Hai", "Bollywood", "xmU0s2QtaEY", 10, 150, 40],
+      ["trk_030", 2, "Afghan Jalebi", "Phantom", "Bollywood", "1T2j6DqK_0o", 12, 162, 45],
+      ["trk_031", 2, "Lat Lag Gayee", "Race 2", "Bollywood", "w_n4F_E8-zU", 10, 160, 44],
+      ["yt_014", 2, "Soni De Nakhre", "Partner", "Bollywood", "mc8COYi0RRk", 15, 165, 45],
+      ["yt_016", 2, "Kamariya", "Mitron", "Bollywood", "lIAo8HFnlq0", 10, 150, 40],
+      ["yt_017", 2, "Patola", "Guru Randhawa", "Punjabi", "-HEp9tTp2CM", 10, 155, 40],
+      ["yt_020", 2, "Do Dhaari Talwaar", "Malkit Singh", "Bollywood", "NzEHgLnNU1A", 12, 160, 45],
+      ["yt_021", 2, "Hauli Hauli", "De De Pyaar De", "Bollywood", "D9dH1id5NzY", 10, 155, 42],
+      ["yt_023", 2, "High Heels Te Nache", "Yo Yo Honey Singh", "Bollywood", "GHZdsKHtioA", 10, 155, 42],
+      ["yt_024", 2, "Naal Nachna", "G Khan", "Punjabi", "P4UnrmPFPA4", 10, 155, 42],
+      ["yt_025", 2, "Shanivaar Raati", "Main Tera Hero", "Bollywood", "qY66m8UosfQ", 12, 160, 45],
+      ["yt_027", 2, "Makhna", "Yo Yo Honey Singh", "Pop", "U13aOFC9Oic", 8, 155, 40],
+      ["yt_028", 2, "Beedi", "Omkara", "Bollywood", "WeCkQHrGDFo", 10, 145, 40],
+      ["yt_031", 2, "Koi Kahe Kehta Rahe", "Dil Chahta Hai", "Bollywood", "qR8FtO0o6Fg", 15, 165, 45],
+      ["yt_032", 2, "Prem Ki Naiyya", "Ajab Prem Ki Ghazab", "Bollywood", "KT7oxGZmdv4", 15, 165, 45],
+      ["yt_033", 2, "Sajna Ji Vaari Vaari", "Honeymoon Travels", "Bollywood", "EJLjIlrsomk", 10, 155, 40],
+      ["yt_034", 2, "Raat Ke Dhai Baje", "Kaminey", "Bollywood", "cIOa-KYOm98", 12, 160, 45],
+      ["yt_035", 2, "Nagada Nagada", "Jab We Met", "Bollywood", "AbtYVVtJPl4", 10, 150, 40],
+      ["yt_036", 2, "Sweety Tera Drama", "Bareilly Ki Barfi", "Bollywood", "BuVYVzCsVzc", 12, 160, 45],
+      ["yt_054", 2, "Kurchi Madathapetti", "Guntur Kaaram", "Telugu", "Ldn11dMHTJ8", 15, 165, 48],
+      ["trk_059", 2, "Wajle Ki Bara", "Natarang", "Marathi", "8uP1fD_4XyE", 15, 155, 45],
 
-      // PHASE 3: PEAK: BOLLYWOOD GOLD (32–51)
-      { num: 32, id: "trk_032", phase: 3, title: "Sheila Ki Jawani", artist: "Tees Maar Khan", type: "Bollywood", ytId: "ZTmF2v5gpVc", inTime: "0:10", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 40, mixOutPoint: 155 }, cueNote: "Peak set opener. Start directly on hook." },
-      { num: 33, id: "trk_033", phase: 3, title: "Munni Badnaam Hui", artist: "Dabangg", type: "Bollywood", ytId: "EsWwycYUg1Z", inTime: "0:12", outTime: "2:47", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 167 }, cueNote: "Back-to-back item energy. No pause." },
-      { num: 34, id: "trk_034", phase: 3, title: "Chikni Chameli", artist: "Agneepath", type: "Bollywood", ytId: "MQM7CNoAsBI", inTime: "0:15", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 45, mixOutPoint: 155 }, cueNote: "Start on dhol beat. Cut before slow outro." },
-      { num: 35, id: "trk_035", phase: 3, title: "Fevicol Se", artist: "Dabangg 2", type: "Bollywood", ytId: "zE7PwGl6WYk", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 160 }, cueNote: "Keep it punchy. Fade on chorus repeat." },
-      { num: 36, id: "trk_036", phase: 3, title: "Kala Chashma", artist: "Baar Baar Dekho", type: "Bollywood", ytId: "k4yXQkG2s1E", inTime: "0:12", outTime: "2:42", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 162 }, cueNote: "Crowd favourite. Instant Rescue Track!" },
-      { num: 37, id: "trk_037", phase: 3, title: "Aankh Marey", artist: "Simmba", type: "Bollywood", ytId: "_KhQT-LGb-4", inTime: "0:10", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 42, mixOutPoint: 155 }, cueNote: "90s revival energy. Start on the beat." },
-      { num: 38, id: "trk_038", phase: 3, title: "Garmi", artist: "Street Dancer 3D", type: "Bollywood", ytId: "q_0uF80g-ao", inTime: "0:08", outTime: "2:43", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 40, mixOutPoint: 163 }, cueNote: "High BPM. Short, sharp play window." },
-      { num: 39, id: "trk_039", phase: 3, title: "Muqabla", artist: "Street Dancer 3D", type: "Bollywood", ytId: "skZxF_u9dAI", inTime: "0:12", outTime: "2:32", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 42, mixOutPoint: 152 }, cueNote: "A.R. Rahman throwback remake." },
-      { num: 40, id: "trk_040", phase: 3, title: "Illegal Weapon 2.0", artist: "Street Dancer 3D", type: "Bollywood", ytId: "1x_AbtptDgg", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 160 }, cueNote: "Fade before final slowdown." },
-      { num: 41, id: "trk_041", phase: 3, title: "Baby Doll", artist: "Ragini MMS 2", type: "Bollywood", ytId: "kHue-G4WoA4", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 42, mixOutPoint: 160 }, cueNote: "Peak item-number energy, start on the hook." },
-      { num: 42, id: "trk_042", phase: 3, title: "Sunny Sunny", artist: "Yaariyan", type: "Bollywood", ytId: "7KPy_O-h0fI", inTime: "0:12", outTime: "2:37", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 42, mixOutPoint: 157 }, cueNote: "Sunny, bouncy peak track." },
-      { num: 43, id: "trk_043", phase: 3, title: "Levitating", artist: "Dua Lipa", type: "English", ytId: "TUVcZfQe-Kw", inTime: "0:05", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 5, dropTimestamp: 40, mixOutPoint: 160 }, cueNote: "English breather in peak. Disco-pop." },
-      { num: 44, id: "trk_044", phase: 3, title: "Jhoome Jo Pathaan", artist: "Pathaan", type: "Bollywood", ytId: "YxWlaYCA8MU", inTime: "0:15", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 46, mixOutPoint: 155 }, cueNote: "Start on Jhoome hook. Big recent anthem." },
-      { num: 45, id: "trk_045", phase: 3, title: "What Jhumka?", artist: "Rocky Aur Rani", type: "Bollywood", ytId: "87JIOAX3NjM", inTime: "0:12", outTime: "2:42", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 162 }, cueNote: "Start on the chorus." },
-      { num: 46, id: "trk_046", phase: 3, title: "Uptown Funk", artist: "Bruno Mars", type: "English", ytId: "OPf0YbXqDm0", inTime: "0:08", outTime: "2:38", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 40, mixOutPoint: 158 }, cueNote: "Funk peak. No intro needed." },
-      { num: 47, id: "trk_047", phase: 3, title: "Shut Up And Dance", artist: "Walk The Moon", type: "English", ytId: "6JCLY0RmxwQ", inTime: "0:08", outTime: "2:33", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 38, mixOutPoint: 153 }, cueNote: "English peak breather on guitar riff." },
-      { num: 48, id: "trk_048", phase: 3, title: "Character Dheela", artist: "Ready", type: "Bollywood", ytId: "bO4fG943L_Y", inTime: "0:12", outTime: "2:47", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 167 }, cueNote: "Salman-era party throwback." },
-      { num: 49, id: "trk_049", phase: 3, title: "Dhinka Chika", artist: "Ready", type: "Bollywood", ytId: "rZ1Hn1E3B_c", inTime: "0:10", outTime: "2:30", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 40, mixOutPoint: 150 }, cueNote: "Close Phase 3 on a high, fade on chorus." },
-      { num: 50, id: "trk_050", phase: 3, title: "Anarkali Disco Chali", artist: "Housefull 2", type: "Bollywood", ytId: "q5i82eK0Pcs", inTime: "0:12", outTime: "2:42", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 162 }, cueNote: "Desi disco, start on chorus." },
-      { num: 51, id: "trk_051", phase: 3, title: "Chamma Chamma", artist: "China Gate", type: "Bollywood", ytId: "uKq1h8H4Nn0", inTime: "0:15", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 48, mixOutPoint: 165 }, cueNote: "90s throwback, start on Chamma hook." },
+      // PHASE 3: PEAK BOLLYWOOD & ITEM EXPLOSION (Floor-filling anthems)
+      ["trk_032", 3, "Sheila Ki Jawani", "Tees Maar Khan", "Bollywood", "ZTmF2v5gpVc", 10, 155, 40],
+      ["trk_033", 3, "Munni Badnaam Hui", "Dabangg", "Bollywood", "EsWwycYUg1Z", 12, 167, 45],
+      ["trk_034", 3, "Chikni Chameli", "Agneepath", "Bollywood", "MQM7CNoAsBI", 15, 155, 45],
+      ["trk_035", 3, "Fevicol Se", "Dabangg 2", "Bollywood", "zE7PwGl6WYk", 10, 160, 44],
+      ["trk_036", 3, "Kala Chashma", "Baar Baar Dekho", "Bollywood", "k4yXQkG2s1E", 12, 162, 45],
+      ["trk_037", 3, "Aankh Marey", "Simmba", "Bollywood", "_KhQT-LGb-4", 10, 155, 42],
+      ["trk_038", 3, "Garmi", "Street Dancer 3D", "Bollywood", "q_0uF80g-ao", 8, 163, 40],
+      ["trk_039", 3, "Muqabla", "Street Dancer 3D", "Bollywood", "skZxF_u9dAI", 12, 152, 42],
+      ["trk_040", 3, "Illegal Weapon 2.0", "Street Dancer 3D", "Bollywood", "1x_AbtptDgg", 10, 160, 44],
+      ["trk_041", 3, "Baby Doll", "Ragini MMS 2", "Bollywood", "kHue-G4WoA4", 10, 160, 42],
+      ["trk_042", 3, "Sunny Sunny", "Yaariyan", "Bollywood", "7KPy_O-h0fI", 12, 157, 42],
+      ["trk_043", 3, "Levitating", "Dua Lipa", "English", "TUVcZfQe-Kw", 5, 160, 40],
+      ["trk_044", 3, "Jhoome Jo Pathaan", "Pathaan", "Bollywood", "YxWlaYCA8MU", 15, 155, 46],
+      ["trk_045", 3, "What Jhumka?", "Rocky Aur Rani", "Bollywood", "87JIOAX3NjM", 12, 162, 45],
+      ["trk_046", 3, "Uptown Funk", "Bruno Mars", "English", "OPf0YbXqDm0", 8, 158, 40],
+      ["trk_047", 3, "Shut Up And Dance", "Walk The Moon", "English", "6JCLY0RmxwQ", 8, 153, 38],
+      ["trk_048", 3, "Character Dheela", "Ready", "Bollywood", "bO4fG943L_Y", 12, 167, 45],
+      ["trk_049", 3, "Dhinka Chika", "Ready", "Bollywood", "rZ1Hn1E3B_c", 10, 150, 40],
+      ["trk_050", 3, "Anarkali Disco Chali", "Housefull 2", "Bollywood", "q5i82eK0Pcs", 12, 162, 45],
+      ["trk_051", 3, "Chamma Chamma", "China Gate", "Bollywood", "uKq1h8H4Nn0", 15, 165, 48],
+      ["yt_038", 3, "O Saki Saki", "Batla House", "Bollywood", "FhiAn9wKqgQ", 10, 155, 40],
+      ["yt_042", 3, "Balma", "Khiladi 786", "Bollywood", "3YeibEh9AXg", 10, 155, 40],
+      ["yt_043", 3, "Tauba Tauba", "Karan Aujla", "Punjabi", "N6_EvGT0ZfM", 8, 155, 40],
+      ["yt_045", 3, "Hookah Bar", "Khiladi 786", "Bollywood", "rCwnaOQJoms", 10, 155, 40],
+      ["yt_066", 3, "Saree Ke Fall Sa", "R... Rajkumar", "Bollywood", "dct0tpvgOsw", 12, 160, 45],
+      ["yt_067", 3, "Param Sundari", "Mimi", "Bollywood", "7Hhg6bXOZnQ", 12, 167, 45],
+      ["trk_056", 3, "Naatu Naatu", "RRR", "Telugu", "7SdKsPu2HZo", 15, 165, 50],
+      ["trk_058", 3, "Zingaat", "Sairat", "Marathi", "8g_H4P_8o8Q", 12, 167, 45],
 
-      // PHASE 4: CROSSOVER PEAK (52–69)
-      { num: 52, id: "trk_052", phase: 4, title: "Arabic Kuthu", artist: "Beast (Tamil)", type: "South Indian", ytId: "KUN5Uf9mObQ", inTime: "0:15", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 48, mixOutPoint: 160 }, cueNote: "Start on Halamithi hook. Tamil dance moment." },
-      { num: 53, id: "trk_053", phase: 4, title: "Vaathi Coming", artist: "Master (Tamil)", type: "South Indian", ytId: "vx2u5uUu3DE", inTime: "0:12", outTime: "2:47", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 167 }, cueNote: "Start on Vaathi beat drop." },
-      { num: 54, id: "trk_054", phase: 4, title: "Rowdy Baby", artist: "Maari 2 (Tamil)", type: "South Indian", ytId: "x6Q7c9RyMzk", inTime: "0:10", outTime: "2:30", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 42, mixOutPoint: 150 }, cueNote: "High-energy Tamil hit." },
-      { num: 55, id: "trk_055", phase: 4, title: "Butta Bomma", artist: "Ala Vaikunthapurramuloo", type: "South Indian", ytId: "2mDCVzruYzQ", inTime: "0:15", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 48, mixOutPoint: 165 }, cueNote: "Telugu groove. Start on chorus." },
-      { num: 56, id: "trk_056", phase: 4, title: "Naatu Naatu", artist: "RRR (Telugu)", type: "South Indian", ytId: "7SdKsPu2HZo", inTime: "0:15", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 50, mixOutPoint: 165 }, cueNote: "Telugu dance explosion. Instant Rescue Track!" },
-      { num: 57, id: "trk_057", phase: 4, title: "Hukum", artist: "Jailer (Tamil)", type: "South Indian", ytId: "1F3hm6MfR1E", inTime: "0:12", outTime: "2:37", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 44, mixOutPoint: 157 }, cueNote: "Mass Tamil beat, start on Hukum drop." },
-      { num: 58, id: "trk_058", phase: 4, title: "Zingaat", artist: "Sairat (Marathi)", type: "Marathi", ytId: "8g_H4P_8o8Q", inTime: "0:12", outTime: "2:47", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 167 }, cueNote: "Marathi dance explosion." },
-      { num: 59, id: "trk_059", phase: 4, title: "Wajle Ki Bara", artist: "Natarang (Marathi)", type: "Marathi", ytId: "8uP1fD_4XyE", inTime: "0:15", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 45, mixOutPoint: 155 }, cueNote: "Traditional dhol-tasha energy." },
-      { num: 60, id: "trk_060", phase: 4, title: "Ooh La La", artist: "The Dirty Picture", type: "Bollywood", ytId: "f0wP_R_l74s", inTime: "0:12", outTime: "2:42", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 162 }, cueNote: "Bold item number, start on chorus." },
-      { num: 61, id: "trk_061", phase: 4, title: "Lungi Dance", artist: "Chennai Express", type: "Bollywood", ytId: "69CEiHfS_mc", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 160 }, cueNote: "South-flavoured Bollywood bridge." },
-      { num: 62, id: "trk_062", phase: 4, title: "1234 Get On The Dance Floor", artist: "Chennai Express", type: "Bollywood", ytId: "7L_8qT3H6e8", inTime: "0:12", outTime: "2:37", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 42, mixOutPoint: 157 }, cueNote: "Start on count-in beat." },
-      { num: 63, id: "trk_063", phase: 4, title: "Dance Monkey", artist: "Tones and I", type: "English", ytId: "q0hyYWKXF0Q", inTime: "0:08", outTime: "2:43", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 40, mixOutPoint: 163 }, cueNote: "Radio edit. Instantly recognisable." },
-      { num: 64, id: "trk_064", phase: 4, title: "Blinding Lights", artist: "The Weeknd", type: "English", ytId: "4NRXx6U8ABQ", inTime: "0:05", outTime: "2:25", cuePoints: { introStart: 0, mixInPoint: 5, dropTimestamp: 35, mixOutPoint: 145 }, cueNote: "80s synth peak." },
-      { num: 65, id: "trk_065", phase: 4, title: "Despacito (Remix)", artist: "Luis Fonsi ft. Bieber", type: "English", ytId: "72UO0v5ESUo", inTime: "0:10", outTime: "2:40", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 160 }, cueNote: "Latin crossover peak." },
-      { num: 66, id: "trk_066", phase: 4, title: "Timber", artist: "Pitbull ft. Kesha", type: "English", ytId: "hHUbLv4ThOo", inTime: "0:08", outTime: "2:38", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 38, mixOutPoint: 158 }, cueNote: "Party classic. Harmonica hook." },
-      { num: 67, id: "trk_067", phase: 4, title: "Party Rock Anthem", artist: "LMFAO", type: "English", ytId: "KQ6zr6kCPj8", inTime: "0:10", outTime: "2:35", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 42, mixOutPoint: 155 }, cueNote: "Throwback peak on Party Rock beat." },
-      { num: 68, id: "trk_068", phase: 4, title: "Turn Down For What", artist: "DJ Snake & Lil Jon", type: "English", ytId: "HMUDVMiITOU", inTime: "0:08", outTime: "2:43", cuePoints: { introStart: 0, mixInPoint: 8, dropTimestamp: 40, mixOutPoint: 163 }, cueNote: "High-energy drop track." },
-      { num: 69, id: "trk_069", phase: 4, title: "I Gotta Feeling", artist: "Black Eyed Peas", type: "English", ytId: "uSD4vsh1zDA", inTime: "0:12", outTime: "2:32", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 40, mixOutPoint: 152 }, cueNote: "Singalong peak. Let chorus run." },
+      // PHASE 4: CROSSOVER, MASS HITS & HYPE MASHUPS (Fast tempo, regional mass beats & remixes)
+      ["trk_052", 4, "Arabic Kuthu", "Beast", "Tamil", "KUN5Uf9mObQ", 15, 160, 48],
+      ["trk_053", 4, "Vaathi Coming", "Master", "Tamil", "vx2u5uUu3DE", 12, 167, 45],
+      ["trk_054", 4, "Rowdy Baby", "Maari 2", "Tamil", "x6Q7c9RyMzk", 10, 150, 42],
+      ["trk_055", 4, "Butta Bomma", "Ala Vaikunthapurramuloo", "Telugu", "2mDCVzruYzQ", 15, 165, 48],
+      ["trk_057", 4, "Hukum", "Jailer", "Tamil", "1F3hm6MfR1E", 12, 157, 44],
+      ["trk_060", 4, "Ooh La La", "The Dirty Picture", "Bollywood", "f0wP_R_l74s", 12, 162, 45],
+      ["trk_061", 4, "Lungi Dance", "Chennai Express", "Bollywood", "69CEiHfS_mc", 10, 160, 44],
+      ["trk_062", 4, "1234 Get On The Dance Floor", "Chennai Express", "Bollywood", "7L_8qT3H6e8", 12, 157, 42],
+      ["trk_063", 4, "Dance Monkey", "Tones and I", "English", "q0hyYWKXF0Q", 8, 163, 40],
+      ["trk_064", 4, "Blinding Lights", "The Weeknd", "English", "4NRXx6U8ABQ", 5, 145, 35],
+      ["trk_065", 4, "Despacito (Remix)", "Luis Fonsi ft. Bieber", "English", "72UO0v5ESUo", 10, 160, 44],
+      ["trk_066", 4, "Timber", "Pitbull ft. Kesha", "English", "hHUbLv4ThOo", 8, 158, 38],
+      ["trk_067", 4, "Party Rock Anthem", "LMFAO", "English", "KQ6zr6kCPj8", 10, 155, 42],
+      ["trk_068", 4, "Turn Down For What", "DJ Snake & Lil Jon", "English", "HMUDVMiITOU", 8, 163, 40],
+      ["trk_069", 4, "I Gotta Feeling", "Black Eyed Peas", "English", "uSD4vsh1zDA", 12, 152, 40],
+      ["yt_047", 4, "Naakka Mukka", "Kadhalil Vizhunthen", "Tamil", "i7EAgcOwXWA", 15, 165, 48],
+      ["yt_056", 4, "Aa Ante", "Pushpa", "Telugu", "1MfJTyUiN-Y", 10, 150, 40],
+      ["yt_058", 4, "Aaj Ki Raat (Stree 2)", "Madhubanti Bagchi", "Bollywood", "XtZTpxnrHAc", 10, 160, 45],
+      ["yt_059", 4, "Aayi Nai (Stree 2)", "Pawan Singh", "Bhojpuri", "gcYGwcUmjZo", 8, 155, 38],
+      ["yt_019", 4, "Shaky", "Sanju Rathod", "Marathi", "kbwuCugRFB0", 5, 140, 35],
+      ["yt_049", 4, "Manali Trance", "Yo Yo Honey Singh", "Bollywood", "6GrtI-9hNBE", 10, 150, 40],
+      ["yt_051", 4, "Daaru Peeke Dance", "Kuch Kuch Locha Hai", "Bollywood", "IRaS2-z-LM8", 10, 155, 40],
+      ["yt_052", 4, "Ek Toh Kum Zindagani", "Marjaavaan", "Bollywood", "fqyZlFKkSu0", 8, 150, 38],
+      ["yt_064", 4, "Shararat", "Ninja", "Punjabi", "Gayw5AQvWcQ", 10, 155, 40],
+      ["yt_068", 4, "Dhadhang Dhang", "Rowdy Rathore", "Bollywood", "AkHtLsL_wNU", 10, 155, 40],
+      ["yt_069", 4, "Chinta Ta Ta Chita Chita", "Rowdy Rathore", "Bollywood", "rWSZd2EEecs", 10, 160, 42],
+      ["yt_070", 4, "Aa Re Pritam Pyaare", "Rowdy Rathore", "Bollywood", "dTmufFzP8p4", 12, 165, 45],
+      ["yt_074", 4, "Rowdy Mix", "Vijay Prakash", "South Mix", "IikOdfTQT5A", 10, 150, 40],
+      ["yt_084", 4, "Kaanta Laga Remix", "DJ Suketu", "Remix", "dDztcwCDqUg", 15, 165, 48],
+      ["yt_094", 4, "Gangnam Style x Shararat", "HPO Mashup", "Mashup", "SL0Jagkey70", 10, 160, 44],
+      ["yt_095", 4, "Hungama Hogya x Ramba Ho", "HPO Mashup", "Mashup", "EBzr2Aycp_E", 10, 160, 44],
+      ["yt_096", 4, "Shararat x Lollypop Lagelu", "HPO Mashup", "Mashup", "b8xlQzH1GwQ", 10, 160, 44],
+      ["yt_097", 4, "APT x Ainvayi Ainvayi", "HPO Mashup", "Mashup", "C_abNyl1EwY", 10, 160, 44],
+      ["yt_098", 4, "Pepas x Saturday Saturday", "HPO Mashup", "Mashup", "0uVdKP6yt5o", 10, 160, 44],
+      ["yt_099", 4, "Like Jennie X Apsara Aali", "HPO Mashup", "Mashup", "SOOm9slD3zo", 10, 160, 44],
+      ["yt_100", 4, "Kala Chashma x Levitating", "HPO Mashup", "Mashup", "ofJIMWsaw8E", 10, 160, 44],
 
-      // PHASE 5: FINALE: DIWALI ANTHEMS (70–80)
-      { num: 70, id: "trk_070", phase: 5, title: "It's The Time To Disco", artist: "Kal Ho Naa Ho", type: "Bollywood", ytId: "w_Cq_v53QnQ", inTime: "0:12", outTime: "2:47", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 167 }, cueNote: "Disco finale opener." },
-      { num: 71, id: "trk_071", phase: 5, title: "Mauja Hi Mauja", artist: "Jab We Met", type: "Bollywood", ytId: "0bL_0jA4UeM", inTime: "0:10", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 45, mixOutPoint: 165 }, cueNote: "Joyful, everyone joins in." },
-      { num: 72, id: "trk_072", phase: 5, title: "Crazy Kiya Re", artist: "Dhoom 2", type: "Bollywood", ytId: "e4k7e74T9lM", inTime: "0:15", outTime: "2:50", cuePoints: { introStart: 0, mixInPoint: 15, dropTimestamp: 48, mixOutPoint: 170 }, cueNote: "2000s Dhoom energy for finale." },
-      { num: 73, id: "trk_073", phase: 5, title: "Go Go Govinda", artist: "OMG – Oh My God!", type: "Bollywood", ytId: "j6fK7E_j8Fw", inTime: "0:10", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 165 }, cueNote: "Festive Govinda groove." },
-      { num: 74, id: "trk_074", phase: 5, title: "Burj Khalifa", artist: "Laxmii", type: "Bollywood", ytId: "y_Nq_x3_31M", inTime: "0:10", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 45, mixOutPoint: 165 }, cueNote: "Modern dance hit. Keep moving." },
-      { num: 75, id: "trk_075", phase: 5, title: "Param Sundari", artist: "Mimi", type: "Bollywood", ytId: "nfnc0kCbZZs", inTime: "0:12", outTime: "2:47", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 45, mixOutPoint: 167 }, cueNote: "Start on Param Sundari hook." },
-      { num: 76, id: "trk_076", phase: 5, title: "Dil Chori", artist: "Sonu Ke Titu Ki Sweety", type: "Bollywood", ytId: "xWi8nDUjHGA", inTime: "0:10", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 165 }, cueNote: "Modern Punjabi party beat." },
-      { num: 77, id: "trk_077", phase: 5, title: "Naach Meri Rani", artist: "Guru Randhawa", type: "Bollywood", ytId: "TCx1yRe1I9o", inTime: "0:10", outTime: "2:45", cuePoints: { introStart: 0, mixInPoint: 10, dropTimestamp: 44, mixOutPoint: 165 }, cueNote: "High-tempo penultimate track." },
-      { num: 78, id: "trk_078", phase: 5, title: "Jumma Chumma De De", artist: "Hum", type: "Bollywood", ytId: "zVp8U8_5G4Q", inTime: "0:18", outTime: "3:03", cuePoints: { introStart: 0, mixInPoint: 18, dropTimestamp: 55, mixOutPoint: 183 }, cueNote: "Classic singalong for this crowd." },
-      { num: 79, id: "trk_079", phase: 5, title: "Tamma Tamma Again", artist: "Badrinath Ki Dulhania", type: "Bollywood", ytId: "EEX_XM6SxmY", inTime: "0:12", outTime: "2:57", cuePoints: { introStart: 0, mixInPoint: 12, dropTimestamp: 48, mixOutPoint: 177 }, cueNote: "90s revival. Huge singalong." },
-      { num: 80, id: "trk_080", phase: 5, title: "Shava Shava", artist: "Kabhi Khushi Kabhie Gham...", type: "Bollywood", ytId: "ca0_h2G7Eeg", inTime: "0:20", outTime: "3:05", cuePoints: { introStart: 0, mixInPoint: 20, dropTimestamp: 60, mixOutPoint: 185 }, cueNote: "Finale: family singalong & Diwali wishes moment. Let it play out!" }
+      // PHASE 5: FINALE & NOSTALGIA ANTHEMS (Singalongs, Diwali Wishes, Grand Closer)
+      ["trk_070", 5, "It's The Time To Disco", "Kal Ho Naa Ho", "Bollywood", "w_Cq_v53QnQ", 12, 167, 45],
+      ["trk_071", 5, "Mauja Hi Mauja", "Jab We Met", "Bollywood", "0bL_0jA4UeM", 10, 165, 45],
+      ["trk_072", 5, "Crazy Kiya Re", "Dhoom 2", "Bollywood", "e4k7e74T9lM", 15, 170, 48],
+      ["trk_073", 5, "Go Go Govinda", "OMG", "Bollywood", "j6fK7E_j8Fw", 10, 165, 44],
+      ["trk_074", 5, "Burj Khalifa", "Laxmii", "Bollywood", "y_Nq_x3_31M", 10, 165, 45],
+      ["trk_076", 5, "Dil Chori", "Sonu Ke Titu", "Bollywood", "xWi8nDUjHGA", 10, 165, 44],
+      ["trk_077", 5, "Naach Meri Rani", "Guru Randhawa", "Bollywood", "TCx1yRe1I9o", 10, 165, 44],
+      ["trk_078", 5, "Jumma Chumma De De", "Hum", "Bollywood", "zVp8U8_5G4Q", 18, 183, 55],
+      ["trk_079", 5, "Tamma Tamma Again", "Badrinath Ki Dulhania", "Bollywood", "EEX_XM6SxmY", 12, 177, 48],
+      ["trk_080", 5, "Shava Shava", "K3G", "Bollywood", "ca0_h2G7Eeg", 20, 185, 60],
+      ["yt_082", 5, "Dhan Te Nan", "Kaminey", "Bollywood", "4QVu6Vo6Jhw", 10, 155, 40],
+      ["yt_083", 5, "Apni Toh Jaise Taise", "Sanju Rathod Afro Remix", "Afro Remix", "NHapUNiJQPM", 5, 135, 30],
+      ["yt_085", 5, "Iski Uski", "2 States", "Bollywood", "7KSgzG9kbw4", 12, 160, 45],
+      ["yt_086", 5, "Ucha Lamba Kad", "Welcome", "Bollywood", "fwRMpTI4J_8", 12, 165, 45],
+      ["yt_087", 5, "Tan Tana Tan Tan", "Judwaa", "Bollywood", "ozeskbNPYAw", 10, 160, 42],
+      ["yt_089", 5, "Tooh", "Gori Tere Pyaar Mein", "Bollywood", "rWawOy1ahWU", 12, 160, 45],
+      ["yt_090", 5, "Mombattiye", "Diljit Dosanjh", "Punjabi", "fYbCl5_8nDg", 5, 140, 30],
+      ["yt_076", 5, "Slow Motion Angreza", "Bhaag Milkha Bhaag", "Bollywood", "IV-AZaDKJ5o", 15, 170, 48],
+      ["yt_078", 5, "Chokra Jawaan", "Ishaqzaade", "Bollywood", "PSpZF2diavc", 10, 165, 44]
     ];
 
-    // Local Storage Cache
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+
+    // EXPAND RAW MATRIX INTO APP OBJECTS
+    const PARTY_TRACKS = MASTER_DATA.map((r, i) => ({
+      num: i + 1,
+      id: r[0],
+      phase: r[1],
+      title: r[2],
+      artist: r[3],
+      type: r[4],
+      ytId: r[5],
+      inTime: formatTime(r[6]),
+      outTime: formatTime(r[7]),
+      cuePoints: { introStart: 0, mixInPoint: r[6], dropTimestamp: r[8], mixOutPoint: r[7] },
+      duration: r[7] + 10,
+      healthStatus: "untested",
+      artwork: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&q=80",
+      audioProfile: { bpm: 124 + r[1] * 2, camelotKey: "4A", energyLevel: r[1] >= 3 ? "Peak" : "Warm-Up" }
+    }));
+
+    // LOAD CUSTOM SONGS & LINK OVERRIDES FROM PERSISTENT LOCALSTORAGE
+    const savedCustoms = JSON.parse(localStorage.getItem('diwali_dj_custom_tracks') || '[]');
+    if (savedCustoms.length > 0) {
+      PARTY_TRACKS.unshift(...savedCustoms);
+      PARTY_TRACKS.forEach((t, idx) => t.num = idx + 1);
+    }
+
     const savedOverrides = JSON.parse(localStorage.getItem('diwali_dj_yt_overrides') || '{}');
     PARTY_TRACKS.forEach((t) => {
       if (savedOverrides[t.id]) {
         t.ytId = savedOverrides[t.id];
         t.healthStatus = 'valid';
-      } else {
-        t.healthStatus = "untested";
       }
-      t.duration = t.cuePoints.mixOutPoint + 10;
-      t.artwork = "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&q=80";
-      t.audioProfile = { bpm: 126 + t.phase, camelotKey: "4A", energyLevel: t.phase >= 3 ? "Peak" : "Warm-Up" };
     });
 
     let autoDjActive = true;
@@ -672,9 +638,25 @@
       deckB: { track: PARTY_TRACKS[1], player: null, isPlaying: false, currentTime: 0, duration: PARTY_TRACKS[1].duration, volume: 0, pitch: 1.0 }
     };
 
-    /* =====================================================================
-       WEB AUDIO SYNTHESIZED DJ SOUNDBOARD (AIR HORN, DHOL, SIREN, SUB, SCRATCH)
-       ===================================================================== */
+    // ACCIDENTAL REFRESH GUARD
+    window.addEventListener('beforeunload', function (e) {
+      if (djState.deckA.isPlaying || djState.deckB.isPlaying) {
+        e.preventDefault();
+        e.returnValue = 'Party is playing! Are you sure you want to exit?';
+        return e.returnValue;
+      }
+    });
+
+    window.addEventListener('keydown', function (e) {
+      if ((e.key === 'F5' || (e.ctrlKey && e.key === 'r') || (e.metaKey && e.key === 'r')) && (djState.deckA.isPlaying || djState.deckB.isPlaying)) {
+        e.preventDefault();
+        if (confirm("⚠️ DJ Booth is actively playing music! Are you sure you want to reload?")) {
+          window.location.reload();
+        }
+      }
+    });
+
+    // DJ SOUNDBOARD (AIR HORN, DHOL, SIREN, SUB, SCRATCH)
     function initAudioContext() {
       if (!djState.audioCtx) djState.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       if (djState.audioCtx.state === 'suspended') djState.audioCtx.resume();
@@ -686,7 +668,6 @@
       const now = ctx.currentTime;
 
       if (fxType === 'airhorn') {
-        // Classic Triple-Burst Air Horn
         [0, 0.22, 0.44].forEach((delay) => {
           [293.66, 369.99, 440.0].forEach((freq) => {
             const osc = ctx.createOscillator();
@@ -702,7 +683,6 @@
           });
         });
       } else if (fxType === 'dhol') {
-        // Punjabi Dhol Fast Crescendo Roll
         for (let i = 0; i < 7; i++) {
           const t = now + i * 0.08;
           const osc = ctx.createOscillator();
@@ -718,7 +698,6 @@
           osc.stop(t + 0.07);
         }
       } else if (fxType === 'siren') {
-        // High-Pitch Reggae/EDM Laser Riser Siren
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'sawtooth';
@@ -732,7 +711,6 @@
         osc.start(now);
         osc.stop(now + 1.25);
       } else if (fxType === 'subdrop') {
-        // Deep 808 Sub Boom
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'sine';
@@ -745,7 +723,6 @@
         osc.start(now);
         osc.stop(now + 1.2);
       } else if (fxType === 'scratch') {
-        // Vinyl Rewind Tape Scratch
         const bufferSize = ctx.sampleRate * 0.35;
         const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
         const data = buffer.getChannelData(0);
@@ -767,7 +744,7 @@
       }
     }
 
-    // YouTube API
+    // YOUTUBE API
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     document.getElementsByTagName('script')[0].parentNode.insertBefore(tag, document.getElementsByTagName('script')[0]);
@@ -819,12 +796,6 @@
       }, 2000);
     }
 
-    function formatTime(sec) {
-      const m = Math.floor(sec / 60);
-      const s = Math.floor(sec % 60);
-      return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-    }
-
     function updateDeckUI(deckLetter) {
       const isA = (deckLetter === 'A');
       const deck = isA ? djState.deckA : djState.deckB;
@@ -868,11 +839,15 @@
       const searchTerm = document.getElementById('crate-search-input').value.toLowerCase();
       tbody.innerHTML = '';
 
-      PARTY_TRACKS.filter(t => {
+      const filtered = PARTY_TRACKS.filter(t => {
         const matchesPhase = (selectedPhase === 'all' || t.phase === parseInt(selectedPhase));
         const matchesSearch = t.title.toLowerCase().includes(searchTerm) || t.artist.toLowerCase().includes(searchTerm);
         return matchesPhase && matchesSearch;
-      }).forEach(track => {
+      });
+
+      document.getElementById('crate-count-badge').textContent = `${PARTY_TRACKS.length} Tracks`;
+
+      filtered.forEach(track => {
         const tr = document.createElement('tr');
         tr.className = "hover:bg-white/[0.04] transition-colors group";
         
@@ -886,19 +861,17 @@
         tr.innerHTML = `
           <td class="py-2.5 font-digital text-amber-400 font-bold">${track.num}</td>
           <td class="py-2.5">
-            <span class="font-bold text-slate-100 block group-hover:text-brand-cyan transition-colors truncate max-w-[150px]">${track.title}</span>
-            <span class="text-[11px] text-slate-400 font-medium truncate block max-w-[150px]">${track.artist}</span>
+            <span class="font-bold text-slate-100 block group-hover:text-brand-cyan transition-colors truncate max-w-[170px]">${track.title}</span>
+            <span class="text-[11px] text-slate-400 font-medium truncate block max-w-[170px]">${track.artist}</span>
+          </td>
+          <td class="py-2.5">
+            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-zinc-800 text-slate-300 border border-white/5">${track.type}</span>
           </td>
           <td class="py-2.5 text-center">${statusBadge}</td>
           <td class="py-2.5 text-center font-digital text-cyan-300">${track.inTime} – ${track.outTime}</td>
-          <td class="py-2.5 text-[11px] text-slate-300 max-w-[180px] truncate" title="${track.cueNote}">
-            ${track.cueNote}
-          </td>
           <td class="py-2.5 text-right">
             <div class="flex items-center justify-end gap-1.5">
-              <button onclick="openFixModal('${track.id}')" title="Fix YouTube link" class="p-1 px-1.5 rounded bg-zinc-800 hover:bg-amber-500 hover:text-black text-amber-300 border border-white/5 transition-all text-[10px]">
-                <i class="fa-solid fa-wrench"></i>
-              </button>
+              <button onclick="openFixModal('${track.id}')" title="Fix YouTube link" class="p-1 px-1.5 rounded bg-zinc-800 hover:bg-amber-500 hover:text-black text-amber-300 border border-white/5 transition-all text-[10px]"><i class="fa-solid fa-wrench"></i></button>
               <button onclick="loadTrackToDeck('A', '${track.id}', true)" class="px-2 py-1 rounded bg-zinc-800 hover:bg-brand-cyan hover:text-black font-digital text-[10px] font-bold text-cyan-300 transition-all active:scale-95">LOAD A</button>
               <button onclick="loadTrackToDeck('B', '${track.id}')" class="px-2 py-1 rounded bg-zinc-800 hover:bg-brand-magenta hover:text-white font-digital text-[10px] font-bold text-pink-300 transition-all active:scale-95">LOAD B</button>
             </div>
@@ -932,15 +905,15 @@
       }
     }
 
-    // Crate Health Check
+    // AUDIT ENGINE
     async function runCrateHealthCheck() {
       const btnText = document.getElementById('audit-btn-text');
-      btnText.textContent = "Auditing (0/80)...";
+      btnText.textContent = "Auditing (0/100)...";
       let passed = 0, failed = 0;
 
       for (let i = 0; i < PARTY_TRACKS.length; i++) {
         const track = PARTY_TRACKS[i];
-        btnText.textContent = `Auditing (${i + 1}/80)...`;
+        btnText.textContent = `Auditing (${i + 1}/${PARTY_TRACKS.length})...`;
         const isValid = await checkYouTubeVideoAvailable(track.ytId);
         track.healthStatus = isValid ? 'valid' : 'blocked';
         if (isValid) passed++; else failed++;
@@ -969,7 +942,6 @@
       else el.innerHTML = `<span onclick="openFixModal('${trackId}')" class="px-2 py-0.5 rounded text-[9px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30 cursor-pointer hover:bg-rose-500/40 animate-pulse">🔴 Fix</span>`;
     }
 
-    // In-App Fix Modal
     function openFixModal(trackId) {
       const track = PARTY_TRACKS.find(t => t.id === trackId);
       if (!track) return;
@@ -1004,7 +976,6 @@
       closeFixModal();
     }
 
-    // Universal YouTube ID Extractor
     function extractYouTubeId(url) {
       if (!url) return null;
       url = url.trim();
@@ -1014,7 +985,6 @@
       return match ? match[1] : null;
     }
 
-    // Load Track to Deck
     window.loadTrackToDeck = function(deckLetter, trackId, autoPlay = false) {
       const track = PARTY_TRACKS.find(t => t.id === trackId);
       if (!track) return;
@@ -1055,35 +1025,28 @@
       }
     }
 
-    // PITCH & SPEED CONTROLLER
     function applyPitch(deckLetter, rate) {
       const deck = (deckLetter === 'A') ? djState.deckA : djState.deckB;
       deck.pitch = parseFloat(rate);
-      
       const valEl = document.getElementById(`deck-${deckLetter.toLowerCase()}-tempo-val`);
       const pct = Math.round((deck.pitch - 1.0) * 100);
       valEl.textContent = `${pct > 0 ? '+' : ''}${pct}%`;
-
       if (deck.player && deck.player.setPlaybackRate) {
         deck.player.setPlaybackRate(deck.pitch);
       }
       updateDeckUI(deckLetter);
     }
 
-    // SYNC BEATMATCH CONTROLLER
     function applySync(deckLetter) {
       const thisDeck = (deckLetter === 'A') ? djState.deckA : djState.deckB;
       const otherDeck = (deckLetter === 'A') ? djState.deckB : djState.deckA;
-
       const targetBpm = otherDeck.track.audioProfile.bpm * otherDeck.pitch;
       const thisBpm = thisDeck.track.audioProfile.bpm;
-
       const neededRatio = Math.max(0.90, Math.min(1.10, targetBpm / thisBpm));
       document.getElementById(`deck-${deckLetter.toLowerCase()}-tempo`).value = neededRatio.toFixed(2);
       applyPitch(deckLetter, neededRatio);
     }
 
-    // SEEK / REWIND / FORWARD CONTROLLERS
     function seekDeck(deckLetter, targetSeconds) {
       const deck = (deckLetter === 'A') ? djState.deckA : djState.deckB;
       const clamped = Math.max(0, Math.min(deck.track.cuePoints.mixOutPoint, targetSeconds));
@@ -1186,78 +1149,90 @@
       }
     }, 250);
 
-    // Universal URL Modal
+    // MODALS & STORAGE
     function openCustomUrlModal() { document.getElementById('custom-url-modal').classList.remove('hidden'); }
     function closeCustomUrlModal() { document.getElementById('custom-url-modal').classList.add('hidden'); }
 
     function submitCustomTrack(deckLetter) {
       const urlInput = document.getElementById('custom-yt-input').value.trim();
       const titleInput = document.getElementById('custom-title-input').value.trim() || "Party Request";
-      const bpmInput = parseInt(document.getElementById('custom-bpm-input').value) || 128;
+      const artistInput = document.getElementById('custom-artist-input').value.trim() || "Custom Add";
 
       if (!urlInput) { alert("Please paste a YouTube link or ID"); return; }
       const vid = extractYouTubeId(urlInput);
-      if (!vid) { alert("Could not read YouTube ID from that link. Please paste a standard YouTube video link."); return; }
+      if (!vid) { alert("Could not read YouTube ID from that link."); return; }
 
       const customTrack = {
         num: PARTY_TRACKS.length + 1,
         id: "custom_" + Date.now(),
         phase: 3,
         title: titleInput,
-        artist: "Guest Request",
+        artist: artistInput,
         type: "Custom",
         ytId: vid,
         inTime: "0:00",
         outTime: "3:00",
         cuePoints: { introStart: 0, mixInPoint: 0, dropTimestamp: 45, mixOutPoint: 180 },
-        cueNote: "Guest party request",
         duration: 190,
         artwork: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&q=80",
-        audioProfile: { bpm: bpmInput, camelotKey: "4A", energyLevel: "Peak" },
+        audioProfile: { bpm: 128, camelotKey: "4A", energyLevel: "Peak" },
         healthStatus: "valid"
       };
 
       PARTY_TRACKS.unshift(customTrack);
+      
+      const customs = JSON.parse(localStorage.getItem('diwali_dj_custom_tracks') || '[]');
+      customs.unshift(customTrack);
+      localStorage.setItem('diwali_dj_custom_tracks', JSON.stringify(customs));
+
       renderPartyCrate();
       loadTrackToDeck(deckLetter, customTrack.id, deckLetter === 'A');
       closeCustomUrlModal();
     }
 
-    // ALL EVENT LISTENERS WIRED HERE
+    function exportSavedTracks() {
+      const customs = JSON.parse(localStorage.getItem('diwali_dj_custom_tracks') || '[]');
+      const overrides = JSON.parse(localStorage.getItem('diwali_dj_yt_overrides') || '{}');
+      const exportData = { customTracks: customs, linkOverrides: overrides };
+      document.getElementById('export-textarea').value = JSON.stringify(exportData, null, 2);
+      document.getElementById('export-modal').classList.remove('hidden');
+    }
+
+    function copyExportCode() {
+      const textarea = document.getElementById('export-textarea');
+      textarea.select();
+      document.execCommand('copy');
+      alert('✓ Saved song data copied to clipboard!');
+    }
+
+    // DOM LISTENERS
     document.addEventListener('DOMContentLoaded', () => {
       updateDeckUI('A');
       updateDeckUI('B');
       renderPartyCrate();
 
-      // Play & Pause
       document.getElementById('btn-play-a').addEventListener('click', () => togglePlay('A'));
       document.getElementById('btn-play-b').addEventListener('click', () => togglePlay('B'));
       document.getElementById('vinyl-a').addEventListener('click', () => togglePlay('A'));
       document.getElementById('vinyl-b').addEventListener('click', () => togglePlay('B'));
 
-      // Cue
       document.getElementById('btn-cue-a').addEventListener('click', () => seekDeck('A', djState.deckA.track.cuePoints.mixInPoint));
       document.getElementById('btn-cue-b').addEventListener('click', () => seekDeck('B', djState.deckB.track.cuePoints.mixInPoint));
 
-      // Fast-Forward & Rewind (+10s / -10s)
       document.getElementById('btn-rw-a').addEventListener('click', () => skipDeck('A', -10));
       document.getElementById('btn-ff-a').addEventListener('click', () => skipDeck('A', 10));
       document.getElementById('btn-rw-b').addEventListener('click', () => skipDeck('B', -10));
       document.getElementById('btn-ff-b').addEventListener('click', () => skipDeck('B', 10));
 
-      // Interactive Seek Slider Scrubbing
       document.getElementById('deck-a-seek').addEventListener('input', (e) => seekDeck('A', parseFloat(e.target.value)));
       document.getElementById('deck-b-seek').addEventListener('input', (e) => seekDeck('B', parseFloat(e.target.value)));
 
-      // Pitch Speed Sliders
       document.getElementById('deck-a-tempo').addEventListener('input', (e) => applyPitch('A', e.target.value));
       document.getElementById('deck-b-tempo').addEventListener('input', (e) => applyPitch('B', e.target.value));
 
-      // SYNC Beatmatch Buttons
       document.getElementById('btn-sync-a').addEventListener('click', () => applySync('A'));
       document.getElementById('btn-sync-b').addEventListener('click', () => applySync('B'));
 
-      // Crossfader & Search
       document.getElementById('crossfader').addEventListener('input', (e) => applyCrossfade(parseInt(e.target.value)));
       document.getElementById('btn-quick-crossfade').addEventListener('click', executeQuickCrossfade);
       document.getElementById('crate-search-input').addEventListener('input', renderPartyCrate);
